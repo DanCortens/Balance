@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : LivingEntity
 {
     /*prolly best to seperate stuff (attacking, stats, movement) into separate scripts later on*/
-
-    //events
-    public event System.Action onHPChanged;
-    public event System.Action onDeath;
 
     //public variables
     //movement
@@ -42,7 +38,6 @@ public class PlayerController : MonoBehaviour
     private float marioTime;
     private float sideJTime;
     private float horzM;
-    private float[] damageMult = {1f,1f,1f};//subject to change
     private float balance;
     private float darkAff;
     private float lightAff;
@@ -52,19 +47,6 @@ public class PlayerController : MonoBehaviour
     private LayerMask enemyLayer;
     private LayerMask interactLayer;
     private InputAction moveInput;
-
-    [SerializeField]
-    private int currHP;
-    public int currHp
-    {
-        get { return currHp; }
-        set
-        {
-            if (currHp == value) return;
-            currHp = value;
-            onHPChanged?.Invoke();
-        }
-    }
 
     //constants
     private const float JUMP_SPD = 6.4f;
@@ -78,8 +60,6 @@ public class PlayerController : MonoBehaviour
     private const float LARGE_ATTACK_RAD = 1f;
     private const float AOE_ATTACK_RAD = 1.5f;
     private const float INTERACT_RAD = 1f;
-    private const int MAX_HP_BASE = 100;
-    private const float FLINCH_DIST = 4f;
 
     private AttStackScript attStack;
 
@@ -135,13 +115,7 @@ public class PlayerController : MonoBehaviour
         balance = 0f;
         darkAff = 1f;
         lightAff = 1f;
-
         //groundAttacks.Add("combo", new Attack());
-
-        setCurrHP((PlayerPrefs.HasKey("currHP")) ? PlayerPrefs.GetInt("currHP") : MAX_HP_BASE);
-
-        //Event handling
-        onHPChanged += CheckHP;
     }
 
     //new input listeners
@@ -255,13 +229,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        /* austin: In general, this is an easy but unoptimized way of checking for player character death. We should make checks every time the player takes damage or changes HP via events
-         * because constantly polling for things like this every frame has the potential to fuck framerates on lower spec devices. 
-         */
-        if (currHP <= 0) 
-        {
-            //game over
-        }
 
         //if (true) //check for paused game state{}
         //else if (true) //check for cinematic game state{}
@@ -450,11 +417,12 @@ public class PlayerController : MonoBehaviour
         }
         
     }
-    public void TakeDamage(float damage, int type, Vector2 enemyDir)
+
+    public new void TakeDamage(float damage, int type, Vector2 enemyDir)
     {
         if (!takingDamage)
         {
-            ChangeHP((-damage * damageMult[type]));
+            CurrHp = (int)(-damage * damageMult[type]);
             isAttacking = false;
             takingDamage = true;
             //play flinch animation
@@ -466,51 +434,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*
-     * returns currHP  current hitpoints (currHP) as int
-     */
-    public int getCurrHP()
-    {
-        return currHP;
-    }
-
-    /* 
-     * returns max hp as int
-     */
-    public int getMaxHp()
-    {
-        return MAX_HP_BASE;
-    }
-
-    /* sets currHp to a new value
-     * @param hp new value HP will be set to
-     */
-    public void setCurrHP(int hp)
-    {
-        currHP = Mathf.Clamp(hp, 0, MAX_HP_BASE); // Austin: might not be the cleanest way to do it if we want shit like temporary hit points in the form of buffs or consumables or whatever. If so, suggest we use a new variable that isn't constant in that case.
-        onHPChanged?.Invoke();
-    }
-
-    /*
-     * Changes health. 
-     * @param hpToChange: Health that will be added.
-     */
-    public void ChangeHP(float hpToChange)
-    {
-        setCurrHP(currHP + (int)hpToChange);
-    }
-
-    /* 
-     * Checks HP. good for seeing if player is at full health, half, or dead, etc.
-     */
-    void CheckHP()
-    {
-        //dead
-        if (currHP <=0)
-        {
-            onDeath?.Invoke();
-        }
-    }
 
     private void OnDrawGizmos()
     {
@@ -552,6 +475,6 @@ public class PlayerController : MonoBehaviour
     [ContextMenu("deal 5 damage")]
     protected void damageTest()
     {
-        ChangeHP(-5);
+        CurrHp = CurrHp - 5;
     }
 }

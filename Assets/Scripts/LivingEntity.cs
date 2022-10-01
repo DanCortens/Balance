@@ -1,0 +1,56 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class LivingEntity : MonoBehaviour
+{
+    //events
+    public event System.Action onHPChanged;
+    public event System.Action onDeath;
+    //bool
+    private bool takingDamage;
+    //constants
+    protected float[] damageMult = { 1f, 1f, 1f };//subject to change
+    private const int MAX_HP_BASE = 100;
+    protected const float FLINCH_DIST = 4f;
+    //stats
+    [SerializeField]
+    private int currHp;
+    //properties
+    public int CurrHp
+    {
+        get { return currHp; }
+        set
+        {
+            if (currHp == value) return;
+            currHp = value;
+            onHPChanged?.Invoke();
+        }
+    }
+
+    void Start()
+    {
+        CurrHp = MAX_HP_BASE;
+    }
+
+    public void TakeDamage(float damage, int type, Vector2 enemyDir)
+    {
+        if (!takingDamage)
+        {
+            CurrHp= (int)(-damage * damageMult[type]);
+            takingDamage = true;
+            //play flinch animation
+            Vector2 pushDir = transform.position;
+            pushDir -= enemyDir;
+            StopAllCoroutines();
+        }
+    }
+
+    /* 
+     * returns max hp as int
+     */
+    public int getMaxHp()
+    {
+        return MAX_HP_BASE;
+    }
+}
