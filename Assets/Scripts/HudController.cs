@@ -23,7 +23,7 @@ public class HudController : MonoBehaviour
 
     void setCurrHPBar()
     {
-        float currhp = (float)player.getCurrHP();
+        float currhp = (float)player.CurrHp;
         float sliderValue = (currhp / maxHpBase);
         canvas.transform.Find("Health").transform.GetComponent<Slider>().value = sliderValue;
         Debug.Log(sliderValue);
