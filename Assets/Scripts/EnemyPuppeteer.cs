@@ -8,7 +8,7 @@ public class EnemyPuppeteer : MonoBehaviour
     public List<GameObject> darkEnemyPrefabs;
     public List<GameObject> lightEnemyPrefabs;
     
-    public List<float> odds;
+    //public List<float> odds;
 
     public float worldBalance;
 
@@ -32,12 +32,13 @@ public class EnemyPuppeteer : MonoBehaviour
         int i = 0;
         foreach (Transform sp in spawnPoints)
         {
-            float rand = Random.Range(0f, odds[odds.Count - 1]);
+
 
             /*
              * first draft - randomly generated enemies; decided it would be better to have "slots" 
              * where each slot has a specific enemy general type (air, turret, basic, etc) and the 
              * light/dark/neut is set by filler
+            float rand = Random.Range(0f, odds[odds.Count - 1]);
             int choice = 0; 
             foreach (float o in odds)
             {
@@ -85,5 +86,6 @@ public class EnemyPuppeteer : MonoBehaviour
     public void SpawnEnemy(GameObject spawned, Vector3 pos, Transform par)
     {
         GameObject newSpawn = Instantiate(spawned, pos, Quaternion.identity, par);
+        Debug.Log($"creating {newSpawn.name}");
     }
 }

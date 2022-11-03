@@ -2962,7 +2962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2138175803851403781, guid: e138c30296fef21429b755a12a51d024, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.1
+      value: -1.7
       objectReference: {fileID: 0}
     - target: {fileID: 2138175803851403781, guid: e138c30296fef21429b755a12a51d024, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2996,13 +2996,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2138175803851403784, guid: e138c30296fef21429b755a12a51d024, type: 3}
+      propertyPath: m_LinearDrag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2138175803851403784, guid: e138c30296fef21429b755a12a51d024, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2138175803851403786, guid: e138c30296fef21429b755a12a51d024, type: 3}
       propertyPath: m_Name
       value: basic_light_enemy
       objectReference: {fileID: 0}
     - target: {fileID: 2138175803851403786, guid: e138c30296fef21429b755a12a51d024, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4801167943400734125, guid: e138c30296fef21429b755a12a51d024, type: 3}
       propertyPath: attackCir
@@ -3904,6 +3912,10 @@ PrefabInstance:
     - target: {fileID: 7567809678680731840, guid: 60ceaa89605761a41adb5bd067a09ea7, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 7567809678680731843, guid: 60ceaa89605761a41adb5bd067a09ea7, type: 3}
+      propertyPath: orthographic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60ceaa89605761a41adb5bd067a09ea7, type: 3}

@@ -5,10 +5,9 @@ using UnityEngine;
 public class RoomControl : MonoBehaviour
 {
     public List<Transform> spawnPoints;
+    public Transform enemyHolder;
     public int[] types;
-    public Transform roomPos;
     public Vector2 dimensions;
-    public List<RoomControl> neighbours;
     public bool enemies;
     private CameraCont mainCam;
     private bool _filled;
@@ -16,6 +15,7 @@ public class RoomControl : MonoBehaviour
     {
         get { return _filled; } set { _filled = value; }
     }
+    public bool cleared = false;
 
     private EnemyPuppeteer puppeteer;
 
@@ -23,28 +23,32 @@ public class RoomControl : MonoBehaviour
     {
         puppeteer = GameObject.Find("EnemyPuppeteer").GetComponent<EnemyPuppeteer>();
         mainCam = GameObject.Find("MainCamera").GetComponent<CameraCont>();
-        filled = true;
+        filled = false;
     }
 
     public void PlayerEnters()
     {
-        foreach (RoomControl n in neighbours)
-            if (n.enemies && !n.filled)
-                n.filled = puppeteer.FillRoom(n.spawnPoints, types, roomPos);
+        if (enemies && !filled)
+        {
+            filled = puppeteer.FillRoom(spawnPoints, types, enemyHolder.transform);
+        }
+        
+        mainCam.centre = transform.position;
+        mainCam.bounds = dimensions;
     }
     public void PlayerLeaves()
     {
-        foreach (Transform child in roomPos.transform)
+        if (enemyHolder != null)
         {
-            GameObject.Destroy(child.gameObject);
-        }
-        filled = false;
-        
+            foreach (Transform child in enemyHolder.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+            filled = false;
+        }    
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        mainCam.bounds = dimensions;
-        mainCam.centre = transform.position;
         if (collision.gameObject.name == "player")
         {
             PlayerEnters();
