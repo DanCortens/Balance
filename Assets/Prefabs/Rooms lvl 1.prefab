@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &17709550
 BoxCollider2D:
@@ -120,9 +120,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &32491782
 BoxCollider2D:
@@ -195,9 +195,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &67747162
 BoxCollider2D:
@@ -225,6 +225,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 25, y: 16}
   m_EdgeRadius: 0
+--- !u!1 &79620951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 79620952}
+  m_Layer: 0
+  m_Name: enemyHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &79620952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79620951}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1735146126}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &191523772
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,9 +300,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &191523774
 BoxCollider2D:
@@ -300,6 +330,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 25, y: 16}
   m_EdgeRadius: 0
+--- !u!1 &217651735
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 217651736}
+  m_Layer: 0
+  m_Name: sp0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &217651736
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217651735}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1735146126}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &276159379
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,9 +405,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &276159381
 BoxCollider2D:
@@ -420,9 +480,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &397633111
 BoxCollider2D:
@@ -495,9 +555,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &404015579
 BoxCollider2D:
@@ -570,9 +630,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &637748906
 BoxCollider2D:
@@ -645,9 +705,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &655943676
 BoxCollider2D:
@@ -720,9 +780,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &667373200
 BoxCollider2D:
@@ -795,9 +855,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &842216168
 BoxCollider2D:
@@ -870,9 +930,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &890165571
 BoxCollider2D:
@@ -945,9 +1005,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &919779729
 BoxCollider2D:
@@ -1020,9 +1080,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &983613791
 BoxCollider2D:
@@ -1095,9 +1155,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &984384484
 BoxCollider2D:
@@ -1170,9 +1230,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &1205574965
 BoxCollider2D:
@@ -1245,9 +1305,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &1221333318
 BoxCollider2D:
@@ -1320,9 +1380,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &1328784007
 BoxCollider2D:
@@ -1395,9 +1455,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &1530812869
 BoxCollider2D:
@@ -1470,9 +1530,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &1551302788
 BoxCollider2D:
@@ -1528,7 +1588,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 54.7, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 217651736}
+  - {fileID: 1784777725}
+  - {fileID: 79620952}
   m_Father: {fileID: 1230158739764828668}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1544,10 +1607,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints: []
-  types: 
+  spawnPoints:
+  - {fileID: 217651736}
+  - {fileID: 1784777725}
+  enemyHolder: {fileID: 79620952}
+  types: 0000000000000000
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &1735146127
 BoxCollider2D:
@@ -1620,9 +1685,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &1760106967
 BoxCollider2D:
@@ -1650,6 +1715,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 25, y: 16}
   m_EdgeRadius: 0
+--- !u!1 &1784777724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1784777725}
+  m_Layer: 0
+  m_Name: sp1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1784777725
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784777724}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1735146126}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2032341650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1695,9 +1790,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &2032341652
 BoxCollider2D:
@@ -1770,9 +1865,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
 --- !u!61 &2096728382
 BoxCollider2D:
