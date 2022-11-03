@@ -33,11 +33,15 @@ public class LivingEntity : MonoBehaviour
         CurrHp = MAX_HP_BASE;
     }
 
-    public void TakeDamage(float damage, int type, Vector2 enemyDir)
+    public void TakeDamage(float damage, int type, Vector2 enemyDir, float pushForce)
     {
         if (!takingDamage)
         {
             CurrHp= (int)(-damage * damageMult[type]);
+            if (currHp <= 0)
+            {
+                onDeath?.Invoke();
+            }
             takingDamage = true;
             //play flinch animation
             Vector2 pushDir = transform.position;

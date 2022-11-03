@@ -42,7 +42,6 @@ public class PlayerController : LivingEntity
     private float sideJTime;
     private float horzM;
     private float balance;
-    private float balance;
     private float darkAff;
     private float lightAff;
     private Rigidbody2D rb2d;
@@ -52,19 +51,6 @@ public class PlayerController : LivingEntity
     private LayerMask interactLayer;
     private LayerMask hookLayer;
     private InputAction moveInput;
-
-    [SerializeField]
-    private int currHP;
-    public int currHp
-    {
-        get { return currHp; }
-        set
-        {
-            if (currHp == value) return;
-            currHp = value;
-            onHPChanged?.Invoke();
-        }
-    }
 
     //constants
     private const float JUMP_SPD = 6.4f;
@@ -259,10 +245,6 @@ public class PlayerController : LivingEntity
         /* austin: In general, this is an easy but unoptimized way of checking for player character death. We should make checks every time the player takes damage or changes HP via events
          * because constantly polling for things like this every frame has the potential to fuck framerates on lower spec devices. 
          */
-        if (currHP <= 0) 
-        {
-            //game over
-        }
 
         //if (true) //check for paused game state{}
         //else if (true) //check for cinematic game state{}
@@ -296,14 +278,6 @@ public class PlayerController : LivingEntity
         if (!takingDamage)
         {
             Movement();
-        }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //check if colliding with an enemy
-        if (collision.collider.gameObject.layer == (enemyLayer.value) && !takingDamage)
-        {
-            TakeDamage(10f, 0, collision.gameObject.transform.position, collision.gameObject.name);
         }
     }
 
@@ -441,20 +415,7 @@ public class PlayerController : LivingEntity
     {
         return countering;
     }
-    public void TakeDamage(float damage, int type, Vector2 enemyDir)
-    {
-        if (!takingDamage)
-        {
-            ChangeHP((-damage * damageMult[type]));
-            isAttacking = false;
-            takingDamage = true;
-            //play flinch animation
-            Vector2 pushDir = ((Vector2)transform.position - enemyDir);
-            rb2d.velocity = pushDir.normalized * FLINCH_DIST;
-            StopAllCoroutines();
-            StartCoroutine(Flinching());
-        }
-    }
+
 
 
     private void OnDrawGizmos()
