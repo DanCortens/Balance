@@ -50,12 +50,13 @@ public abstract class EnemyAI : MonoBehaviour
         public float windUp;
         public Transform attackPos;
         public float rad;
+        public float attackPushForce;
         public int attackType;
         public float damage;
         public bool counterable;
         public bool melee;
 
-        public Attack(float windUp, Transform attackPos, float rad, int attackType, float damage, bool counterable, bool melee)
+        public Attack(float windUp, Transform attackPos, float rad, int attackType, float damage, bool counterable, bool melee, float attackPushForce)
         {
             this.windUp = windUp;
             this.attackPos = attackPos;
@@ -64,6 +65,7 @@ public abstract class EnemyAI : MonoBehaviour
             this.damage = damage;
             this.counterable = counterable;
             this.melee = melee;
+            this.attackPushForce = attackPushForce;
         }
     }
 
@@ -291,7 +293,7 @@ public abstract class EnemyAI : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, attack.rad, playerLayer);
         foreach (Collider2D hit in hits)
         {
-            hit.gameObject.GetComponent<PlayerController>().TakeDamage(attack.damage, attack.attackType, transform.position, gameObject.name);
+            hit.gameObject.GetComponent<PlayerController>().TakeDamage(attack.damage, attack.attackType, transform.position, attack.attackPushForce);
         }
     }
 }
