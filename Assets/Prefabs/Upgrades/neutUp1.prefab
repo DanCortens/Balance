@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5270008978241001928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2627579957136086315}
+  - component: {fileID: 2986010633399007150}
+  m_Layer: 0
+  m_Name: neutUp1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2627579957136086315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5270008978241001928}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2986010633399007150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5270008978241001928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3cfc19720287449bd7ed009715991f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upName: Focus
+  prereq: {fileID: 7826967823810085093, guid: 06e614e957e6a6342b298d2632ebd960, type: 3}
+  descrip: Your extreme focus in combat allows you to attack with superhuman swiftness.
+  unlocked: 0
+  lockedImg: {fileID: 21300000, guid: 136767245fd38134da5eb32e3560e9b2, type: 3}
+  unlockedImg: {fileID: 21300000, guid: d8a0c7735b898804f94dd94d784402d5, type: 3}
+  activeImg: {fileID: 21300000, guid: 571adc16fe8190844a58bc4516d7c18e, type: 3}

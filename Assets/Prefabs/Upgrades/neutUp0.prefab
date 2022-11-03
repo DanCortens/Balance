@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1966480311878976602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8209540964326888576}
+  - component: {fileID: 7826967823810085093}
+  m_Layer: 0
+  m_Name: neutUp0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8209540964326888576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966480311878976602}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7826967823810085093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966480311878976602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3cfc19720287449bd7ed009715991f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upName: Will
+  prereq: {fileID: 0}
+  descrip: You center yourself in combat, reducing the amount of time spent flinching.
+  unlocked: 0
+  lockedImg: {fileID: 21300000, guid: 136767245fd38134da5eb32e3560e9b2, type: 3}
+  unlockedImg: {fileID: 21300000, guid: d8a0c7735b898804f94dd94d784402d5, type: 3}
+  activeImg: {fileID: 21300000, guid: 571adc16fe8190844a58bc4516d7c18e, type: 3}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class EnemyAI : MonoBehaviour
+public abstract class EnemyAI : MonoBehaviour
 {
     [Header("Pathfinding")]
     public float aggroRange = 10f;
@@ -13,38 +13,39 @@ public class EnemyAI : MonoBehaviour
     public float jumpNodeReq = 0.8f;
     public float nextWaypointCheck = 1f;
 
-    private float[] damageMult = new float[3];
+    protected float[] damageMult = new float[3];
     [Header("Combat")]
-    [SerializeField]private float hp;
-    private float deathAnimTime;
-    private float pathRefreshTime;
+    public GameObject attackCir;
+    [SerializeField] protected float hp;
+    protected float deathAnimTime;
+    protected float pathRefreshTime;
 
-    private bool flying;
-    private bool grounded;
-    private bool chaser;
-    private bool hasFacing;
-    private int currentWaypoint;
+    protected bool flying;
+    protected bool grounded;
+    protected bool chaser;
+    protected bool hasFacing;
+    protected int currentWaypoint;
 
-    private bool dying;
-    [SerializeField] private bool attacking;
-    [SerializeField] private bool counterable;
-    [SerializeField] private bool flinching;
-    private float flinchCheck;
-    private float flinchThreshold;
-    private float flinchTime;
+    protected bool dying;
+    [SerializeField] protected bool attacking;
+    [SerializeField] protected bool counterable;
+    [SerializeField] protected bool flinching;
+    protected float flinchCheck;
+    protected float flinchThreshold;
+    protected float flinchTime;
 
-    private Transform player;
-    private Transform startPos;
-    private Transform target;
-    private Animator anim;
-    private LayerMask playerLayer;
-    private Path path;
-    private Seeker seeker;
-    private Rigidbody2D rb2d;
-    private Attack[] attacks;
+    protected Transform player;
+    protected Transform startPos;
+    protected Transform target;
+    protected Animator anim;
+    protected LayerMask playerLayer;
+    protected Path path;
+    protected Seeker seeker;
+    protected Rigidbody2D rb2d;
+    protected Attack[] attacks;
 
-    private const float VERT_COLL_DIST = 0.34f;
-    class Attack
+    protected const float VERT_COLL_DIST = 0.34f;
+    public class Attack
     {
         public float windUp;
         public Transform attackPos;
@@ -52,15 +53,17 @@ public class EnemyAI : MonoBehaviour
         public int attackType;
         public float damage;
         public bool counterable;
+        public bool melee;
 
-        public Attack(float wu, Transform ap, float r, int at, float d, bool c)
+        public Attack(float windUp, Transform attackPos, float rad, int attackType, float damage, bool counterable, bool melee)
         {
-            windUp = wu;
-            attackPos = ap;
-            rad = r;
-            attackType = at;
-            damage = d;
-            counterable = c;
+            this.windUp = windUp;
+            this.attackPos = attackPos;
+            this.rad = rad;
+            this.attackType = attackType;
+            this.damage = damage;
+            this.counterable = counterable;
+            this.melee = melee;
         }
     }
 
@@ -91,7 +94,9 @@ public class EnemyAI : MonoBehaviour
 
         EnemySpecificStart();
     }
-    private void EnemySpecificStart()
+    abstract protected void EnemySpecificStart();
+    /*
+     * example enemy
     {
         flying = false;
         grounded = false;
@@ -104,7 +109,7 @@ public class EnemyAI : MonoBehaviour
         attacks = new Attack[] {new Attack(1f, transform, 1.5f, 0, 5f, true),
                                 new Attack(2f, transform, 1.5f, 0, 20f, false)};
         damageMult = new float[] { 1f, 1f, 1f };
-    }
+    }*/
 
     // Update is called once per frame
     void FixedUpdate()
@@ -151,13 +156,22 @@ public class EnemyAI : MonoBehaviour
         float dist = Vector2.Distance(rb2d.position, target.position);
         if (dist < 1.5f)
         {
-            attacking = true;
-            //pick a random attack
-            System.Random random = new System.Random();
-            int num = random.Next(0, attacks.Length);
-            //start timer to make the attack
-            StartCoroutine(AttackDamageTimer(attacks[num]));
-            //play the animation
+            if (chaser)
+            {
+                attacking = true;
+                //pick a random attack
+                System.Random random = new System.Random();
+                int num = random.Next(0, attacks.Length);
+                //start timer to make the attack
+                if (attacks[num].melee)
+                    StartCoroutine(AttackDamageTimer(attacks[num]));
+                //play the animation
+            }
+            else
+            {
+
+            }
+            
         }
 
 
@@ -256,18 +270,19 @@ public class EnemyAI : MonoBehaviour
     }
     IEnumerator AttackDamageTimer(Attack attack)
     {
-        //Gizmos.DrawWireSphere(attack.attackPos.position, attack.rad);
+        
         Debug.Log("attack");
         //windUp is the amount of time between the start of the animation and when it should deal damage
         yield return new WaitForSeconds(attack.windUp);
         attacking = false;
         //deal damage to player in the radius
         Vector2 actualPos = transform.position;
-
-        Collider2D[] hits = Physics2D.OverlapCircleAll(attack.attackPos.position, attack.rad, playerLayer);
+        GameObject circle = GameObject.Instantiate(attackCir, actualPos, attackCir.transform.rotation);
+        circle.transform.localScale = new Vector3(attack.rad, attack.rad, 1f);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, attack.rad, playerLayer);
         foreach (Collider2D hit in hits)
         {
-            hit.gameObject.GetComponent<PlayerController>().TakeDamage(attack.damage, attack.attackType, transform.position);
+            hit.gameObject.GetComponent<PlayerController>().TakeDamage(attack.damage, attack.attackType, transform.position, gameObject.name);
         }
     }
 }

@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 2138175803851403781}
   - component: {fileID: 2138175803851403782}
-  - component: {fileID: 2138175803851403783}
   - component: {fileID: 2138175803851403784}
   - component: {fileID: 2138175803851403780}
   - component: {fileID: 2138175803851403779}
   - component: {fileID: 5823169819384439400}
+  - component: {fileID: 4801167943400734125}
   m_Layer: 8
-  m_Name: test_enemy
+  m_Name: basic_light_enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,28 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2138175803851403783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2138175803851403786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e09c6c2ab6dafe40ac6b17f5ab8a868, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aggroRange: 20
-  speed: 800
-  jump: 0.3
-  jumpOffset: 0.1
-  jumpNodeReq: 0.5
-  nextWaypointCheck: 2
-  hp: 0
-  attacking: 0
-  counterable: 0
-  flinching: 0
 --- !u!50 &2138175803851403784
 Rigidbody2D:
   serializedVersion: 4
@@ -193,3 +171,26 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
+--- !u!114 &4801167943400734125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138175803851403786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6936ef8b94942947a6a1926e831bf12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aggroRange: 10
+  speed: 400
+  jump: 0.3
+  jumpOffset: 0.1
+  jumpNodeReq: 0.8
+  nextWaypointCheck: 1
+  attackCir: {fileID: 0}
+  hp: 0
+  attacking: 0
+  counterable: 0
+  flinching: 0

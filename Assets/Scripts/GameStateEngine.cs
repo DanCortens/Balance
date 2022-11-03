@@ -25,7 +25,7 @@ public class GameStateEngine : MonoBehaviour
     
     private void Start()
     {
-        state = State.Cinematic;
+        state = State.Play;
     }
     private void StateChanged(State previous)
     {
