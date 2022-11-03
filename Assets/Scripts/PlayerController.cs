@@ -107,10 +107,7 @@ public class PlayerController : LivingEntity
 
         groundAttacks = PlayerAttacks.SetGroundAttacks();
         airAttacks = PlayerAttacks.SetAirAttacks();
-        setCurrHP((PlayerPrefs.HasKey("currHP")) ? PlayerPrefs.GetInt("currHP") : MAX_HP_BASE);
-
-        //Event handling
-        onHPChanged += CheckHP;
+        CurrHp = PlayerPrefs.HasKey("currHP") ? PlayerPrefs.GetInt("currHP") : MAX_HP_BASE;
     }
 
     //new input listeners
