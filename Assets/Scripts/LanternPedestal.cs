@@ -22,7 +22,7 @@ public class LanternPedestal : Interactable
         if (collision.gameObject.name == "player")
         {
             PlayerStats.hasLantern = true;
-            Vector2 offset = new Vector2 (0.5f,0f);
+            Vector2 offset = new Vector2 (2f,0f);
             cc.StartCinematic(new Vector2[] { (Vector2)transform.position, 
                                               ((Vector2)transform.position + offset),
                                               ((Vector2)transform.position - offset),

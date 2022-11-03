@@ -49,7 +49,7 @@ if (Input.GetKeyDown(KeyCode.Escape))
     public void QuitGame()
     {
         Debug.Log("Quitting Game...");
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
         Application.Quit();
     }
 
