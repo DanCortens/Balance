@@ -43,8 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ac55c259bb4304d9ae483f132880c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neutEnemyPrefabs: []
-  darkEnemyPrefabs: []
-  lightEnemyPrefabs: []
-  odds: []
+  neutEnemyPrefabs:
+  - {fileID: 3741025888455305921, guid: ab785d3b043be584a9cb3258ee1d2e0e, type: 3}
+  darkEnemyPrefabs:
+  - {fileID: 8741799056856845751, guid: 42a34c70646172a4dbee36c38f7f8a6e, type: 3}
+  lightEnemyPrefabs:
+  - {fileID: 2138175803851403786, guid: e138c30296fef21429b755a12a51d024, type: 3}
   worldBalance: 0
