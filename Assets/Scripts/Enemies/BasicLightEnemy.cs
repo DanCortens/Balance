@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class BasicLightEnemy : EnemyAI
 {
+    void Start()
+    {
+        base.CustomStart();
+    }
+    void FixedUpdate()
+    {
+        CustomFixedUpdate();
+    }
     override protected void EnemySpecificStart()
     {
         flying = false;

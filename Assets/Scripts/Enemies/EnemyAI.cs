@@ -70,6 +70,10 @@ public abstract class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+    protected void CustomStart()
+    {
         dying = false;
         attacking = false;
         flinching = false;
@@ -113,6 +117,10 @@ public abstract class EnemyAI : MonoBehaviour
 
     // Update is called once per frame
     void FixedUpdate()
+    {
+        CustomFixedUpdate();
+    }
+    protected void CustomFixedUpdate()
     {
         if (hp <= 0f && !dying)
             Die();
@@ -277,8 +285,9 @@ public abstract class EnemyAI : MonoBehaviour
         attacking = false;
         //deal damage to player in the radius
         Vector2 actualPos = transform.position;
-        GameObject circle = GameObject.Instantiate(attackCir, actualPos, attackCir.transform.rotation);
-        circle.transform.localScale = new Vector3(attack.rad, attack.rad, 1f);
+        // circle for testing
+        //GameObject circle = GameObject.Instantiate(attackCir, actualPos, attackCir.transform.rotation);
+        //circle.transform.localScale = new Vector3(attack.rad, attack.rad, 1f);
         Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, attack.rad, playerLayer);
         foreach (Collider2D hit in hits)
         {
