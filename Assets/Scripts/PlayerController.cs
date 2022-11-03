@@ -21,6 +21,7 @@ public class PlayerController : LivingEntity
     public Transform sAttack;
     public Transform lAttack;
     public Transform aoeAttack;
+    private float facing;
 
     //private variables
     
@@ -81,7 +82,7 @@ public class PlayerController : LivingEntity
     void Start(){
         mat = gameObject.GetComponent<SpriteRenderer>();
         baseColor = mat.color;
-
+        facing = 1f;
         puppeteer = GameObject.FindObjectOfType<EnemyPuppeteer>();
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -118,8 +119,18 @@ public class PlayerController : LivingEntity
     //new input listeners
     void OnHorizontal(InputValue value)
     {
+        if (value.Get<float>() > 0f)
+            facing = 1f;
+        else if (value.Get<float>() < 0f)
+            facing = -1f;
+            
+
         if (sideJTime <= 0f && !isAttacking)
+        {
             horzM = value.Get<float>();
+            
+        }
+            
 
     }
     void OnJump(InputValue value)
@@ -371,14 +382,8 @@ public class PlayerController : LivingEntity
             }
             else
             {
-                for (int i = 0; i < groundAttacks[result].hits; i++)
-                {
-                    StartCoroutine(AttackDamageTimer(groundAttacks[result].windUp[i],
-                                                groundAttacks[result].attackPos,
-                                                groundAttacks[result].rad,
-                                                groundAttacks[result].GetType(i,usingDark),
-                                                groundAttacks[result].damage[i]));
-                }
+                
+                StartCoroutine(AttackDamageTimer(0, groundAttacks[result]));
                
                 StartCoroutine(NotAttackingTimer(groundAttacks[result].animTime));
                 float change = (usingDark) ? groundAttacks[result].balChange * (darkAff + PlayerStats.damageDoneMod[1]) 
@@ -398,14 +403,7 @@ public class PlayerController : LivingEntity
             }
             else
             {
-                for (int i = 0; i < airAttacks[result].hits; i++)
-                {
-                    StartCoroutine(AttackDamageTimer(airAttacks[result].windUp[i],
-                                                 airAttacks[result].attackPos,
-                                                 airAttacks[result].rad,
-                                                 airAttacks[result].GetType(i,usingDark),
-                                                 airAttacks[result].damage[i]));
-                }
+                StartCoroutine(AttackDamageTimer(0, airAttacks[result]));
                 StartCoroutine(NotAttackingTimer(airAttacks[result].animTime));
                 float change = (usingDark) ? airAttacks[result].balChange * (darkAff + PlayerStats.damageDoneMod[1])
                                            : -airAttacks[result].balChange * (lightAff + PlayerStats.damageDoneMod[2]);
@@ -443,25 +441,27 @@ public class PlayerController : LivingEntity
         
     }
 
-    private IEnumerator AttackDamageTimer(float windUp, Vector2 attackPos, float rad, int attackType, float damage)
+    private IEnumerator AttackDamageTimer(int currHit, PlayerAttacks.Attack attack)
     {
         mat.color = new Color(1, baseColor.g, baseColor.b, baseColor.a);
         //windUp is the amount of time between the start of the animation and when it should deal damage
-        yield return new WaitForSeconds(windUp - 0.1f);
+        yield return new WaitForSeconds(attack.windUp[currHit] - 0.1f);
         mat.color = new Color(1, baseColor.g * 0.2f, baseColor.b * 0.2f, baseColor.a);
         yield return new WaitForSeconds(0.1f);
         mat.color = baseColor;
         //deal damage to all enemies in the radius
         Vector2 actualPos = transform.position;
-        actualPos += attackPos;
+        actualPos += new Vector2(attack.attackPos.x * facing, attack.attackPos.y);
         GameObject newEffect = Instantiate(attackEffect, actualPos, Quaternion.identity);
-        newEffect.GetComponent<AttackEffectScript>().InitEffect(attackType, rad);
-        Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, rad, enemyLayer);
+        newEffect.GetComponent<AttackEffectScript>().InitEffect(attack.GetType(currHit,usingDark), attack.rad);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, attack.rad, enemyLayer);
         foreach (Collider2D hit in hits)
         {
             Debug.Log("hit enemy!");
-            hit.gameObject.GetComponent<EnemyAI>().TakeDamage(damage, attackType);
+            hit.gameObject.GetComponent<EnemyAI>().TakeDamage(attack.damage[currHit], attack.GetType(currHit, usingDark));
         }
+        if (currHit < attack.hits - 1)
+            StartCoroutine(AttackDamageTimer(currHit+1, attack));
     }
     private IEnumerator NotAttackingTimer(float wait)
     {
