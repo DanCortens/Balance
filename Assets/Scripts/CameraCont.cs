@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class CameraCont : MonoBehaviour
 {
+    public Transform target;
     private Transform player;
+    public GameObject gseObj;
+    private GameStateEngine gse;
     private const float SMTH = 0.3f;
     private Vector3 vel = Vector3.zero;
 
@@ -12,6 +15,7 @@ public class CameraCont : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("player").GetComponent<Transform>();
+        gse = gseObj.GetComponent<GameStateEngine>();
     }
 
     // Update is called once per frame
@@ -21,7 +25,14 @@ public class CameraCont : MonoBehaviour
         //if (player.position.x > right || player.position.x < left || player.position.y > up || player.position < down) {}
         //else {}
         //follow the player 
-        Vector3 targetPos = player.TransformPoint(new Vector3(0f,0f,-10f));
+        if (gse.state == GameStateEngine.State.Play)
+            target.position = player.position;
+        Vector3 targetPos = target.TransformPoint(new Vector3(0f,0f,-10f));
         transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref vel, SMTH);
+    }
+
+    public void setTarget(Vector2 tar)
+    {
+        target.position = tar;
     }
 }
