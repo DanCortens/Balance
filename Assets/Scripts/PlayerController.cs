@@ -120,6 +120,8 @@ public class PlayerController : LivingEntity
     {
         if (value.isPressed && !isAttacking)
         {
+            //Calls jump audio
+            FindObjectOfType<AudioManager>().Play("Jump");
             if ((anim.GetBool("grounded") || coyote < COYO_MAX))
             {
                 coyote = COYO_MAX;
@@ -179,6 +181,8 @@ public class PlayerController : LivingEntity
 
     void OnPhysical(InputValue value)
     {
+        //Calls Strike audio
+        FindObjectOfType<AudioManager>().Play("Strike");
         attStack.stored[(int)(AttStackScript.Inputs.PAttack)] = true;
         if (rb2d.velocity.magnitude > 0f)
             attStack.stored[(int)(AttStackScript.Inputs.Forward)] = true;
