@@ -6,6 +6,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : LivingEntity
 {
     /*prolly best to seperate stuff (attacking, stats, movement) into separate scripts later on*/
+    //temp hack to show attacking
+    protected SpriteRenderer mat;
+    protected Color baseColor;
+    public GameObject attackEffect;
 
     //public variables
     //movement
@@ -75,6 +79,9 @@ public class PlayerController : LivingEntity
     Dictionary<string, PlayerAttacks.Attack> airAttacks;
 
     void Start(){
+        mat = gameObject.GetComponent<SpriteRenderer>();
+        baseColor = mat.color;
+
         puppeteer = GameObject.FindObjectOfType<EnemyPuppeteer>();
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -438,11 +445,17 @@ public class PlayerController : LivingEntity
 
     private IEnumerator AttackDamageTimer(float windUp, Vector2 attackPos, float rad, int attackType, float damage)
     {
+        mat.color = new Color(1, baseColor.g, baseColor.b, baseColor.a);
         //windUp is the amount of time between the start of the animation and when it should deal damage
-        yield return new WaitForSeconds(windUp);
+        yield return new WaitForSeconds(windUp - 0.1f);
+        mat.color = new Color(1, baseColor.g * 0.2f, baseColor.b * 0.2f, baseColor.a);
+        yield return new WaitForSeconds(0.1f);
+        mat.color = baseColor;
         //deal damage to all enemies in the radius
         Vector2 actualPos = transform.position;
         actualPos += attackPos;
+        GameObject newEffect = Instantiate(attackEffect, actualPos, Quaternion.identity);
+        newEffect.GetComponent<AttackEffectScript>().InitEffect(attackType, rad);
         Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, rad, enemyLayer);
         foreach (Collider2D hit in hits)
         {

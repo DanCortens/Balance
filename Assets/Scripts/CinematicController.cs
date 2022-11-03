@@ -36,17 +36,16 @@ public class CinematicController : MonoBehaviour
                                       new float[] {2f,2f,2f});
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartCinematic(Vector2[] path, float[] times)
     {
-        if (gse.state == GameStateEngine.State.Cinematic)
-        {
-            if (currCinematic != null && playing == false)
-                StartCoroutine(PlayCinematic());
-        }
+        currCinematic = new Cinematic(path, times);
+        
+        if (currCinematic != null && playing == false)
+            StartCoroutine(PlayCinematic());
     }
     private IEnumerator PlayCinematic()
     {
+        gse.state = GameStateEngine.State.Cinematic;
         playing = true;
         for (int i = 0; i < currCinematic.path.Length; i++)
         {

@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currHp: 0
+  attackEffect: {fileID: 7715566787090560569, guid: 4b3e7cb2abcbd4841b68de17b5dc3cb6, type: 3}
   groundCheck: {fileID: 3400479937127262662}
   head: {fileID: 3400479935796093682}
   knees: {fileID: 3400479936994201160}

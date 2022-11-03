@@ -5,6 +5,7 @@ using Pathfinding;
 
 public abstract class EnemyAI : MonoBehaviour
 {
+    //temp hack to show attacking
     protected SpriteRenderer mat;
     protected Color baseColor;
     [Header("Pathfinding")]
