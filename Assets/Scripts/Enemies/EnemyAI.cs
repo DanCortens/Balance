@@ -15,7 +15,7 @@ public abstract class EnemyAI : MonoBehaviour
 
     protected float[] damageMult = new float[3];
     [Header("Combat")]
-    public GameObject attackCir;
+    //public GameObject attackCir;
     [SerializeField] protected float hp;
     protected float deathAnimTime;
     protected float pathRefreshTime;
@@ -70,7 +70,7 @@ public abstract class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        CustomStart();
     }
     protected void CustomStart()
     {
@@ -122,10 +122,12 @@ public abstract class EnemyAI : MonoBehaviour
     }
     protected void CustomFixedUpdate()
     {
+        
         if (hp <= 0f && !dying)
             Die();
         else if (!flinching)
         {
+            
             //isangry checks aggro distance, chaser is false if the enemy is turret type
             if (IsAngry() && chaser)
             {
@@ -158,7 +160,7 @@ public abstract class EnemyAI : MonoBehaviour
         }
     }
 
-    private void Combat()
+    protected void Combat()
     {
         //if close enough to the player, attack
         float dist = Vector2.Distance(rb2d.position, target.position);
@@ -184,14 +186,14 @@ public abstract class EnemyAI : MonoBehaviour
 
 
     }
-    private void UpdatePath()
+    protected void UpdatePath()
     {
         if (IsAngry() && seeker.IsDone())
         {
             seeker.StartPath(rb2d.position, target.position, OnPathComplete);
         }
     }
-    private void Pathfinding()
+    protected void Pathfinding()
     {
         if (path == null)
             return;
@@ -225,8 +227,8 @@ public abstract class EnemyAI : MonoBehaviour
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
     }
-    
-    private void OnPathComplete(Path p)
+
+    protected void OnPathComplete(Path p)
     {
         if (!p.error)
         {
@@ -234,15 +236,15 @@ public abstract class EnemyAI : MonoBehaviour
             currentWaypoint = 0;    
         }
     }
-    private void UpdateIdlePos()
+    protected void IdlePos()
     {
 
     }
-    private void PathfindingIdle()
+    protected void PathfindingIdle()
     {
         //do pathfinding when idle
     }
-    private bool IsAngry()
+    protected bool IsAngry()
     {
         float distance = Vector2.Distance(transform.position, player.transform.position);
         return (distance < aggroRange) ? true : false;
@@ -257,11 +259,11 @@ public abstract class EnemyAI : MonoBehaviour
             flinching = true;
         }
     }
-    public void Countered()
+    protected void Countered()
     {
         flinching = true;
     }
-    private void Die()
+    protected void Die()
     {
         dying = true;
         //play death animation
@@ -271,7 +273,7 @@ public abstract class EnemyAI : MonoBehaviour
         StartCoroutine(DeleteMe());
     }
 
-    IEnumerator DeleteMe()
+    protected IEnumerator DeleteMe()
     {
         yield return new WaitForSeconds(deathAnimTime);
         Destroy(this.gameObject);
@@ -291,7 +293,8 @@ public abstract class EnemyAI : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, attack.rad, playerLayer);
         foreach (Collider2D hit in hits)
         {
-            hit.gameObject.GetComponent<PlayerController>().TakeDamage(attack.damage, attack.attackType, transform.position, gameObject.name);
+            PlayerController pc = hit.gameObject.GetComponent<PlayerController>();
+            pc.TakeDamage(attack.damage, attack.attackType, transform.position, gameObject.name);
         }
     }
 }

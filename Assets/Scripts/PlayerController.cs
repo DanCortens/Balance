@@ -65,7 +65,7 @@ public class PlayerController : LivingEntity
     private const float AOE_ATTACK_RAD = 1.5f;
     private const float INTERACT_RAD = 1f;
     private const int MAX_HP_BASE = 100;
-    private const float FLINCH_DIST = 15f;
+    private const float FLINCH_DIST = 5f;
     private const float HOOK_DIST = 1f;
 
     private AttStackScript attStack;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicLightEnemy : EnemyAI
+public class BasicDarkEnemy : EnemyAI
 {
     void Start()
     {
@@ -23,8 +23,8 @@ public class BasicLightEnemy : EnemyAI
         hp = 100f;
         flinchThreshold = hp / 2;
 
-        attacks = new Attack[] {new Attack(1.5f, transform, 1.5f, 2, 5f, true, true),
-                                new Attack(3f, transform, 1.5f, 2, 20f, false, true)};
-        damageMult = new float[] { 1f, 1.5f, 0.5f };
+        attacks = new Attack[] {new Attack(1.5f, transform, 1.5f, 1, 5f, true, true),
+                                new Attack(3f, transform, 1.5f, 1, 20f, false, true)};
+        damageMult = new float[] { 1f, 0.5f, 1.5f };
     }
 }
