@@ -29,7 +29,6 @@ public class PlayerController : LivingEntity
     private bool canAttack;
     private bool isAttacking;
     private bool countering;
-    private bool takingDamage;
     private bool usingDark;
     private bool upHeld;
     private bool downHeld;
@@ -415,7 +414,7 @@ public class PlayerController : LivingEntity
     {
         base.TakeDamage(damage, type, enemyDir, pushForce);
         Vector2 pushDir = ((Vector2)transform.position - enemyDir);
-        rb2d.velocity = pushDir.normalized * (FLINCH_DIST + pushForce);
+        rb2d.velocity = pushDir.normalized * (FLINCH_DIST * pushForce);
         StartCoroutine(Flinching());
     }
 

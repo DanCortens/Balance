@@ -8,11 +8,11 @@ public class LivingEntity : MonoBehaviour
     public event System.Action onHPChanged;
     public event System.Action onDeath;
     //bool
-    private bool takingDamage;
+    protected bool takingDamage;
     //constants
     protected float[] damageMult = { 1f, 1f, 1f };//subject to change
     protected const int MAX_HP_BASE = 100;
-    protected const float FLINCH_DIST = 2f;
+    protected const float FLINCH_DIST = 10f;
     //stats
     [SerializeField]
     private int currHp;
@@ -37,7 +37,7 @@ public class LivingEntity : MonoBehaviour
     {
         if (!takingDamage)
         {
-            CurrHp = (int)(-damage * damageMult[type]);
+            CurrHp += (int)(-damage * damageMult[type]);
             if (currHp <= 0)
             {
                 onDeath?.Invoke();

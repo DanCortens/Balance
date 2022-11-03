@@ -5,6 +5,8 @@ using Pathfinding;
 
 public abstract class EnemyAI : MonoBehaviour
 {
+    protected SpriteRenderer mat;
+    protected Color baseColor;
     [Header("Pathfinding")]
     public float aggroRange = 10f;
     public float speed = 400f;
@@ -76,6 +78,8 @@ public abstract class EnemyAI : MonoBehaviour
     }
     protected void CustomStart()
     {
+        mat = gameObject.GetComponent<SpriteRenderer>();
+        baseColor = mat.color;
         dying = false;
         attacking = false;
         flinching = false;
@@ -284,8 +288,15 @@ public abstract class EnemyAI : MonoBehaviour
     {
         
         Debug.Log("attack");
-        //windUp is the amount of time between the start of the animation and when it should deal damage
+        if (attack.counterable)
+            mat.color = new Color(1, baseColor.g,baseColor.b,baseColor.a);
+        else
+            mat.color = new Color(1, baseColor.g * 0.5f, baseColor.b * 0.5f, baseColor.a);
         yield return new WaitForSeconds(attack.windUp);
+        mat.color = new Color(1, 0, 0, baseColor.a);
+        //windUp is the amount of time between the start of the animation and when it should deal damage
+        yield return new WaitForSeconds(0.1f);
+        mat.color = baseColor;
         attacking = false;
         //deal damage to player in the radius
         Vector2 actualPos = transform.position;
@@ -296,8 +307,6 @@ public abstract class EnemyAI : MonoBehaviour
         foreach (Collider2D hit in hits)
         {
             hit.gameObject.GetComponent<PlayerController>().TakeDamage(attack.damage, attack.attackType, transform.position, attack.attackPushForce);
-            PlayerController pc = hit.gameObject.GetComponent<PlayerController>();
-            pc.TakeDamage(attack.damage, attack.attackType, transform.position, attack.attackPushForce);
         }
     }
 }
