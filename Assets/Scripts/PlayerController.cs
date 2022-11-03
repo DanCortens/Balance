@@ -64,8 +64,7 @@ public class PlayerController : LivingEntity
     private const float LARGE_ATTACK_RAD = 1f;
     private const float AOE_ATTACK_RAD = 1.5f;
     private const float INTERACT_RAD = 1f;
-    private const int MAX_HP_BASE = 100;
-    private const float FLINCH_DIST = 5f;
+    private new const int MAX_HP_BASE = 100;
     private const float HOOK_DIST = 1f;
 
     private AttStackScript attStack;
@@ -408,8 +407,15 @@ public class PlayerController : LivingEntity
         }
         
     }
-    
-    public bool IsCountering()
+    public new void TakeDamage(float damage, int type, Vector2 enemyDir, float pushForce)
+    {
+        base.TakeDamage(damage, type, enemyDir, pushForce);
+        Vector2 pushDir = ((Vector2)transform.position - enemyDir);
+        rb2d.velocity = pushDir.normalized * (FLINCH_DIST + pushForce);
+        StartCoroutine(Flinching());
+    }
+
+        public bool IsCountering()
     {
         return countering;
     }

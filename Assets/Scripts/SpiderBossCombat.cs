@@ -172,7 +172,7 @@ public class SpiderBossCombat : MonoBehaviour
             if (pc.IsCountering() && counterable)
                 Counter();
             else
-                pc.TakeDamage(currMove.damage, currMove.type, attackPos, gameObject.name);
+                pc.TakeDamage(currMove.damage, currMove.type, attackPos, 2f);
         }
     }
     private IEnumerator MoveEvent(int choice)

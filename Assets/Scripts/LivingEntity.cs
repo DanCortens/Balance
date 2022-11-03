@@ -11,8 +11,8 @@ public class LivingEntity : MonoBehaviour
     private bool takingDamage;
     //constants
     protected float[] damageMult = { 1f, 1f, 1f };//subject to change
-    private const int MAX_HP_BASE = 100;
-    private const float FLINCH_DIST = 15f;
+    protected const int MAX_HP_BASE = 100;
+    protected const float FLINCH_DIST = 2f;
     //stats
     [SerializeField]
     private int currHp;
@@ -37,7 +37,7 @@ public class LivingEntity : MonoBehaviour
     {
         if (!takingDamage)
         {
-            CurrHp= (int)(-damage * damageMult[type]);
+            CurrHp = (int)(-damage * damageMult[type]);
             if (currHp <= 0)
             {
                 onDeath?.Invoke();
