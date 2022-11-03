@@ -2,14 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class PauseMenu : MonoBehaviour
 {
+    
+    AudioListener myAudioListener;
+    public AudioMixer audioMixer;
+
     public static bool GameIsPaused = false;
     public static bool GameIsMenu = false;
+    public static bool exitGame = false;
 
     public GameObject pauseMenuUI;
     public GameObject settingMenuUI;
+    public GameObject exitGameUI;
 
     void Update()
     {
@@ -30,7 +37,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Resume()
-    {
+    { 
+        AudioListener.volume = 1;
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
@@ -38,6 +46,7 @@ public class PauseMenu : MonoBehaviour
 
     void Pause()
     {
+        AudioListener.volume = 0f;
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
@@ -49,11 +58,11 @@ public class PauseMenu : MonoBehaviour
     settingMenuUI.SetActive(true);
     GameIsMenu = true;
     }
-      public void QuitGame()
+      public void QuitPrompt()
     {
-        Debug.Log("Quitting Game...");
-        UnityEditor.EditorApplication.isPlaying = false;
-        Application.Quit();
+    pauseMenuUI.SetActive(false);
+    exitGameUI.SetActive(true);
+    exitGame = true;
     }
 
     public void BackGame()
@@ -62,4 +71,30 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
         GameIsMenu = false;
     }
+
+    public void setVolume(float volume) 
+    {
+    audioMixer.SetFloat("volume", volume);
+    }
+
+    public void SetQuality (int qualityIndex)
+    {
+        QualitySettings.SetQualityLevel(qualityIndex);
+    }
+
+     public void ContinueGame()
+    {
+    pauseMenuUI.SetActive(true);
+    exitGameUI.SetActive(false);
+    exitGame = false;
+    }
+
+    public void QuitToMain()
+    {
+        AudioListener.volume = 1;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("HomeScene");
+    }
+
+
 }

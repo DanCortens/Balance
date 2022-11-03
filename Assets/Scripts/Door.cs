@@ -8,11 +8,6 @@ public class Door : Interactable
     private bool closed;
     private bool locked;
 
-    private AudioSource doorSounds;
-    public AudioClip openSound;
-    public AudioClip closeSound;
-    public AudioClip unlockSound;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +40,7 @@ public class Door : Interactable
             obstacle.SetActive(false);
             Debug.Log("Opened");
             //play open animation
-            doorSounds.PlayOneShot(openSound);
+            FindObjectOfType<AudioManager>().Play("door_Open");
         }
         else 
         {
@@ -59,7 +54,7 @@ public class Door : Interactable
         obstacle.SetActive(true);
         Debug.Log("Closed");
         //play closed animation
-        doorSounds.PlayOneShot(closeSound);
+        FindObjectOfType<AudioManager>().Play("door_Close");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -86,7 +81,7 @@ public class Door : Interactable
             locked = false;
             //change sprite from locked to unlocked
             //play unlock sound
-            doorSounds.PlayOneShot(unlockSound);
+            FindObjectOfType<AudioManager>().Play("door_Unlock");
             PlayerPrefs.SetInt(gameObject.name, 0);
         }
         

@@ -5,9 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainPageScript : MonoBehaviour
 {
-
     public static bool exitGame = false;
-
     public GameObject exitGameUI;
 
     public void GoToSettings()
