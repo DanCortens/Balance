@@ -23,6 +23,13 @@ public static class PlayerStats
         set { _hasChain = value; }
     }
 
+    private static bool _hasDoubleJ;
+    public static bool hasDoubleJ
+    {
+        get { return _hasDoubleJ; }
+        set { _hasDoubleJ = value; }
+    }
+
     private static bool _hasPoison;
     public static bool hasPoison
     {
@@ -49,6 +56,11 @@ public static class PlayerStats
         else
             hasLantern = false;
 
+        if (PlayerPrefs.HasKey("hasDoubleJ"))
+            hasDoubleJ = PlayerPrefs.GetInt("hasDoubleJ") != 0;
+        else
+            hasDoubleJ = false;
+
         if (PlayerPrefs.HasKey("hasPoison"))
             hasPoison = PlayerPrefs.GetInt("hasPoison") != 0;
         else
@@ -63,6 +75,7 @@ public static class PlayerStats
     {
         PlayerPrefs.SetInt("hasLantern", (hasLantern) ? 1 : 0);
         PlayerPrefs.SetInt("hasChain", (hasLantern) ? 1 : 0);
+        PlayerPrefs.SetInt("hasDoubleJ", (hasLantern) ? 1 : 0);
         PlayerPrefs.SetInt("hasPoison", (hasLantern) ? 1 : 0);
         PlayerPrefs.SetInt("hasFlame", (hasLantern) ? 1 : 0);
     }

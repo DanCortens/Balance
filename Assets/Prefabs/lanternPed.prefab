@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 3733606563574000066}
   - component: {fileID: 5482019397863787373}
   - component: {fileID: 6765262982369346449}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: lanternPed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a507355dd5ab952409a7ced575674399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gse: {fileID: 0}
+  cc: {fileID: 0}
   obstacle: {fileID: 4655900977672854936}
 --- !u!50 &5482019397863787373
 Rigidbody2D:

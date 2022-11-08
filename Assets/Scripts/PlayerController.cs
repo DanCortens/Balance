@@ -16,6 +16,9 @@ public class PlayerController : LivingEntity
     public Transform groundCheck;
     public Transform head;
     public Transform knees;
+    private float hookSpeed;
+    private float hookSpeedMax;
+    private float hookSpeedChange = 5f;
     //combat
     public Transform attacks;
     public Transform sAttack;
@@ -28,6 +31,7 @@ public class PlayerController : LivingEntity
     [SerializeField] private bool grounded;
     private bool startJump;
     private bool stoppedJump;
+    private bool canDoubleJ;
     [SerializeField] private bool wallGrab;
     [SerializeField] private bool dashing;
     private bool pushing;
@@ -37,7 +41,7 @@ public class PlayerController : LivingEntity
     private bool usingDark;
     private bool upHeld;
     private bool downHeld;
-    private bool hooked;
+    public bool hooked;
 
     private float coyote;
     private float wallCoyote;
@@ -69,10 +73,11 @@ public class PlayerController : LivingEntity
     private const float AOE_ATTACK_RAD = 1.5f;
     private const float INTERACT_RAD = 1f;
     private new const int MAX_HP_BASE = 100;
-    private const float HOOK_DIST = 1f;
+    public const float HOOK_DIST = 2f;
 
     private AttStackScript attStack;
     private EnemyPuppeteer puppeteer;
+    private ChainHinge chainHinge;
     private Transform nearestHook;
     private Transform hookPoint;
     
@@ -84,10 +89,12 @@ public class PlayerController : LivingEntity
         baseColor = mat.color;
         facing = 1f;
         puppeteer = GameObject.FindObjectOfType<EnemyPuppeteer>();
+        chainHinge = GameObject.FindObjectOfType<ChainHinge>();
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         attStack = new AttStackScript();
         startJump = false;
+        canDoubleJ = false;
         dashing = false;
         stoppedJump = true;
         hooked = false;
@@ -138,9 +145,9 @@ public class PlayerController : LivingEntity
         if (value.isPressed && !isAttacking)
         {
             //Calls jump audio
-            FindObjectOfType<AudioManager>().Play("Jump");
             if ((anim.GetBool("grounded") || coyote < COYO_MAX))
             {
+                FindObjectOfType<AudioManager>().Play("Jump");
                 coyote = COYO_MAX;
                 startJump = true;
                 stoppedJump = false;
@@ -148,24 +155,37 @@ public class PlayerController : LivingEntity
             }
             else if (wallGrab || wallCoyote < COYO_MAX)
             {
+                FindObjectOfType<AudioManager>().Play("Jump");
                 rb2d.velocity = new Vector2(Mathf.Abs(horzM) * wallDir * SPEED, JUMP_SPD * 1.4f);
                 wallGrab = false;
                 sideJTime = 0.1f;
             }
             else if (PlayerStats.hasChain && (nearestHook = GetClosestHook())!= null)
             {
-                hookPoint = nearestHook;
+                chainHinge.Hook(nearestHook);
+                hookSpeed = rb2d.velocity.x;
+                hookSpeedMax = Mathf.Abs(hookSpeed);
                 hooked = true;
+                canDoubleJ = true;
+            }
+            else if (PlayerStats.hasDoubleJ && canDoubleJ)
+            {
+                FindObjectOfType<AudioManager>().Play("Jump");
+                coyote = COYO_MAX;
+                startJump = true;
+                stoppedJump = false;
+                marioTime = 0f;
             }
         }
         else 
         {
             if (!stoppedJump)
                 stoppedJump = true;
+
             if (hooked)
             {
                 hooked = false;
-                hookPoint = null;
+                chainHinge.Unhook();
             }
                 
         }
@@ -173,7 +193,13 @@ public class PlayerController : LivingEntity
     private Transform GetClosestHook()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, HOOK_DIST, hookLayer);
-        return null;
+        Collider2D target = (hits.Length > 0) ? hits[0] : null;
+        foreach (Collider2D h in hits)
+        {
+            if (Vector2.Distance(transform.position, target.transform.position) > Vector2.Distance(transform.position, h.transform.position))
+                target = h;
+        }
+        return (target is null) ? null : target.transform;
     }
     void OnDash(InputValue value)
     {
@@ -298,17 +324,53 @@ public class PlayerController : LivingEntity
             Movement();
         }
     }
+    private Vector2 SwingVel(Vector2 dirToPoint)
+    {
+        float angle = Vector2.Angle(dirToPoint, transform.up);
+        Vector2 swing = rb2d.velocity;
+        if (horzM == 0f)
+        {
+            swing = new Vector2(swing.x * 0.9f, swing.y + 0.1f);
+        }
+        else
+        {
+            Vector2 perpDir = (horzM > 0f) ? new Vector2(-dirToPoint.y, dirToPoint.x) :
+                                             new Vector2(dirToPoint.y, -dirToPoint.x);
+            Debug.DrawLine(transform.position, (Vector2)transform.position + perpDir);
+            float slowByPercent = Mathf.Clamp((angle - 70f) / 90f, 0f, 1f);
+            swing = perpDir * Mathf.Abs(horzM * SPEED);
+            swing *= slowByPercent;
+        }
+
+        
+            
+        
+        //Debug.Log(slowByPercent);
+        //rb2d.velocity = new Vector2(horzM * SPEED * slowByPercent, rb2d.velocity.y / slowByPercent);
+
+        return swing;
+    }
 
     private void Movement()
     {
         float d = (dashing) ? DASH : 0f;
         //horizontal
-        if (sideJTime <= 0f && !isAttacking)
+        if (sideJTime <= 0f && !isAttacking && !hooked)
             rb2d.velocity = new Vector2(horzM * (SPEED + d), rb2d.velocity.y);
+        else if (hooked)
+        {
+            chainHinge.UpdateChain();
+            Vector2 dirToPoint = transform.position - nearestHook.position;
+            rb2d.velocity = SwingVel(dirToPoint);
+            if (dirToPoint.magnitude > HOOK_DIST)
+            {
+                transform.position = (Vector2)nearestHook.position + ((dirToPoint).normalized * HOOK_DIST);
+            }
+        }
         else
             sideJTime -= Time.deltaTime;
-        //force object to not drill horizontally
-        //raycast for terrain
+
+        //raycast for terrain for wall jumping
         Debug.DrawRay(head.position, transform.right * horzM, Color.red);
         RaycastHit2D hitH = Physics2D.Raycast(head.position, transform.right * horzM, HORIZ_COLL_DIST,groundLayer.value);
         RaycastHit2D hitK = Physics2D.Raycast(knees.position, transform.right * horzM, HORIZ_COLL_DIST, groundLayer.value);
@@ -331,6 +393,7 @@ public class PlayerController : LivingEntity
         {
             coyote = 0f;
             wallGrab = false;
+            canDoubleJ = true;
         }
             
         else
@@ -368,6 +431,7 @@ public class PlayerController : LivingEntity
             attacks.position = new Vector2(transform.position.x - 0.75f, attacks.transform.position.y);
             aoeAttack.position = new Vector2(transform.position.x, aoeAttack.transform.position.y);
         }
+            
     }
 
     private void Combat(string result)

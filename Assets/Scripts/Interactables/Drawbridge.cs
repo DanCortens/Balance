@@ -8,11 +8,11 @@ public class Drawbridge : MonoBehaviour
     private AudioSource bridgeSounds;
     public AudioClip openSound;
     public GameObject bridge;
-    private Vector3 openPos;
+    public float openPos;
 
     private void Start()
     {
-        openPos = new Vector3(0f,-1f,0f);
+        openPos = -1f;
 
         if (PlayerPrefs.HasKey(gameObject.name))
         {
@@ -24,7 +24,7 @@ public class Drawbridge : MonoBehaviour
             PlayerPrefs.SetInt(gameObject.name, 1);
         }
         if (!closed)
-            bridge.transform.localPosition = openPos;
+            bridge.transform.localPosition = new Vector3(bridge.transform.localPosition.x, openPos);
     }
 
     public void Open()
@@ -37,7 +37,7 @@ public class Drawbridge : MonoBehaviour
 
     private void Opening()
     {
-        if (bridge.transform.localPosition.y > openPos.y)
+        if (bridge.transform.localPosition.y > openPos)
             bridge.transform.localPosition -= new Vector3(0f, 0.05f, 0f);
         else
             CancelInvoke("Opening");
