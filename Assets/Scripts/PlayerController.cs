@@ -147,10 +147,12 @@ public class PlayerController : LivingEntity
             if ((anim.GetBool("grounded") || coyote < COYO_MAX))
             {
                 FindObjectOfType<AudioManager>().Play("Jump");
+                anim.Play("Jump");
                 coyote = COYO_MAX;
                 startJump = true;
                 stoppedJump = false;
                 marioTime = 0f;
+
             }
             else if (wallGrab || wallCoyote < COYO_MAX)
             {
