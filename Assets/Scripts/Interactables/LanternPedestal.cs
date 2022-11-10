@@ -42,5 +42,7 @@ public class LanternPedestal : Interactable
     {
         //play destruction animation
         obstacle.SetActive(false);
+        //Calls audio
+        FindObjectOfType<AudioManager>().Play("floorfall");
     }
 }

@@ -79,7 +79,7 @@ public class PauseMenu : MonoBehaviour
 
     public void SetQuality (int qualityIndex)
     {
-        QualitySettings.SetQualityLevel(qualityIndex);
+    QualitySettings.SetQualityLevel(qualityIndex);
     }
 
      public void ContinueGame()

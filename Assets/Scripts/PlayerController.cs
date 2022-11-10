@@ -162,6 +162,7 @@ public class PlayerController : LivingEntity
             }
             else if (PlayerStats.hasChain && (nearestHook = GetClosestHook())!= null)
             {
+                FindObjectOfType<AudioManager>().Play("Chain");
                 chainHinge.Hook(nearestHook);
                 hookSpeed = rb2d.velocity.x;
                 hookSpeedMax = Mathf.Abs(hookSpeed);

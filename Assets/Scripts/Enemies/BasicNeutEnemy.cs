@@ -8,6 +8,13 @@ public class BasicNeutEnemy : EnemyAI
     {
         base.CustomStart();
     }
+/*
+    void Update()
+   {
+       if (this == null)
+       FindObjectOfType<AudioManager>().Play("humandeath");
+    } */
+
     void FixedUpdate()
     {
         CustomFixedUpdate();
@@ -27,4 +34,7 @@ public class BasicNeutEnemy : EnemyAI
                                 new Attack(3f, transform, 1.5f, 0, 20f, false, true, 1.5f)};
         damageMult = new float[] { 1f, 1f, 1f };
     }
+
+
+
 }
