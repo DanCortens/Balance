@@ -12,6 +12,7 @@ public class ChainHinge : MonoBehaviour
     private Vector2 hookPoint;
     private float dist;
     private List<Vector2> chainPos = new List<Vector2>();
+    
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,7 @@ public class ChainHinge : MonoBehaviour
             hinge.distance = dist;
             chainRender.SetPosition(0, transform.position);
             chainRender.SetPosition(1, hookPoint);
+            chainRender.material.SetTextureScale("_MainTex", new Vector2(10f, 1f));
         }
     }
     public void Unhook()

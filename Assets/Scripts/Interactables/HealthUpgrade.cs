@@ -23,6 +23,7 @@ public class HealthUpgrade : Interactable
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefs.DeleteKey("hpUpgrade" + id);
         //ResetSaved();
         destroying = false;
         if (PlayerPrefs.HasKey("hpUpgrade" + id))

@@ -26,8 +26,17 @@ public class CameraCont : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bounds = firstRoom.dimensions;
-        centre = firstRoom.transform.position;
+        if (firstRoom is null)
+        {
+            bounds = new Vector2(25f, 15f);
+            centre = transform.position;
+        }
+        else
+        {
+            bounds = firstRoom.dimensions;
+            centre = firstRoom.transform.position;
+        }
+        
 
         player = GameObject.Find("player").GetComponent<Transform>();
         gse = gseObj.GetComponent<GameStateEngine>();

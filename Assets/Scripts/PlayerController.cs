@@ -86,6 +86,7 @@ public class PlayerController : LivingEntity
     Dictionary<string, PlayerAttacks.Attack> airAttacks;
 
     void Start(){
+
         mat = spriteChild.GetComponent<SpriteRenderer>();
         baseColor = mat.color;
         facing = 1f;
