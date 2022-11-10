@@ -5,10 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : LivingEntity
 {
-    //temp hack to show attacking
-    protected SpriteRenderer mat;
-    public GameObject spriteChild;
-    protected Color baseColor;
     public GameObject attackEffect;
 
     //public variables
@@ -28,7 +24,6 @@ public class PlayerController : LivingEntity
 
     //private variables
 
-    [SerializeField] private bool grounded;
     private bool startJump;
     private bool stoppedJump;
     private bool canDoubleJ;
@@ -53,7 +48,7 @@ public class PlayerController : LivingEntity
     private float darkAff;
     private float lightAff;
     private Rigidbody2D rb2d;
-    private Animator anim;
+    public Animator anim;
     private LayerMask groundLayer;
     private LayerMask enemyLayer;
     private LayerMask interactLayer;
@@ -92,12 +87,9 @@ public class PlayerController : LivingEntity
     }
     void Start(){
 
-        mat = spriteChild.GetComponentInChildren<SpriteRenderer>();
-        baseColor = mat.color;
         facing = 1f;
         puppeteer = GameObject.FindObjectOfType<EnemyPuppeteer>();
         chainHinge = GameObject.FindObjectOfType<ChainHinge>();
-        anim = GetComponent<Animator>();
         startJump = false;
         canDoubleJ = false;
         dashing = false;
@@ -439,7 +431,7 @@ public class PlayerController : LivingEntity
             /*attacks.transform.position = new Vector2(transform.position.x + 0.75f, attacks.transform.position.y);
             aoeAttack.transform.position = new Vector2(transform.position.x, aoeAttack.transform.position.y);*/
             Vector3 newScale = gameObject.transform.localScale;
-            newScale.x *= 1;
+            newScale.x = 0.5f;
             gameObject.transform.localScale = newScale;
         }
         else if (horzM < 0f)
@@ -448,7 +440,7 @@ public class PlayerController : LivingEntity
             /*attacks.position = new Vector2(transform.position.x - 0.75f, attacks.transform.position.y);
             aoeAttack.position = new Vector2(transform.position.x, aoeAttack.transform.position.y);*/
             Vector3 newScale = gameObject.transform.localScale;
-            newScale.x *= -1;
+            newScale.x = -0.5f;
             gameObject.transform.localScale = newScale;
         }
 
@@ -528,12 +520,8 @@ public class PlayerController : LivingEntity
 
     private IEnumerator AttackDamageTimer(int currHit, PlayerAttacks.Attack attack)
     {
-        mat.color = new Color(1, baseColor.g, baseColor.b, baseColor.a);
         //windUp is the amount of time between the start of the animation and when it should deal damage
-        yield return new WaitForSeconds(attack.windUp[currHit] - 0.1f);
-        mat.color = new Color(1, baseColor.g * 0.2f, baseColor.b * 0.2f, baseColor.a);
-        yield return new WaitForSeconds(0.1f);
-        mat.color = baseColor;
+        yield return new WaitForSeconds(attack.windUp[currHit]);
         //deal damage to all enemies in the radius
         FindObjectOfType<AudioManager>().Play("Strike");
         Vector2 actualPos = transform.position;
@@ -557,7 +545,6 @@ public class PlayerController : LivingEntity
     }
     private IEnumerator Flinching()
     {
-        mat.color = baseColor;
         isAttacking = false;
         yield return new WaitForSeconds(0.25f * (1f - PlayerStats.flinchMod));
         takingDamage = false;

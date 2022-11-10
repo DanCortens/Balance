@@ -20,6 +20,7 @@ public abstract class EnemyAI : MonoBehaviour
     [Header("Combat")]
     //public GameObject attackCir;
     [SerializeField] protected float hp;
+    public GameObject projectile;
     protected float deathAnimTime;
     protected float pathRefreshTime;
 
@@ -51,6 +52,7 @@ public abstract class EnemyAI : MonoBehaviour
     {
         public float windUp;
         public Transform attackPos;
+        
         public float rad;
         public float attackPushForce;
         public int attackType;
@@ -174,7 +176,7 @@ public abstract class EnemyAI : MonoBehaviour
             }
             else
             {
-
+                
             }
             
         }
@@ -276,7 +278,6 @@ public abstract class EnemyAI : MonoBehaviour
     IEnumerator AttackDamageTimer(Attack attack)
     {
         
-        Debug.Log("attack");
         if (attack.counterable)
             StartCoroutine(CounterFlash());
         else
@@ -287,19 +288,30 @@ public abstract class EnemyAI : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         mat.color = baseColor;
         attacking = false;
-        //deal damage to player in the radius
+        
         Vector2 actualPos = transform.position;
-        // circle for testing
-        //GameObject circle = GameObject.Instantiate(attackCir, actualPos, attackCir.transform.rotation);
-        //circle.transform.localScale = new Vector3(attack.rad, attack.rad, 1f);
-        Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, attack.rad, playerLayer);
-        foreach (Collider2D hit in hits)
+        //if melee attack
+        if (attack.melee)
         {
-            if (attack.counterable && hit.gameObject.GetComponent<PlayerController>().CheckCounter())
-                Countered();
-            else 
-                hit.gameObject.GetComponent<PlayerController>().TakeDamage(attack.damage, attack.attackType, transform.position, attack.attackPushForce);
+            //check for player
+            Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, attack.rad, playerLayer);
+            foreach (Collider2D hit in hits)
+            {
+                //if player is countering and attack is counterable
+                if (attack.counterable && hit.gameObject.GetComponent<PlayerController>().CheckCounter())
+                    Countered();
+                else
+                    hit.gameObject.GetComponent<PlayerController>().TakeDamage(attack.damage, attack.attackType, transform.position, attack.attackPushForce);
+            }
         }
+        //else ranged attack
+        else
+        {
+
+        }
+        
+        
+        
     }
     private IEnumerator CounterFlash()
     {

@@ -188,7 +188,6 @@ GameObject:
   - component: {fileID: 3400479936570015895}
   - component: {fileID: 3400479936570015892}
   - component: {fileID: 3400479936570015891}
-  - component: {fileID: 3400479936570015890}
   - component: {fileID: 562680299}
   - component: {fileID: 1307899142351038207}
   - component: {fileID: 8109296105719990386}
@@ -208,7 +207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3400479936570015913}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.29, y: -1.24, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children:
   - {fileID: 3400479937127262662}
@@ -227,7 +226,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3400479936570015913}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -305,8 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currHp: 0
-  spriteChild: {fileID: 0}
-  attackEffect: {fileID: 0}
+  attackEffect: {fileID: 7715566787090560569, guid: 4b3e7cb2abcbd4841b68de17b5dc3cb6, type: 3}
   groundCheck: {fileID: 3400479937127262662}
   head: {fileID: 3400479935796093682}
   knees: {fileID: 3400479936994201160}
@@ -314,11 +312,11 @@ MonoBehaviour:
   sAttack: {fileID: 3400479936377386912}
   lAttack: {fileID: 3400479936668610504}
   aoeAttack: {fileID: 3400479936410104111}
-  grounded: 0
   wallGrab: 0
   dashing: 0
   countering: 0
   hooked: 0
+  anim: {fileID: 2211075741558095799}
 --- !u!114 &3400479936570015891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,25 +347,6 @@ MonoBehaviour:
   m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!95 &3400479936570015890
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3400479936570015913}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 84ca32af52485f44b9831173879e8c67, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!70 &562680299
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -602,7 +581,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3400479937127262663}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3400479936570015893}
@@ -772,5 +751,10 @@ PrefabInstance:
 --- !u!4 &4705406384616607165 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3292326838476075683, guid: b7910a3ae1c91c2448adc26113ef37ec, type: 3}
+  m_PrefabInstance: {fileID: 7853231005488152350}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2211075741558095799 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8237952684133040297, guid: b7910a3ae1c91c2448adc26113ef37ec, type: 3}
   m_PrefabInstance: {fileID: 7853231005488152350}
   m_PrefabAsset: {fileID: 0}

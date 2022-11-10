@@ -30,8 +30,8 @@ public class BasicNeutEnemy : EnemyAI
         hp = 100f;
         flinchThreshold = hp / 2;
 
-        attacks = new Attack[] {new Attack(1.5f, transform, 1.5f, 0, 5f, true, true, 1f),
-                                new Attack(3f, transform, 1.5f, 0, 20f, false, true, 1.5f)};
+        attacks = new Attack[] {new Attack(1f, transform, 1.5f, 0, 5f, true, true, 1f),
+                                new Attack(1.5f, transform, 1.5f, 0, 20f, false, true, 1.5f)};
         damageMult = new float[] { 1f, 1f, 1f };
     }
 
