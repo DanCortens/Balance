@@ -6,6 +6,8 @@ public class HealthUpgrade : Interactable
 {
     public int id;
     private bool destroying;
+    public GameObject effect;
+
     public override void Interact()
     {
         if (!destroying)
@@ -36,6 +38,7 @@ public class HealthUpgrade : Interactable
 
     private IEnumerator Pickup()
     {
+        GameObject newEffect = Instantiate(effect,transform.position,Quaternion.identity);
         yield return new WaitForSeconds(0.2f);
         Destroy(gameObject);
     }
