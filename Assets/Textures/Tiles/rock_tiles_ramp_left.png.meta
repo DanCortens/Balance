@@ -1,19 +1,13 @@
 fileFormatVersion: 2
-guid: 762c7818b6c26cd41a2c875a6e53ae97
+guid: 9749af3982d662241a98327280e308c3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3712620646101265329
-    second: grass_sprite_sheet_0
+      213: 6597101501960052014
+    second: rock_tiles_ramp_left_0
   - first:
-      213: -5114556667540789515
-    second: grass_sprite_sheet_1
-  - first:
-      213: 4800810227804115205
-    second: grass_sprite_sheet_2
-  - first:
-      213: -7488409733741823452
-    second: grass_sprite_sheet_3
+      213: -177824766853594028
+    second: rock_tiles_ramp_left_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -139,13 +133,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: grass_sprite_sheet_0
+      name: rock_tiles_ramp_left_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 107
-        height: 57
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f445a53513f1a7cc0800000000000000
-      internalID: -3712620646101265329
+      spriteID: e2d5683fcdc9d8b50800000000000000
+      internalID: 6597101501960052014
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: grass_sprite_sheet_1
+      name: rock_tiles_ramp_left_1
       rect:
         serializedVersion: 2
-        x: 107
+        x: 64
         y: 0
-        width: 107
-        height: 57
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,50 +168,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f620a71fc17509b0800000000000000
-      internalID: -5114556667540789515
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: grass_sprite_sheet_2
-      rect:
-        serializedVersion: 2
-        x: 214
-        y: 0
-        width: 107
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 50193566777ef9240800000000000000
-      internalID: 4800810227804115205
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: grass_sprite_sheet_3
-      rect:
-        serializedVersion: 2
-        x: 321
-        y: 0
-        width: 107
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 42abdbfb503d31890800000000000000
-      internalID: -7488409733741823452
+      spriteID: 454cc63115d388df0800000000000000
+      internalID: -177824766853594028
       vertices: []
       indices: 
       edges: []

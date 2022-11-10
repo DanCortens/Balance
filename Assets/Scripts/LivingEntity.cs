@@ -6,6 +6,7 @@ public class LivingEntity : MonoBehaviour
 {
     //events
     public event System.Action onHPChanged;
+    public event System.Action onHPMaxChanged;
     public event System.Action onDeath;
     //bool
     protected bool takingDamage;
@@ -23,14 +24,14 @@ public class LivingEntity : MonoBehaviour
         set
         {
             if (currHp == value) return;
-            currHp = value;
+            currHp = Mathf.Clamp(value,0,getMaxHp());
             onHPChanged?.Invoke();
         }
     }
 
     void Start()
     {
-        CurrHp = MAX_HP_BASE;
+        CurrHp = getMaxHp();
     }
 
     public void TakeDamage(float damage, int type, Vector2 enemyDir, float pushForce)
@@ -55,6 +56,10 @@ public class LivingEntity : MonoBehaviour
      */
     public int getMaxHp()
     {
-        return MAX_HP_BASE;
+        return MAX_HP_BASE + PlayerStats.maxHPMod;
+    }
+    public void MaxHPChanged()
+    {
+        onHPMaxChanged.Invoke();
     }
 }

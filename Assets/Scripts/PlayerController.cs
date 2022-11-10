@@ -37,7 +37,7 @@ public class PlayerController : LivingEntity
     private bool pushing;
     private bool canAttack;
     private bool isAttacking;
-    private bool countering;
+    [SerializeField] private bool countering;
     private bool usingDark;
     private bool upHeld;
     private bool downHeld;
@@ -248,6 +248,10 @@ public class PlayerController : LivingEntity
                 attStack.stored[(int)(AttStackScript.Inputs.Down)] = true;
         }
     }
+    void OnCounter(InputValue value)
+    {
+        attStack.stored[(int)(AttStackScript.Inputs.Counter)] = true;
+    }
     void OnVertical(InputValue value)
     {
         if (value.isPressed)
@@ -443,7 +447,7 @@ public class PlayerController : LivingEntity
         {
             if (result == "counter")
             {
-                countering = true;
+                StartCoroutine(Countering());
             }
             else
             {
@@ -464,7 +468,7 @@ public class PlayerController : LivingEntity
             //not grounded
             if (result == "counter")
             {
-
+                StartCoroutine(Countering());
             }
             else
             {
@@ -530,13 +534,24 @@ public class PlayerController : LivingEntity
     }
     private IEnumerator NotAttackingTimer(float wait)
     {
+
         yield return new WaitForSeconds(wait);
         isAttacking = false;
     }
     private IEnumerator Flinching()
     {
+        mat.color = baseColor;
+        isAttacking = false;
         yield return new WaitForSeconds(0.25f * (1f - PlayerStats.flinchMod));
         takingDamage = false;
+    }
+    private IEnumerator Countering()
+    {
+        countering = true;
+        isAttacking = true;
+        yield return new WaitForSeconds(0.5f);
+        countering = false;
+        StartCoroutine(NotAttackingTimer(0.5f));
     }
 
 
@@ -544,5 +559,13 @@ public class PlayerController : LivingEntity
     protected void damageTest()
     {
         CurrHp = CurrHp - 5;
+    }
+    public bool CheckCounter()
+    {
+        return countering;
+    }
+    private void OnDestroy()
+    {
+        PlayerStats.ResetUnsavedUpgrades();
     }
 }

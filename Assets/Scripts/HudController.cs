@@ -17,7 +17,9 @@ public class HudController : MonoBehaviour
     {
         player = FindObjectOfType<PlayerController>();
         maxHpBase = (float)player.getMaxHp();
+        hpWidthMax = player.getMaxHp();
         player.onHPChanged += setCurrHPBar;
+        player.onHPMaxChanged += SetMaxHPBar;
         canvas.transform.Find("Health").GetComponent<RectTransform>().sizeDelta = new Vector2(hpWidthMax, hpHeightMax);
     }
 
@@ -27,6 +29,11 @@ public class HudController : MonoBehaviour
         float sliderValue = (currhp / maxHpBase);
         canvas.transform.Find("Health").transform.GetComponent<Slider>().value = sliderValue;
         Debug.Log(sliderValue);
+    }
+    void SetMaxHPBar()
+    {
+        hpWidthMax = player.getMaxHp();
+        canvas.transform.Find("Health").GetComponent<RectTransform>().sizeDelta = new Vector2(hpWidthMax, hpHeightMax);
     }
 
     // Update is called once per frame

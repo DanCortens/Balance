@@ -6,9 +6,23 @@ public static class PlayerStats
 {
     public static float[] damageTakenMod = { 0f, 0f, 0f };
     public static float[] damageDoneMod = { 0f, 0f, 0f };
+    
     public static float flinchMod = 0f;
     public static float attackSpeedMod = 0f;
     public static float enemyFlinchMod = 0f;
+
+    private static int _maxHPMod;
+    public static int maxHPMod
+    {
+        get { return _maxHPMod; }
+        set
+        {
+            if (_maxHPMod == value) return;
+            _maxHPMod = value;
+            GameObject.FindObjectOfType<PlayerController>().MaxHPChanged();
+        }
+    }
+    public static List<int> unsavedHPUps = new List<int>();
 
     private static bool _hasLantern;
     public static bool hasLantern
@@ -70,6 +84,10 @@ public static class PlayerStats
             hasFlame = PlayerPrefs.GetInt("hasFlame") != 0;
         else
             hasFlame = false;
+        if (PlayerPrefs.HasKey("maxHPMod"))
+            maxHPMod = PlayerPrefs.GetInt("maxHPMod");
+        else
+            maxHPMod = 0;
     }
     public static void Save()
     {
@@ -78,6 +96,8 @@ public static class PlayerStats
         PlayerPrefs.SetInt("hasDoubleJ", (hasLantern) ? 1 : 0);
         PlayerPrefs.SetInt("hasPoison", (hasLantern) ? 1 : 0);
         PlayerPrefs.SetInt("hasFlame", (hasLantern) ? 1 : 0);
+        PlayerPrefs.SetInt("maxHPMod", maxHPMod);
+        unsavedHPUps.Clear();
     }
     public static void UpdateStats(int id, int type)
     {
@@ -153,4 +173,11 @@ public static class PlayerStats
             }
         }
     }
+    public static void ResetUnsavedUpgrades()
+    {
+        foreach (int u in unsavedHPUps)
+            if (PlayerPrefs.HasKey("hpUpgrade" + u))
+                PlayerPrefs.DeleteKey("hpUpgrade" + u);
+    }
+    
 }

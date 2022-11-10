@@ -35,7 +35,6 @@ public abstract class EnemyAI : MonoBehaviour
     [SerializeField] protected bool flinching;
     protected float flinchCheck;
     protected float flinchThreshold;
-    protected float flinchTime;
 
     protected Transform player;
     protected Transform startPos;
@@ -98,7 +97,6 @@ public abstract class EnemyAI : MonoBehaviour
         startPos = transform;
 
         flinchCheck = 0f;
-        flinchTime = 0f;
 
         InvokeRepeating("UpdatePath", 0f, pathRefreshTime);
         InvokeRepeating("UpdateIdlePos", 0f, 3f);
@@ -153,16 +151,6 @@ public abstract class EnemyAI : MonoBehaviour
             {
                 target = startPos;
                 PathfindingIdle();
-            }
-        }
-        else
-        {
-            if (flinchTime < 0.5f)
-                flinchTime += Time.deltaTime;
-            else
-            {
-                flinchTime = 0f;
-                flinching = false;
             }
         }
     }
@@ -262,13 +250,13 @@ public abstract class EnemyAI : MonoBehaviour
         flinchCheck += damage * damageMult[type];
         if (flinchCheck >= flinchThreshold)
         {
-            flinchCheck = 0f;
-            flinching = true;
+            
+            StartCoroutine(Flinching(0.4f + PlayerStats.enemyFlinchMod));
         }
     }
     protected void Countered()
     {
-        flinching = true;
+        StartCoroutine(Flinching(0.4f + PlayerStats.enemyFlinchMod));
     }
     protected void Die()
     {
@@ -290,7 +278,7 @@ public abstract class EnemyAI : MonoBehaviour
         
         Debug.Log("attack");
         if (attack.counterable)
-            mat.color = new Color(1, baseColor.g,baseColor.b,baseColor.a);
+            StartCoroutine(CounterFlash());
         else
             mat.color = new Color(1, baseColor.g * 0.5f, baseColor.b * 0.5f, baseColor.a);
         yield return new WaitForSeconds(attack.windUp);
@@ -307,7 +295,31 @@ public abstract class EnemyAI : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, attack.rad, playerLayer);
         foreach (Collider2D hit in hits)
         {
-            hit.gameObject.GetComponent<PlayerController>().TakeDamage(attack.damage, attack.attackType, transform.position, attack.attackPushForce);
+            if (attack.counterable && hit.gameObject.GetComponent<PlayerController>().CheckCounter())
+                Countered();
+            else 
+                hit.gameObject.GetComponent<PlayerController>().TakeDamage(attack.damage, attack.attackType, transform.position, attack.attackPushForce);
         }
+    }
+    private IEnumerator CounterFlash()
+    {
+        mat.color = new Color(0.9f, 0.9f, 0.9f, baseColor.a);
+        yield return new WaitForSeconds(0.1f);
+        mat.color = baseColor;
+        yield return new WaitForSeconds(0.1f);
+        mat.color = new Color(0.9f, 0.9f, 0.9f, baseColor.a);
+        yield return new WaitForSeconds(0.1f);
+        mat.color = baseColor;
+
+    }
+
+    private IEnumerator Flinching(float wait)
+    {
+        flinchCheck = 0f;
+        flinching = true;
+        mat.color = new Color(0.2f, 0.2f, 0.2f, baseColor.a);
+        yield return new WaitForSeconds(wait);
+        mat.color = baseColor;
+        flinching = false;
     }
 }
