@@ -52,14 +52,20 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: Jump
-    clip: {fileID: 8300000, guid: 75ed7699bc4bac148a7e53bd0eb46964, type: 3}
-    volume: 0.05
+    clip: {fileID: 8300000, guid: eca16ae880190e448af72b11fe9b0e0a, type: 3}
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Strike
     clip: {fileID: 8300000, guid: 439cd93b0dc834c4695928bcf01b105e, type: 3}
     volume: 0.05
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Chain
+    clip: {fileID: 8300000, guid: b02e15ef53f308245b2d24e456f6dc8c, type: 3}
+    volume: 0.3
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -78,6 +84,18 @@ MonoBehaviour:
   - name: door_Unlock
     clip: {fileID: 8300000, guid: c3a06c857ea55ad4996a4e30aaff6283, type: 3}
     volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: floorfall
+    clip: {fileID: 8300000, guid: a27c9af5d69577c4a8e0485ad88b4a98, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: humandeath
+    clip: {fileID: 8300000, guid: 1a8c42ec2e0aab24d935e48497a30417, type: 3}
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}
