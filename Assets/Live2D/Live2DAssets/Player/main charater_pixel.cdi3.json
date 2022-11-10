@@ -1,0 +1,157 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "ParamAngleX",
+			"GroupId": "",
+			"Name": "head"
+		},
+		{
+			"Id": "ParamAngleY",
+			"GroupId": "",
+			"Name": "cloak"
+		},
+		{
+			"Id": "Param9",
+			"GroupId": "",
+			"Name": "back"
+		},
+		{
+			"Id": "ParamBodyAngleX",
+			"GroupId": "ParamGroup2",
+			"Name": "uppertorso"
+		},
+		{
+			"Id": "Param14",
+			"GroupId": "ParamGroup2",
+			"Name": "rootRotation"
+		},
+		{
+			"Id": "Param16",
+			"GroupId": "ParamGroup2",
+			"Name": "RootY"
+		},
+		{
+			"Id": "Param10",
+			"GroupId": "ParamGroup4",
+			"Name": "Dagger_Opacity"
+		},
+		{
+			"Id": "Param3",
+			"GroupId": "ParamGroup4",
+			"Name": "rightupper"
+		},
+		{
+			"Id": "Param4",
+			"GroupId": "ParamGroup4",
+			"Name": "rightforearm"
+		},
+		{
+			"Id": "Param5",
+			"GroupId": "ParamGroup4",
+			"Name": "hand"
+		},
+		{
+			"Id": "Param15",
+			"GroupId": "ParamGroup5",
+			"Name": "left_draw_order"
+		},
+		{
+			"Id": "Param6",
+			"GroupId": "ParamGroup5",
+			"Name": "leftupper"
+		},
+		{
+			"Id": "Param7",
+			"GroupId": "ParamGroup5",
+			"Name": "leftforearm"
+		},
+		{
+			"Id": "Param8",
+			"GroupId": "ParamGroup5",
+			"Name": "lefthand"
+		},
+		{
+			"Id": "ParamBodyAngleZ",
+			"GroupId": "ParamGroup",
+			"Name": "leftthigh"
+		},
+		{
+			"Id": "Param",
+			"GroupId": "ParamGroup",
+			"Name": "leftcalf"
+		},
+		{
+			"Id": "Param11",
+			"GroupId": "ParamGroup3",
+			"Name": "rightthigh"
+		},
+		{
+			"Id": "Param12",
+			"GroupId": "ParamGroup3",
+			"Name": "rightcalf"
+		},
+		{
+			"Id": "Param13",
+			"GroupId": "ParamGroup3",
+			"Name": "rightfoot"
+		}
+	],
+	"ParameterGroups": [
+		{
+			"Id": "ParamGroup2",
+			"GroupId": "",
+			"Name": "torso"
+		},
+		{
+			"Id": "ParamGroup4",
+			"GroupId": "",
+			"Name": "rightarm"
+		},
+		{
+			"Id": "ParamGroup5",
+			"GroupId": "",
+			"Name": "leftarm"
+		},
+		{
+			"Id": "ParamGroup",
+			"GroupId": "",
+			"Name": "leftleg"
+		},
+		{
+			"Id": "ParamGroup3",
+			"GroupId": "",
+			"Name": "rightleg"
+		}
+	],
+	"Parts": [
+		{
+			"Id": "back",
+			"Name": "back"
+		},
+		{
+			"Id": "front",
+			"Name": "front"
+		},
+		{
+			"Id": "Part",
+			"Name": "left arm"
+		},
+		{
+			"Id": "Torso",
+			"Name": "Torso"
+		},
+		{
+			"Id": "Part3",
+			"Name": "Left Leg"
+		},
+		{
+			"Id": "Part2",
+			"Name": "Right Leg"
+		},
+		{
+			"Id": "Part4",
+			"Name": "right arm"
+		}
+	]
+}

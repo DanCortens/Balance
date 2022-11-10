@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : LivingEntity
 {
-    /*prolly best to seperate stuff (attacking, stats, movement) into separate scripts later on*/
     //temp hack to show attacking
     protected SpriteRenderer mat;
     public GameObject spriteChild;
@@ -28,7 +27,7 @@ public class PlayerController : LivingEntity
     private float facing;
 
     //private variables
-    
+
     [SerializeField] private bool grounded;
     private bool startJump;
     private bool stoppedJump;
@@ -85,16 +84,20 @@ public class PlayerController : LivingEntity
     Dictionary<string, PlayerAttacks.Attack> groundAttacks;
     Dictionary<string, PlayerAttacks.Attack> airAttacks;
 
+    private void Awake()
+    {
+        anim = GetComponentInChildren<Animator>();
+        attStack = new AttStackScript();
+        rb2d = GetComponent<Rigidbody2D>();
+    }
     void Start(){
 
-        mat = spriteChild.GetComponent<SpriteRenderer>();
+        mat = spriteChild.GetComponentInChildren<SpriteRenderer>();
         baseColor = mat.color;
         facing = 1f;
         puppeteer = GameObject.FindObjectOfType<EnemyPuppeteer>();
         chainHinge = GameObject.FindObjectOfType<ChainHinge>();
-        rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        attStack = new AttStackScript();
         startJump = false;
         canDoubleJ = false;
         dashing = false;
@@ -362,9 +365,13 @@ public class PlayerController : LivingEntity
     private void Movement()
     {
         float d = (dashing) ? DASH : 0f;
+
+        if (horzM != 0) anim.SetBool("walk", true); else anim.SetBool("walk", false);
         //horizontal
         if (sideJTime <= 0f && !isAttacking && !hooked)
+        {
             rb2d.velocity = new Vector2(horzM * (SPEED + d), rb2d.velocity.y);
+        }
         else if (hooked)
         {
             chainHinge.UpdateChain();
@@ -423,22 +430,28 @@ public class PlayerController : LivingEntity
                 if (marioTime > MARIO_MAX)
                     stoppedJump = true;
             }
-        } 
-        
+        }
 
         //facing stuff
-        if (rb2d.velocity.x > 0f)
+        if (horzM > 0f)
         {
             //facing right
-            attacks.transform.position = new Vector2(transform.position.x + 0.75f, attacks.transform.position.y);
-            aoeAttack.transform.position = new Vector2(transform.position.x, aoeAttack.transform.position.y);
+            /*attacks.transform.position = new Vector2(transform.position.x + 0.75f, attacks.transform.position.y);
+            aoeAttack.transform.position = new Vector2(transform.position.x, aoeAttack.transform.position.y);*/
+            Vector3 newScale = gameObject.transform.localScale;
+            newScale.x *= 1;
+            gameObject.transform.localScale = newScale;
         }
-        else if (rb2d.velocity.x < 0f)
+        else if (horzM < 0f)
         {
             //facing left
-            attacks.position = new Vector2(transform.position.x - 0.75f, attacks.transform.position.y);
-            aoeAttack.position = new Vector2(transform.position.x, aoeAttack.transform.position.y);
+            /*attacks.position = new Vector2(transform.position.x - 0.75f, attacks.transform.position.y);
+            aoeAttack.position = new Vector2(transform.position.x, aoeAttack.transform.position.y);*/
+            Vector3 newScale = gameObject.transform.localScale;
+            newScale.x *= -1;
+            gameObject.transform.localScale = newScale;
         }
+
             
     }
 
