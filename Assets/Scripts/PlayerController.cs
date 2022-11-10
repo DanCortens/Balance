@@ -8,6 +8,7 @@ public class PlayerController : LivingEntity
     /*prolly best to seperate stuff (attacking, stats, movement) into separate scripts later on*/
     //temp hack to show attacking
     protected SpriteRenderer mat;
+    public GameObject spriteChild;
     protected Color baseColor;
     public GameObject attackEffect;
 
@@ -85,7 +86,7 @@ public class PlayerController : LivingEntity
     Dictionary<string, PlayerAttacks.Attack> airAttacks;
 
     void Start(){
-        mat = gameObject.GetComponent<SpriteRenderer>();
+        mat = spriteChild.GetComponent<SpriteRenderer>();
         baseColor = mat.color;
         facing = 1f;
         puppeteer = GameObject.FindObjectOfType<EnemyPuppeteer>();
@@ -128,15 +129,17 @@ public class PlayerController : LivingEntity
     {
         if (value.Get<float>() > 0f)
             facing = 1f;
+            
         else if (value.Get<float>() < 0f)
             facing = -1f;
-            
+
 
         if (sideJTime <= 0f && !isAttacking)
         {
             horzM = value.Get<float>();
-            
+
         }
+        else horzM = 0f;
             
 
     }
@@ -226,7 +229,6 @@ public class PlayerController : LivingEntity
     void OnPhysical(InputValue value)
     {
         //Calls Strike audio
-        FindObjectOfType<AudioManager>().Play("Strike");
         attStack.stored[(int)(AttStackScript.Inputs.PAttack)] = true;
         if (rb2d.velocity.magnitude > 0f)
             attStack.stored[(int)(AttStackScript.Inputs.Forward)] = true;
@@ -519,6 +521,7 @@ public class PlayerController : LivingEntity
         yield return new WaitForSeconds(0.1f);
         mat.color = baseColor;
         //deal damage to all enemies in the radius
+        FindObjectOfType<AudioManager>().Play("Strike");
         Vector2 actualPos = transform.position;
         actualPos += new Vector2(attack.attackPos.x * facing, attack.attackPos.y);
         GameObject newEffect = Instantiate(attackEffect, actualPos, Quaternion.identity);
