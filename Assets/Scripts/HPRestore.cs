@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HPRestore : MonoBehaviour
 {
+    public GameObject effect;
     public int restore;
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -17,6 +18,7 @@ public class HPRestore : MonoBehaviour
 
     private IEnumerator PickedUp()
     {
+        GameObject newEffect = Instantiate(effect, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(0.25f);
         Destroy(gameObject);
     }
