@@ -11,22 +11,24 @@ public abstract class EnemyAI : MonoBehaviour
     [Header("Pathfinding")]
     public float aggroRange = 10f;
     public float speed = 400f;
-    public float jump = 0.3f;
+    public float jump = 0.5f;
     public float jumpOffset = 0.1f;
     public float jumpNodeReq = 0.8f;
     public float nextWaypointCheck = 1f;
+    public LayerMask ignoreLayers;
 
     protected float[] damageMult = new float[3];
     [Header("Combat")]
     //public GameObject attackCir;
     [SerializeField] protected float hp;
-    public GameObject projectile;
+    public EnemyAttackEffect shine;
     protected float deathAnimTime;
     protected float pathRefreshTime;
 
     protected bool flying;
     protected bool grounded;
     protected bool chaser;
+    protected bool turret;
     protected bool hasFacing;
     protected int currentWaypoint;
 
@@ -34,6 +36,7 @@ public abstract class EnemyAI : MonoBehaviour
     [SerializeField] protected bool attacking;
     [SerializeField] protected bool counterable;
     [SerializeField] protected bool flinching;
+    [SerializeField] protected float range;
     protected float flinchCheck;
     protected float flinchThreshold;
 
@@ -45,7 +48,8 @@ public abstract class EnemyAI : MonoBehaviour
     protected Path path;
     protected Seeker seeker;
     protected Rigidbody2D rb2d;
-    protected Attack[] attacks;
+    protected Attack[] meleeAttacks;
+    public GameObject[] rangedAttacks;
 
     protected const float VERT_COLL_DIST = 0.34f;
     public class Attack
@@ -58,9 +62,8 @@ public abstract class EnemyAI : MonoBehaviour
         public int attackType;
         public float damage;
         public bool counterable;
-        public bool melee;
 
-        public Attack(float windUp, Transform attackPos, float rad, int attackType, float damage, bool counterable, bool melee, float attackPushForce)
+        public Attack(float windUp, Transform attackPos, float rad, int attackType, float damage, bool counterable, float attackPushForce)
         {
             this.windUp = windUp;
             this.attackPos = attackPos;
@@ -68,7 +71,6 @@ public abstract class EnemyAI : MonoBehaviour
             this.attackType = attackType;
             this.damage = damage;
             this.counterable = counterable;
-            this.melee = melee;
             this.attackPushForce = attackPushForce;
         }
     }
@@ -129,25 +131,43 @@ public abstract class EnemyAI : MonoBehaviour
     }
     protected void CustomFixedUpdate()
     {
-        
-        if (hp <= 0f && !dying)
-            Die();
-        else if (!flinching)
+        if (!flinching && !dying)
         {
-            
-            //isangry checks aggro distance, chaser is false if the enemy is turret type
+            //isangry checks aggro distance, chaser is true when melee only
             if (IsAngry() && chaser)
             {
                 target = player;
                 float dist = Vector2.Distance(rb2d.position, target.position);
                 if (dist < nextWaypointCheck && (grounded || flying) && !attacking)
-                    Combat();
+                    MeleeCombat();
                 else if (!attacking)
                     Pathfinding();
             }
             else if (IsAngry() && !chaser)
             {
-
+                target = player;
+                float dist = Vector2.Distance(rb2d.position, target.position);
+                if (InRange())
+                {
+                    Vector2 dir = ((Vector2)target.position - rb2d.position).normalized;
+                    RaycastHit2D hit = Physics2D.Raycast(rb2d.position, dir, range, ~ignoreLayers);
+                    Debug.Log(hit.collider.gameObject.name);
+                    if (hit.collider.gameObject.name == "player")
+                    {//no obstacles between enemy and player, shoot
+                        if (!attacking)
+                            RangedCombat();
+                    }
+                    else if (!turret && !attacking)//obstacle hit, do pathfinding
+                        Pathfinding();
+                    else
+                    {
+                        //idle
+                    }
+                }
+                else if (!turret && !attacking)
+                { //not in range, not turret, not attacking: move closer
+                    Pathfinding();
+                }
             }
             else
             {
@@ -157,31 +177,22 @@ public abstract class EnemyAI : MonoBehaviour
         }
     }
 
-    protected void Combat()
+    protected void MeleeCombat()
     {
-        //if close enough to the player, attack
-        float dist = Vector2.Distance(rb2d.position, target.position);
-        if (dist < 1.5f)
-        {
-            if (chaser)
-            {
-                attacking = true;
-                //pick a random attack
-                System.Random random = new System.Random();
-                int num = random.Next(0, attacks.Length);
-                //start timer to make the attack
-                if (attacks[num].melee)
-                    StartCoroutine(AttackDamageTimer(attacks[num]));
-                //play the animation
-            }
-            else
-            {
-                
-            }
-            
-        }
-
-
+        attacking = true;
+        //pick a random attack
+        System.Random random = new System.Random();
+        int num = random.Next(0, meleeAttacks.Length);
+        //start timer to make the attack
+        StartCoroutine(AttackDamageTimer(meleeAttacks[num]));
+        //play the animation
+    }
+    protected void RangedCombat()
+    {
+        attacking = true;
+        System.Random random = new System.Random();
+        int num = random.Next(0, rangedAttacks.Length);
+        StartCoroutine(RangedAttack(rangedAttacks[num]));
     }
     protected void UpdatePath()
     {
@@ -246,13 +257,20 @@ public abstract class EnemyAI : MonoBehaviour
         float distance = Vector2.Distance(transform.position, player.transform.position);
         return (distance < aggroRange) ? true : false;
     }
+    protected bool InRange()
+    {
+        float distance = Vector2.Distance(transform.position, player.transform.position);
+        return (distance < range) ? true : false;
+    }
     public void TakeDamage(float damage, int type)
     {
         hp -= damage * damageMult[type];
         flinchCheck += damage * damageMult[type];
-        if (flinchCheck >= flinchThreshold)
+        if (hp <= 0 && !dying)
+            Die();
+        else if (flinchCheck >= flinchThreshold)
         {
-            
+
             StartCoroutine(Flinching(0.4f + PlayerStats.enemyFlinchMod));
         }
     }
@@ -277,40 +295,42 @@ public abstract class EnemyAI : MonoBehaviour
     }
     IEnumerator AttackDamageTimer(Attack attack)
     {
+        mat.color = new Color(1, baseColor.g * 0.4f, baseColor.b * 0.4f, baseColor.a);
+        if (!attack.counterable)
+            shine.PlayEffect();
         
-        if (attack.counterable)
-            StartCoroutine(CounterFlash());
-        else
-            mat.color = new Color(1, baseColor.g * 0.5f, baseColor.b * 0.5f, baseColor.a);
         yield return new WaitForSeconds(attack.windUp);
         mat.color = new Color(1, 0, 0, baseColor.a);
         //windUp is the amount of time between the start of the animation and when it should deal damage
         yield return new WaitForSeconds(0.1f);
         mat.color = baseColor;
-        attacking = false;
+        
         
         Vector2 actualPos = transform.position;
-        //if melee attack
-        if (attack.melee)
-        {
-            //check for player
-            Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, attack.rad, playerLayer);
-            foreach (Collider2D hit in hits)
-            {
-                //if player is countering and attack is counterable
-                if (attack.counterable && hit.gameObject.GetComponent<PlayerController>().CheckCounter())
-                    Countered();
-                else
-                    hit.gameObject.GetComponent<PlayerController>().TakeDamage(attack.damage, attack.attackType, transform.position, attack.attackPushForce);
-            }
-        }
-        //else ranged attack
-        else
-        {
-
-        }
         
-        
+        //check for player
+        Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, attack.rad, playerLayer);
+        foreach (Collider2D hit in hits)
+        {
+            //if player is countering and attack is counterable
+            if (attack.counterable && hit.gameObject.GetComponent<PlayerController>().CheckCounter())
+                Countered();
+            else
+                hit.gameObject.GetComponent<PlayerController>().TakeDamage(attack.damage, attack.attackType, transform.position, attack.attackPushForce);
+        }
+        yield return new WaitForSeconds(0.25f);
+        attacking = false;
+    }
+    private IEnumerator RangedAttack(GameObject attack)
+    {
+        mat.color = new Color(baseColor.r * 0.4f, baseColor.g * 0.4f, 1f, baseColor.a);
+        yield return new WaitForSeconds(2f);
+        mat.color = baseColor;
+        Vector2 dir = ((Vector2)target.position - rb2d.position).normalized;
+        GameObject p = Instantiate(attack, transform.position, Quaternion.identity);
+        p.GetComponent<Projectile>().Shoot(dir);
+        yield return new WaitForSeconds(0.25f);
+        attacking = false;
         
     }
     private IEnumerator CounterFlash()

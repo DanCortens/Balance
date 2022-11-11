@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretEnemy : EnemyAI
+public class TurretLightEnemy : EnemyAI
 {
     override protected void EnemySpecificStart()
     {
@@ -10,12 +10,12 @@ public class TurretEnemy : EnemyAI
         grounded = false;
         chaser = false;
         hasFacing = true;
+        turret = true;
 
-        hp = 100f;
+        hp = 50f;
         flinchThreshold = hp / 2;
 
-        attacks = new Attack[] {new Attack(1f, transform, 1.5f, 0, 5f, true, true, 0.5f),
-                                new Attack(2f, transform, 1.5f, 0, 20f, false, true, 0.5f)};
+        meleeAttacks = new Attack[] {new Attack(1f, transform, 1.5f, 0, 5f, true, 0.5f)};
         damageMult = new float[] { 1f, 0.5f, 1.5f };
     }
 }

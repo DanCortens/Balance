@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3790763820597231249}
   - component: {fileID: 4328064744540966397}
   - component: {fileID: 8286879487099491372}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,11 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+  enemyHolder: {fileID: 0}
   types: 
-  roomPos: {fileID: 0}
   dimensions: {x: 25, y: 16}
-  neighbours: []
   enemies: 0
+  cleared: 0
 --- !u!61 &8286879487099491372
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -85,7 +85,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2198825559665426320}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rooms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
