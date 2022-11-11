@@ -147,7 +147,7 @@ public class PlayerController : LivingEntity
             if ((anim.GetBool("grounded") || coyote < COYO_MAX))
             {
                 FindObjectOfType<AudioManager>().Play("Jump");
-                anim.Play("Jump");
+                anim.SetTrigger("jump");
                 coyote = COYO_MAX;
                 startJump = true;
                 stoppedJump = false;
