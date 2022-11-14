@@ -13,7 +13,7 @@ public class LivingEntity : MonoBehaviour
     //constants
     protected float[] damageMult = { 1f, 1f, 1f };//subject to change
     protected const int MAX_HP_BASE = 100;
-    protected const float FLINCH_DIST = 10f;
+    protected const float FLINCH_DIST = 5f;
     //stats
     [SerializeField]
     private int currHp;

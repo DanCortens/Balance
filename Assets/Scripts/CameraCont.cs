@@ -12,6 +12,8 @@ public class CameraCont : MonoBehaviour
     private const float SMTH = 0.3f;
     private Vector3 vel = Vector3.zero;
     private Vector2 _bounds;
+    private Vector3 shakeOffset;
+
     public Vector2 bounds
     {
         set { _bounds = value; }
@@ -26,6 +28,7 @@ public class CameraCont : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        shakeOffset = new Vector3(0f, 0f, 0f);
         if (firstRoom is null)
         {
             bounds = new Vector2(25f, 15f);
@@ -59,7 +62,7 @@ public class CameraCont : MonoBehaviour
                 (Mathf.Clamp(targetPos.x, leftBounds, rightBounds),
                  Mathf.Clamp(targetPos.y, topBounds, bottomBounds),
                  targetPos.z);
-            transform.position = Vector3.SmoothDamp(transform.position, clampTarget, ref vel, SMTH);
+            transform.position = Vector3.SmoothDamp(transform.position + shakeOffset, clampTarget, ref vel, SMTH);
         }
         else
         {
@@ -71,6 +74,16 @@ public class CameraCont : MonoBehaviour
     public void setTarget(Vector2 tar)
     {
         target.position = tar;
+    }
+    public void StartShake(Vector3 dir, float mag)
+    {
+        StartCoroutine(CamShake(dir, mag));
+    }
+    private IEnumerator CamShake(Vector3 dir, float mag)
+    {
+        shakeOffset = dir.normalized * mag;
+        yield return new WaitForSeconds(0.1f);
+        shakeOffset = new Vector3(0f, 0f, 0f);
     }
 
 }

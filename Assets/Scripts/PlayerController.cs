@@ -500,6 +500,7 @@ public class PlayerController : LivingEntity
         Vector2 pushDir = ((Vector2)transform.position - enemyDir);
         rb2d.velocity = pushDir.normalized * (FLINCH_DIST * pushForce);
         StartCoroutine(Flinching());
+        FindObjectOfType<CameraCont>().StartShake(pushDir, pushForce * 0.2f);
     }
 
         public bool IsCountering()
