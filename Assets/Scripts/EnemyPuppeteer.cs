@@ -7,10 +7,18 @@ public class EnemyPuppeteer : MonoBehaviour
     public List<GameObject> neutEnemyPrefabs;
     public List<GameObject> darkEnemyPrefabs;
     public List<GameObject> lightEnemyPrefabs;
-    
+    public event System.Action onWorldBalanceChanged;
     //public List<float> odds;
-
-    public float worldBalance;
+    private float _worldBalance;
+    public float worldBalance
+    {
+        get { return _worldBalance; }
+        set { 
+            if (_worldBalance == value) return;
+            _worldBalance = value;
+            onWorldBalanceChanged?.Invoke();
+        }
+    }
 
     // Start is called before the first frame update
     void Start()

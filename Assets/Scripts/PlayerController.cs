@@ -465,8 +465,8 @@ public class PlayerController : LivingEntity
                 StartCoroutine(AttackDamageTimer(0, groundAttacks[result]));
                
                 StartCoroutine(NotAttackingTimer(groundAttacks[result].animTime));
-                float change = (usingDark) ? groundAttacks[result].balChange * (darkAff + PlayerStats.damageDoneMod[1]) 
-                                           : -groundAttacks[result].balChange * (lightAff + PlayerStats.damageDoneMod[2]);
+                float change = (usingDark) ? -groundAttacks[result].balChange * (darkAff + PlayerStats.damageDoneMod[1]) 
+                                           : groundAttacks[result].balChange * (lightAff + PlayerStats.damageDoneMod[2]);
                 puppeteer.worldBalance = Mathf.Clamp(puppeteer.worldBalance + change, -100f, 100f);
                 string animName = (groundAttacks[result].attackType[0] == 0) ? result : 
                                   (usingDark) ? result+ "Dark" : result+ "Light";
@@ -484,8 +484,8 @@ public class PlayerController : LivingEntity
             {
                 StartCoroutine(AttackDamageTimer(0, airAttacks[result]));
                 StartCoroutine(NotAttackingTimer(airAttacks[result].animTime));
-                float change = (usingDark) ? airAttacks[result].balChange * (darkAff + PlayerStats.damageDoneMod[1])
-                                           : -airAttacks[result].balChange * (lightAff + PlayerStats.damageDoneMod[2]);
+                float change = (usingDark) ? -airAttacks[result].balChange * (darkAff + PlayerStats.damageDoneMod[1])
+                                           : airAttacks[result].balChange * (lightAff + PlayerStats.damageDoneMod[2]);
                 puppeteer.worldBalance = Mathf.Clamp(puppeteer.worldBalance + change, -100f, 100f);
                 string animName = (airAttacks[result].attackType[0] == 0) ? result+ "Air" :
                                   (usingDark) ? result + "AirDark" : result + "AirLight";

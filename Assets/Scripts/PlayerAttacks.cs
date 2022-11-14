@@ -76,22 +76,22 @@ public class PlayerAttacks
             new Attack(1, new float[] { 0.3f },             //swings, wind up
             1f, new Vector2(0f, 0f), 2f,                    //total anim time, pos, radius
             new int[] { 1 }, new float[] { 8f },      //attack type, damage
-            8f));                                           //balance change
+            4f));                                           //balance change
         attacks.Add("magUp",                                //name
             new Attack(2, new float[] { 0.2f, 0.2f },       //swings, wind up
             1f, new Vector2(0.75f, 1.5f), 1f,                  //total anim time, pos, radius
             new int[] { 1, 1 }, new float[] { 3f, 3f },   //attack type, damage
-            0f));                                           //balance change
+            8f));                                           //balance change
         attacks.Add("magDown",                              //name
             new Attack(2, new float[] { 0.5f, 0.25f },      //swings, wind up
             1f, new Vector2(0f, 0f), 2f,                    //total anim time, pos, radius
             new int[] { 1, 1 }, new float[] { 10f, 10f },   //attack type, damage
-            0f));                                           //balance change
+            8f));                                           //balance change
         attacks.Add("magForward",                           //name
             new Attack(2, new float[] { 0.5f, 0.25f },      //swings, wind up
             1f, new Vector2(0f, 0f), 2f,                    //total anim time, pos, radius
             new int[] { 1, 1 }, new float[] { 10f, 10f },   //attack type, damage
-            0f));                                           //balance change
+            8f));                                           //balance change
 
         return attacks;
     }
