@@ -6,6 +6,8 @@ public class LanternPedestal : Interactable
 {
     public CinematicController cc;
     public GameObject obstacle;
+    public GameObject soulsReleasedEffect;
+    public Animator medalAnim;
     public override void Interact()
     {
         PlayerStats.hasLantern = true;
@@ -28,7 +30,12 @@ public class LanternPedestal : Interactable
     }
     private IEnumerator Crumble()
     {
-        yield return new WaitForSeconds(3.25f);
+        yield return new WaitForSeconds(1f);
+        medalAnim.SetTrigger("crack");
+        yield return new WaitForSeconds(0.5f);
+        GameObject effect = Instantiate(soulsReleasedEffect, transform.position, Quaternion.identity);
+        Destroy(transform.Find("medallion").gameObject);
+        yield return new WaitForSeconds(4f);
         StartDestruction();
     }
     private void StartDestruction()
