@@ -11,12 +11,12 @@ public class InteractUI : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
     }
 
-    public void FadeIn()
+    public void FadeIn(bool canInteract)
     {
-        anim.SetTrigger("fadeIn");
+        anim.SetBool("canInteract", canInteract);
     }
     public void FadeOut()
     {
-        anim.SetTrigger("fadeOut");
+        anim.SetBool("canInteract", false);
     }
 }

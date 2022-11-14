@@ -11,6 +11,8 @@ public class LanternPedestal : Interactable
     public override void Interact()
     {
         PlayerStats.hasLantern = true;
+        canInteract = false;
+        FindObjectOfType<InteractUI>().FadeOut();
         Vector2 offset = new Vector2(2f, 0f);
         cc.StartCinematic(new Vector2[] { (Vector2)transform.position,
                                         ((Vector2)transform.position + offset),
