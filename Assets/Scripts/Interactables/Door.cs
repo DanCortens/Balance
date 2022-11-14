@@ -57,18 +57,12 @@ public class Door : Interactable
         FindObjectOfType<AudioManager>().Play("door_Close");
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    
+    private new void OnTriggerExit2D(Collider2D collision)
     {
+        base.OnTriggerExit2D(collision);
         if (collision.gameObject.name == "player")
         {
-            //show interact prompt
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.name == "player")
-        {
-            //hide interact prompt
             if (!closed)
                 Close();
         }
