@@ -14,6 +14,7 @@ public class HealthUpgrade : Interactable
         {
             PlayerPrefs.SetInt("hpUpgrade" + id, id);
             PlayerStats.maxHPMod += 10;
+            FindObjectOfType<PlayerController>().CurrHp += 10;
             PlayerStats.unsavedHPUps.Add(id);
 
             destroying = true;

@@ -19,7 +19,7 @@ public static class PlayerStats
         {
             if (_maxHPMod == value) return;
             _maxHPMod = value;
-            GameObject.FindObjectOfType<PlayerController>().MaxHPChanged();
+            GameObject.FindObjectOfType<PlayerController>().MaxHpChanged();
         }
     }
     public static List<int> unsavedHPUps = new List<int>();

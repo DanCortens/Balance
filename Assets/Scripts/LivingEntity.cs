@@ -58,7 +58,7 @@ public class LivingEntity : MonoBehaviour
     {
         return MAX_HP_BASE + PlayerStats.maxHPMod;
     }
-    public void MaxHPChanged()
+    public void MaxHpChanged()
     {
         onHPMaxChanged.Invoke();
     }
