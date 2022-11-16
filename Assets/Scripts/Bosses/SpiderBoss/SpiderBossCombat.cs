@@ -9,9 +9,13 @@ public class SpiderBossCombat : BossBaseAI
     
     
     private float[] damageMult;
-    
-    public Vector2 anchors;
-    
+    public GameObject attackEffectVisualizer;
+    public Vector2[] anchors;
+    public Vector2 currAnchor;
+    public Vector2 xMinMax;
+    protected int chosenAnchor;
+    protected float currTime;
+    protected float duration;
     protected override void InitBossVars()
     {
         hp = 1000f;
@@ -49,6 +53,7 @@ public class SpiderBossCombat : BossBaseAI
     }
     protected override void ChooseAttack()
     {
+        /*
         float pick = Random.Range(0f,20f);
         switch (pick)
         {
@@ -64,34 +69,51 @@ public class SpiderBossCombat : BossBaseAI
             case float p when (p >= 18f):
                 currAttack = 3;
                 break;
-        }
+        }*/
+        currAttack = 0;
         //start animation
         //anim.SetBool(attacks[currAttack].animBoolName, true);
-        StartCoroutine(TriggerAttack());
+        if (currAttack < 2)
+        {
+            facing = (GameObject.Find("player").transform.position.x >= transform.position.x) ? 1 : -1;
+            StartCoroutine(TriggerAttack());
+        }
+        else
+            StartTravelToAnchor();
     }
 
     protected void FixedUpdate()
     {
-        if (attacking)
+        transform.localScale = new Vector3(transform.localScale.x, facing, transform.localScale.z);
+        if (attacking && !attacks[currAttack].IsDone())
         {
             transform.position = attacks[currAttack].GetCurrent().movement.LerpedPos(facing);
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, xMinMax.x, xMinMax.y), 
+                transform.position.y, transform.position.z);
         }
 
     }
-
-
-    private void OnTriggerExit2D(Collider2D collision)
+    public override void PlayIntro()
     {
-        Debug.Log("turn");
-        facing *= -1;
+        FindObjectOfType<CinematicController>().StartCinematic(
+            new Vector2[] { transform.position }, new float[] { 3f });
+        StartCoroutine(StartFight(3f));
     }
 
-    protected new void MeleeAttack(BossAttack currMove)
+    protected override IEnumerator StartFight(float time)
     {
-        Vector2 offset = currMove.attackOffset;
-        offset.x *= facing;
+        yield return new WaitForSeconds(time);
+        active = true;
+    }
+
+    protected override void MeleeAttack(BossAttack currMove)
+    {
+        Vector2 offset = new Vector2(currMove.attackOffset.x * facing, currMove.attackOffset.y);
         Vector2 attackPos = (Vector2)transform.position + offset;
         Collider2D[] hits = Physics2D.OverlapCircleAll(attackPos, currMove.radius, playerLayer);
+        //TESTING, GET RID OF THIS//
+        GameObject effect = Instantiate(attackEffectVisualizer, attackPos, Quaternion.identity);
+        effect.GetComponent<AttackEffectScript>().InitEffect(currMove.type, currMove.radius);
         foreach (Collider2D hit in hits)
         {
             PlayerController pc = hit.gameObject.GetComponent<PlayerController>();
@@ -101,4 +123,29 @@ public class SpiderBossCombat : BossBaseAI
                 pc.TakeDamage(currMove.damage, currMove.type, attackPos, 2f);
         }
     }
-}
+    protected void TravelToAnchor()
+    {
+        while (currTime < duration)
+        {
+            transform.position = Vector2.Lerp(transform.position, currAnchor, currTime/duration);
+            currTime += Time.deltaTime;
+        }
+        transform.position = currAnchor;
+        if (chosenAnchor == 0)                      //if at left anchor
+            facing = (currAttack == 2) ? -1 : 1;    //2: jump left to wall; 3: jump to center
+        else                                        //if at right anchor
+            facing = (currAttack == 2) ? 1 : -1;    //2: jump right to wall; 3: jump to center
+        CancelInvoke("TravelToAnchor");
+        StartCoroutine(TriggerAttack());
+    }
+    protected void StartTravelToAnchor()
+    {
+        currTime = 0f;
+        chosenAnchor = (Vector2.Distance(transform.position, anchors[0]) < Vector2.Distance(transform.position, anchors[1])) ?
+            0 : 1;
+        currAnchor = anchors[chosenAnchor];
+        duration = Vector2.Distance(transform.position, anchors[chosenAnchor])/10f;
+        facing = (transform.position.x < currAnchor.x) ? 1 : -1;
+        InvokeRepeating("TravelToAnchor", 0f, 0.05f);
+    }
+ }

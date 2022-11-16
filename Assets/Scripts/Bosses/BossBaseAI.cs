@@ -20,6 +20,7 @@ public abstract class BossBaseAI : MonoBehaviour
 
         }
     }
+    protected bool active;
     [SerializeField] protected float[] phaseTrigger;
     [SerializeField] protected int phase;
     [SerializeField] protected int totalPhases;
@@ -39,6 +40,7 @@ public abstract class BossBaseAI : MonoBehaviour
         phase = 0;
         attacking = false;
         stunned = false;
+        active = false;
         InitBossVars();
     }
     protected abstract void InitBossVars();
@@ -55,12 +57,17 @@ public abstract class BossBaseAI : MonoBehaviour
 
     protected void Update()
     {
-        if (!attacking && !stunned && !dying)
-        {
-            attacking = true;
-            ChooseAttack();
-        }
+        if (active)
+            if (!attacking && !stunned && !dying)
+            {
+                attacking = true;
+                ChooseAttack();
+            }
     }
+
+    public abstract void PlayIntro();
+    
+    protected abstract IEnumerator StartFight(float time);
     
 
     //called when player attempts to counter
@@ -84,6 +91,7 @@ public abstract class BossBaseAI : MonoBehaviour
     protected void StopAttack()
     {
         attacking = false;
+        attacks[currAttack].currentAttack = 0;
     }
     protected IEnumerator StunRecover()
     {
@@ -94,7 +102,8 @@ public abstract class BossBaseAI : MonoBehaviour
     {
 
     }
-    protected void MeleeAttack(BossAttack currMove)
+    protected abstract void MeleeAttack(BossAttack currMove);
+    /*
     {
         Vector2 offset = currMove.attackOffset;
         Vector2 attackPos = (Vector2)transform.position + offset;
@@ -107,7 +116,7 @@ public abstract class BossBaseAI : MonoBehaviour
             else
                 pc.TakeDamage(currMove.damage, currMove.type, attackPos, 2f);
         }
-    }
+    }*/
     protected IEnumerator TriggerAttack()
     {
         BossAttack currMove = attacks[currAttack].GetCurrent();

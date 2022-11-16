@@ -13,15 +13,16 @@ public class BossAttackChain : MonoBehaviour
     public bool UpdateCurrAttack()
     {
         currentAttack++;
+        return IsDone();
+            
+    }
+    public bool IsDone()
+    {
         if (currentAttack < bossAttacks.Length)
             return false;
-        
         else
-        {
-            currentAttack = 0;
             return true;
-        }
-            
+        
     }
     public BossAttack GetCurrent()
     {
