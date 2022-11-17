@@ -1,0 +1,32 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "Param",
+			"GroupId": "",
+			"Name": "Head"
+		},
+		{
+			"Id": "Param2",
+			"GroupId": "",
+			"Name": "ForelegL"
+		},
+		{
+			"Id": "Param3",
+			"GroupId": "",
+			"Name": "ForelegR"
+		},
+		{
+			"Id": "Param4",
+			"GroupId": "",
+			"Name": "HindLegR"
+		},
+		{
+			"Id": "Param5",
+			"GroupId": "",
+			"Name": "HindLegL"
+		}
+	],
+	"ParameterGroups": [],
+	"Parts": []
+}
