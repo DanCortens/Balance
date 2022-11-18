@@ -60,8 +60,9 @@ MonoBehaviour:
   enemies: 1
   cleared: 0
   killCount: 0
-  killsReq: 0
-  doors: []
+  killsReq: 4
+  doors:
+  - {fileID: 0}
 --- !u!61 &17709550
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1318,7 +1319,8 @@ MonoBehaviour:
   cleared: 0
   killCount: 0
   killsReq: 1
-  doors: []
+  doors:
+  - {fileID: 0}
 --- !u!61 &984384484
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1895,7 +1897,7 @@ MonoBehaviour:
   types: 0000000000000000
   dimensions: {x: 25, y: 16}
   enemies: 1
-  cleared: 0
+  cleared: 1
   killCount: 0
   killsReq: 0
   doors: []
@@ -2291,8 +2293,9 @@ MonoBehaviour:
   enemies: 1
   cleared: 0
   killCount: 0
-  killsReq: 0
-  doors: []
+  killsReq: 3
+  doors:
+  - {fileID: 0}
 --- !u!61 &2096728382
 BoxCollider2D:
   m_ObjectHideFlags: 0
