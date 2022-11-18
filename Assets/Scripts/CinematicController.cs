@@ -58,6 +58,7 @@ public class CinematicController : MonoBehaviour
             }
                 
         }
+        playing = false;
         currCinematic = null;
         gse.state = GameStateEngine.State.Play;
     }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class BossBaseAI : MonoBehaviour
 {
+    public event System.Action onHPChanged;
+
     [Header("Health")]
     private float _hp;
     public float hp
@@ -13,31 +15,36 @@ public abstract class BossBaseAI : MonoBehaviour
         {
             if (_hp == value) return;
             _hp = value;
+            onHPChanged?.Invoke();
             if (_hp <= 0f)
                 Die();
-            else if (_hp <= phaseTrigger[phase])
-                ChangePhase();
-
         }
     }
-    protected bool active;
-    [SerializeField] protected float[] phaseTrigger;
+    public bool active;
+    [SerializeField] protected float phaseTrigger;
+    [SerializeField] protected float phaseProg;
     [SerializeField] protected int phase;
     [SerializeField] protected int totalPhases;
     [Header("Combat")]
     [SerializeField] protected BossAttackChain[] attacks;
+    [SerializeField] protected float[] damageMult;
     [SerializeField] protected bool attacking;
     [SerializeField] protected bool stunned;
     [SerializeField] protected bool dying;
     public string deathAnimBool;
     [SerializeField] protected int currAttack;
-
+    public GameObject splineAnchor;
+    protected GameObject player;
     protected LayerMask playerLayer;
+    public RoomControl bossRoom;
 
     void Start()
     {
+        player = GameObject.Find("player");
         playerLayer = LayerMask.GetMask("Player");
         phase = 0;
+        phaseProg = 0f;
+        currAttack = -1;    
         attacking = false;
         stunned = false;
         active = false;
@@ -45,22 +52,27 @@ public abstract class BossBaseAI : MonoBehaviour
     }
     protected abstract void InitBossVars();
     protected abstract void ChooseAttack();
-    protected void Die()
+    protected abstract void Die();
+    
+    public void ChangePhase(float damage)
     {
-
-    }
-    public void ChangePhase()
-    {
-        if (phase < totalPhases - 1)
+        phaseProg += damage;
+        
+        if (phaseProg >= phaseTrigger)
+        {
             phase++;
+            phaseProg = 0f;
+            PhaseChangeEvent();
+        }
+            
     }
+    protected abstract void PhaseChangeEvent();
 
     protected void Update()
     {
         if (active)
-            if (!attacking && !stunned && !dying)
+            if (currAttack < 0 && !stunned && !dying)
             {
-                attacking = true;
                 ChooseAttack();
             }
     }
@@ -75,9 +87,9 @@ public abstract class BossBaseAI : MonoBehaviour
     {
         StopAllCoroutines();
         stunned = true;
-        attacking = false;
+        StopAttack();
         //switch to stunned animation
-        StartCoroutine(StunRecover());
+        StartCoroutine(StunRecover(2.5f));
 
     }
     //called by attack patterns to initialize next attacks
@@ -92,16 +104,14 @@ public abstract class BossBaseAI : MonoBehaviour
     {
         attacking = false;
         attacks[currAttack].currentAttack = 0;
+        currAttack = -1;
     }
-    protected IEnumerator StunRecover()
+    protected IEnumerator StunRecover(float time)
     {
-        yield return new WaitForSeconds(1.75f);
+        yield return new WaitForSeconds(time);
         stunned = false;
     }
-    protected void RangedAttack(BossAttack currMove)
-    {
-
-    }
+    protected abstract void RangedAttack(BossAttack currMove);
     protected abstract void MeleeAttack(BossAttack currMove);
     /*
     {
@@ -119,6 +129,7 @@ public abstract class BossBaseAI : MonoBehaviour
     }*/
     protected IEnumerator TriggerAttack()
     {
+        attacking = true;
         BossAttack currMove = attacks[currAttack].GetCurrent();
         Debug.Log($"{attacks[currAttack].animBoolName} on {attacks[currAttack].currentAttack}");
         currMove.StartAttack(transform.position);
@@ -133,5 +144,12 @@ public abstract class BossBaseAI : MonoBehaviour
         float t = currMove.TotalTime();
         yield return new WaitForSeconds(t);
         PopNext();
+    }
+    public void TakeDamage(float damage, int type)
+    {
+        float actualDamage = damage * damageMult[type];
+        hp -= (actualDamage > hp) ? hp : actualDamage;
+        if (phase < totalPhases - 1)
+            ChangePhase(actualDamage);
     }
 }

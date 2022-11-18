@@ -7,6 +7,7 @@ public class BossRoomStartCollider : MonoBehaviour
     public BossBaseAI boss;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        boss.PlayIntro();
+        if (!boss.active)
+            boss.PlayIntro();
     }
 }

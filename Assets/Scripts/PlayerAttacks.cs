@@ -92,6 +92,11 @@ public class PlayerAttacks
             1f, new Vector2(0f, 0f), 2f,                    //total anim time, pos, radius
             new int[] { 1, 1 }, new float[] { 10f, 10f },   //attack type, damage
             8f));                                           //balance change
+        attacks.Add("counter",
+            new Attack(1, new float[] { 0.25f },
+            0.4f, new Vector2(0f, 0f), 2f,
+            new int[] { 0 }, new float[] { 20f },
+            0f));
 
         return attacks;
     }

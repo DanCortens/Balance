@@ -50,6 +50,7 @@ public abstract class EnemyAI : MonoBehaviour
     protected Rigidbody2D rb2d;
     protected Attack[] meleeAttacks;
     public GameObject[] rangedAttacks;
+    public RoomControl room;
 
     protected const float VERT_COLL_DIST = 0.34f;
     public class Attack
@@ -271,12 +272,12 @@ public abstract class EnemyAI : MonoBehaviour
         else if (flinchCheck >= flinchThreshold)
         {
 
-            StartCoroutine(Flinching(0.4f + PlayerStats.enemyFlinchMod));
+            StartCoroutine(Flinching(0.75f + PlayerStats.enemyFlinchMod));
         }
     }
     protected void Countered()
     {
-        StartCoroutine(Flinching(0.4f + PlayerStats.enemyFlinchMod));
+        StartCoroutine(Flinching(1.25f + PlayerStats.enemyFlinchMod));
     }
     protected void Die()
     {
@@ -284,6 +285,8 @@ public abstract class EnemyAI : MonoBehaviour
         //play death animation
         //anim.Play("death");
         //destroy game object
+        if (!room.cleared)
+            room.EnemyKilled();
         StopAllCoroutines();
         StartCoroutine(DeleteMe());
     }
@@ -312,11 +315,15 @@ public abstract class EnemyAI : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, attack.rad, playerLayer);
         foreach (Collider2D hit in hits)
         {
+            PlayerController pc = hit.gameObject.GetComponent<PlayerController>();
             //if player is countering and attack is counterable
-            if (attack.counterable && hit.gameObject.GetComponent<PlayerController>().CheckCounter())
+            if (attack.counterable && pc.CheckCounter())
+            {
                 Countered();
+                pc.CounterAttack();
+            }
             else
-                hit.gameObject.GetComponent<PlayerController>().TakeDamage(attack.damage, attack.attackType, transform.position, attack.attackPushForce);
+                pc.TakeDamage(attack.damage, attack.attackType, transform.position, attack.attackPushForce);
         }
         yield return new WaitForSeconds(0.25f);
         attacking = false;

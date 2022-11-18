@@ -8,13 +8,18 @@ public class BossMove : MonoBehaviour
     public float duration;
     public float progress;
     public Vector3 offset;
-    protected Vector3 startPos;
-
+    protected Vector3 _startPos;
+    public Vector3 startPos
+    {
+        get { return _startPos; }
+        set { _startPos = value; }
+    }
     public void StartMove(Vector3 startPos)
     {
         this.startPos = startPos;
         progress = 0f;
     }
+    
     public bool IsDone()
     {
         return (progress >= duration) ? true : false;

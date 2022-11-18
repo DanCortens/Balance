@@ -34,7 +34,7 @@ public class EnemyPuppeteer : MonoBehaviour
     {
         
     }
-    public bool FillRoom(List<Transform> spawnPoints, int[] types, Transform enemyParent)
+    public bool FillRoom(List<Transform> spawnPoints, int[] types, Transform enemyParent, RoomControl room)
     {
         bool swap = false;
         int i = 0;
@@ -61,39 +61,40 @@ public class EnemyPuppeteer : MonoBehaviour
             if (worldBalance <= -80f)
             {
                 //only dark spawns
-                SpawnEnemy(darkEnemyPrefabs[types[i]], sp.position, enemyParent);
+                SpawnEnemy(darkEnemyPrefabs[types[i]], sp.position, enemyParent, room);
             }
             else if (worldBalance <= -20f)
             {
                 //mix of neutral and dark
                 SpawnEnemy((swap)? neutEnemyPrefabs[types[i]] : darkEnemyPrefabs[types[i]]
-                    , sp.position, enemyParent);
+                    , sp.position, enemyParent, room);
                 swap = !swap;
             }
             else if (worldBalance < 20f)
             {
                 //only neutral spawns
-                SpawnEnemy(neutEnemyPrefabs[types[i]], sp.position, enemyParent);
+                SpawnEnemy(neutEnemyPrefabs[types[i]], sp.position, enemyParent, room);
             }
             else if (worldBalance < 80f)
             {
                 //mix of light and neutral
                 SpawnEnemy((swap) ? neutEnemyPrefabs[types[i]] : lightEnemyPrefabs[types[i]]
-                    , sp.position, enemyParent);
+                    , sp.position, enemyParent, room);
                 swap = !swap;
             }
             else
             {
                 //only light spawns
-                SpawnEnemy(lightEnemyPrefabs[types[i]], sp.position,enemyParent);
+                SpawnEnemy(lightEnemyPrefabs[types[i]], sp.position,enemyParent, room);
             }
             i++;
         }
         return true;
     }
-    public void SpawnEnemy(GameObject spawned, Vector3 pos, Transform par)
+    public void SpawnEnemy(GameObject spawned, Vector3 pos, Transform par, RoomControl room)
     {
         GameObject newSpawn = Instantiate(spawned, pos, Quaternion.identity, par);
+        newSpawn.GetComponent<EnemyAI>().room = room;
         Debug.Log($"creating {newSpawn.name}");
     }
 }

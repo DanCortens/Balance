@@ -79,6 +79,9 @@ public class PlayerController : LivingEntity
     Dictionary<string, PlayerAttacks.Attack> groundAttacks;
     Dictionary<string, PlayerAttacks.Attack> airAttacks;
 
+    private PlayerInput input;
+    private GameStateEngine gse;
+
     private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
@@ -86,7 +89,8 @@ public class PlayerController : LivingEntity
         rb2d = GetComponent<Rigidbody2D>();
     }
     void Start(){
-
+        input = GetComponent<PlayerInput>();
+        gse = FindObjectOfType<GameStateEngine>();
         facing = 1f;
         puppeteer = GameObject.FindObjectOfType<EnemyPuppeteer>();
         chainHinge = GameObject.FindObjectOfType<ChainHinge>();
@@ -297,8 +301,9 @@ public class PlayerController : LivingEntity
 
         //if (true) //check for paused game state{}
         //else if (true) //check for cinematic game state{}
-        //else
+        if (gse.state == GameStateEngine.State.Play)
         {
+            input.enabled = true;
             string result = attStack.Update(Time.deltaTime);
             //check for combat execution
             if (result != "waiting")
@@ -317,6 +322,12 @@ public class PlayerController : LivingEntity
                 anim.SetBool("canAttack", true);
             }
         }
+        else
+        {
+            input.enabled = false;
+            horzM = 0f;
+        }
+            
         
     }
     void FixedUpdate()
@@ -535,7 +546,10 @@ public class PlayerController : LivingEntity
         foreach (Collider2D hit in hits)
         {
             Debug.Log("hit enemy!");
-            hit.gameObject.GetComponent<EnemyAI>().TakeDamage(attack.damage[currHit], attack.GetType(currHit, usingDark));
+            if (hit.gameObject.tag == "boss")
+                hit.gameObject.GetComponent<BossBaseAI>().TakeDamage(attack.damage[currHit], attack.GetType(currHit, usingDark));
+            else
+                hit.gameObject.GetComponent<EnemyAI>().TakeDamage(attack.damage[currHit], attack.GetType(currHit, usingDark));
         }
         if (currHit < attack.hits - 1)
             StartCoroutine(AttackDamageTimer(currHit+1, attack));
@@ -556,9 +570,9 @@ public class PlayerController : LivingEntity
     {
         countering = true;
         isAttacking = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.75f);
         countering = false;
-        StartCoroutine(NotAttackingTimer(0.5f));
+        StartCoroutine(NotAttackingTimer(0.25f));
     }
 
 
@@ -570,6 +584,13 @@ public class PlayerController : LivingEntity
     public bool CheckCounter()
     {
         return countering;
+    }
+    public void CounterAttack()
+    {
+        StopCoroutine(Countering());
+        StartCoroutine(AttackDamageTimer(0, groundAttacks["counter"]));
+        StartCoroutine(NotAttackingTimer(groundAttacks["counter"].animTime));
+
     }
     private void OnDestroy()
     {

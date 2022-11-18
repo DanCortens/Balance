@@ -15,7 +15,10 @@ public class RoomControl : MonoBehaviour
     {
         get { return _filled; } set { _filled = value; }
     }
-    public bool cleared = false;
+    public bool cleared;
+    public int killCount;
+    public int killsReq;
+    public Door[] doors;
 
     private EnemyPuppeteer puppeteer;
 
@@ -30,7 +33,7 @@ public class RoomControl : MonoBehaviour
     {
         if (enemies && !filled)
         {
-            filled = puppeteer.FillRoom(spawnPoints, types, enemyHolder.transform);
+            filled = puppeteer.FillRoom(spawnPoints, types, enemyHolder.transform, this);
         }
         
         mainCam.centre = transform.position;
@@ -45,7 +48,9 @@ public class RoomControl : MonoBehaviour
                 GameObject.Destroy(child.gameObject);
             }
             filled = false;
-        }    
+        }
+        if (!cleared)
+            killCount = 0;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -60,5 +65,21 @@ public class RoomControl : MonoBehaviour
         {
             PlayerLeaves();
         }
+    }
+
+    public void EnemyKilled()
+    {
+        killCount++;
+        if (killCount >= killsReq)
+            Cleared();
+    }
+    public void Cleared()
+    {
+        cleared = true;
+        foreach (Door d in doors)
+            d.Unlock();
+
+        FindObjectOfType<CinematicController>().StartCinematic(
+            new Vector2[] { doors[0].transform.position }, new float[] { 2f });
     }
 }

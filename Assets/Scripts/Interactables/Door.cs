@@ -76,8 +76,12 @@ public class Door : Interactable
             //change sprite from locked to unlocked
             //play unlock sound
             FindObjectOfType<AudioManager>().Play("door_Unlock");
-            PlayerPrefs.SetInt(gameObject.name, 0);
+            
         }
         
+    }
+    public void Save()
+    {
+        PlayerPrefs.SetInt(gameObject.name, (locked)? 1 : 0);
     }
 }

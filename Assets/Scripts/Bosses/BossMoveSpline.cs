@@ -8,10 +8,14 @@ public class BossMoveSpline : BossMove
 
     public new Vector3 LerpedPos(int facing)
     {
-        progress += Time.deltaTime;
-        Vector3 facingMult = new Vector3(facing, 1f, 1f);
+        progress += Time.deltaTime / duration;
+        Vector3 facedSpline;
         if (IsDone())
-            return startPos + spline.GetPoint(1f)*facing;
-        return startPos + spline.GetPoint(progress / duration)*facing;
+            facedSpline = spline.GetPoint(1f);
+        else
+            facedSpline = spline.GetPoint(progress);
+        facedSpline.x *= facing;
+        
+        return facedSpline;
     }
 }
