@@ -56,7 +56,7 @@ public abstract class EnemyAI : MonoBehaviour
     public class Attack
     {
         public float windUp;
-        public Transform attackPos;
+        public Vector2 attackPos;
         
         public float rad;
         public float attackPushForce;
@@ -64,7 +64,7 @@ public abstract class EnemyAI : MonoBehaviour
         public float damage;
         public bool counterable;
 
-        public Attack(float windUp, Transform attackPos, float rad, int attackType, float damage, bool counterable, float attackPushForce)
+        public Attack(float windUp, Vector2 attackPos, float rad, int attackType, float damage, bool counterable, float attackPushForce)
         {
             this.windUp = windUp;
             this.attackPos = attackPos;
@@ -309,7 +309,7 @@ public abstract class EnemyAI : MonoBehaviour
         mat.color = baseColor;
         
         
-        Vector2 actualPos = transform.position;
+        Vector2 actualPos = (Vector2)transform.position + attack.attackPos;
         
         //check for player
         Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, attack.rad, playerLayer);
@@ -323,7 +323,7 @@ public abstract class EnemyAI : MonoBehaviour
                 pc.CounterAttack();
             }
             else
-                pc.TakeDamage(attack.damage, attack.attackType, transform.position, attack.attackPushForce);
+                pc.TakeDamage(attack.damage, attack.attackType, actualPos, attack.attackPushForce);
         }
         yield return new WaitForSeconds(0.25f);
         attacking = false;
