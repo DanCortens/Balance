@@ -63,8 +63,9 @@ public abstract class EnemyAI : MonoBehaviour
         public int attackType;
         public float damage;
         public bool counterable;
+        public string animName;
 
-        public Attack(float windUp, Vector2 attackPos, float rad, int attackType, float damage, bool counterable, float attackPushForce)
+        public Attack(float windUp, Vector2 attackPos, float rad, int attackType, float damage, bool counterable, float attackPushForce, string animName)
         {
             this.windUp = windUp;
             this.attackPos = attackPos;
@@ -73,6 +74,7 @@ public abstract class EnemyAI : MonoBehaviour
             this.damage = damage;
             this.counterable = counterable;
             this.attackPushForce = attackPushForce;
+            this.animName = animName;
         }
     }
 
@@ -91,7 +93,7 @@ public abstract class EnemyAI : MonoBehaviour
         player = GameObject.Find("player").GetComponent<Transform>();
         startPos = transform;
         target = player;
-        anim = GetComponent<Animator>();
+        anim = gameObject.GetComponentInChildren<Animator>();
         playerLayer = LayerMask.GetMask("Player");
         seeker = GetComponent<Seeker>();
         rb2d = GetComponent<Rigidbody2D>();
@@ -187,6 +189,7 @@ public abstract class EnemyAI : MonoBehaviour
         //start timer to make the attack
         StartCoroutine(AttackDamageTimer(meleeAttacks[num]));
         //play the animation
+        anim.Play(meleeAttacks[num].animName);
     }
     protected void RangedCombat()
     {
@@ -216,6 +219,8 @@ public abstract class EnemyAI : MonoBehaviour
         Vector2 dir = ((Vector2)path.vectorPath[currentWaypoint] - rb2d.position).normalized;
         Vector2 force = new Vector2(dir.x * speed * Time.deltaTime, 0f);
 
+        anim.SetBool("walk", true);
+
         //jump if grounded, not a flying enemy, and needs to jump to reach target
         if (!flying && grounded)
         {
@@ -230,10 +235,18 @@ public abstract class EnemyAI : MonoBehaviour
 
         if (hasFacing)
         {
-            if (rb2d.velocity.x > 0.05f)
-                transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-            else if (rb2d.velocity.x < -0.05f)
-                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            if (rb2d.velocity.x > 0)
+            {
+                Vector3 newScale = gameObject.transform.localScale;
+                newScale.x = gameObject.transform.localScale.x;
+                gameObject.transform.localScale = newScale;
+            }
+            else if (rb2d.velocity.x < -0)
+            {
+                Vector3 newScale = gameObject.transform.localScale;
+                newScale.x = -gameObject.transform.localScale.x;
+                gameObject.transform.localScale = newScale;
+            }
         }
     }
 

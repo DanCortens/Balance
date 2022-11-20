@@ -15,7 +15,7 @@ public class TurretLightEnemy : EnemyAI
         hp = 50f;
         flinchThreshold = hp / 2;
 
-        meleeAttacks = new Attack[] {new Attack(1f, new Vector2(0f, 0f), 1.5f, 0, 5f, true, 0.5f)};
+        meleeAttacks = new Attack[] {new Attack(1f, new Vector2(0f, 0f), 1.5f, 0, 5f, true, 0.5f, "")};
         damageMult = new float[] { 1f, 0.5f, 1.5f };
     }
 }
