@@ -16,6 +16,7 @@ public abstract class EnemyAI : MonoBehaviour
     public float jumpNodeReq = 0.8f;
     public float nextWaypointCheck = 1f;
     public LayerMask ignoreLayers;
+    Vector3 localScale;
 
     protected float[] damageMult = new float[3];
     [Header("Combat")]
@@ -80,8 +81,13 @@ public abstract class EnemyAI : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    { 
         CustomStart();
+    }
+
+    private void Awake()
+    {
+        localScale = gameObject.transform.localScale;
     }
     protected void CustomStart()
     {
@@ -237,14 +243,14 @@ public abstract class EnemyAI : MonoBehaviour
         {
             if (rb2d.velocity.x > 0)
             {
-                Vector3 newScale = gameObject.transform.localScale;
-                newScale.x = gameObject.transform.localScale.x;
+                Vector3 newScale = localScale;
+                newScale.x = localScale.x;
                 gameObject.transform.localScale = newScale;
             }
             else if (rb2d.velocity.x < -0)
             {
-                Vector3 newScale = gameObject.transform.localScale;
-                newScale.x = -gameObject.transform.localScale.x;
+                Vector3 newScale = localScale;
+                newScale.x = -localScale.x;
                 gameObject.transform.localScale = newScale;
             }
         }
@@ -311,6 +317,8 @@ public abstract class EnemyAI : MonoBehaviour
     }
     IEnumerator AttackDamageTimer(Attack attack)
     {
+        float animLength = anim.GetCurrentAnimatorClipInfo(0).Length;
+
         mat.color = new Color(1, baseColor.g * 0.4f, baseColor.b * 0.4f, baseColor.a);
         if (!attack.counterable)
             shine.PlayEffect();
@@ -338,7 +346,7 @@ public abstract class EnemyAI : MonoBehaviour
             else
                 pc.TakeDamage(attack.damage, attack.attackType, actualPos, attack.attackPushForce);
         }
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(animLength);
         attacking = false;
     }
     private IEnumerator RangedAttack(GameObject attack)

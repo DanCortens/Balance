@@ -23,7 +23,7 @@ public class BasicLightEnemy : EnemyAI
         hp = 100f;
         flinchThreshold = hp / 2;
 
-        meleeAttacks = new Attack[] { new Attack(1.1f, new Vector2(0f, 0f), 1.5f, 0, 5f, true, 0f, "Charge") };
+        meleeAttacks = new Attack[] { new Attack(1.2f, new Vector2(0f, 0f), 1.5f, 0, 5f, true, 0f, "Charge") };
                                 //new Attack(1.5f,new Vector2(0f,0f), 1.5f, 2, 20f, false, 1.5f, "")};
         damageMult = new float[] { 1f, 1.5f, 0.5f };
     }
