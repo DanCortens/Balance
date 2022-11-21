@@ -33,8 +33,8 @@ Transform:
   m_LocalPosition: {x: 5.11, y: -2.22, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
-  - {fileID: 1896224257108068309}
   - {fileID: 2149174685748445955}
+  - {fileID: 2870642013420078891}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -211,7 +211,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1861533207775824241, guid: 8e4cc2de74979604f832555cbe7f8623, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1861533207775824241, guid: 8e4cc2de74979604f832555cbe7f8623, type: 3}
       propertyPath: m_LocalScale.x
@@ -283,16 +283,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0232984afc272e347a1925d347937be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1412271751595368399
+--- !u!1001 &3323456366982045489
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 2138175803851403781}
     m_Modifications:
+    - target: {fileID: 2519862364461665, guid: 2ebd516fb1eab5446a0a30efa2625d7b, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 705332614962010138, guid: 2ebd516fb1eab5446a0a30efa2625d7b, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 705332614962010138, guid: 2ebd516fb1eab5446a0a30efa2625d7b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -338,14 +342,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: crystalspider_pixel
       objectReference: {fileID: 0}
+    - target: {fileID: 6308453576007895944, guid: 2ebd516fb1eab5446a0a30efa2625d7b, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6330713652090791963, guid: 2ebd516fb1eab5446a0a30efa2625d7b, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6854205659219806933, guid: 2ebd516fb1eab5446a0a30efa2625d7b, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655652822090537640, guid: 2ebd516fb1eab5446a0a30efa2625d7b, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8739518403162361685, guid: 2ebd516fb1eab5446a0a30efa2625d7b, type: 3}
       propertyPath: _lastOpacity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8973768690224166310, guid: 2ebd516fb1eab5446a0a30efa2625d7b, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ebd516fb1eab5446a0a30efa2625d7b, type: 3}
---- !u!4 &1896224257108068309 stripped
+--- !u!4 &2870642013420078891 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 705332614962010138, guid: 2ebd516fb1eab5446a0a30efa2625d7b, type: 3}
-  m_PrefabInstance: {fileID: 1412271751595368399}
+  m_PrefabInstance: {fileID: 3323456366982045489}
   m_PrefabAsset: {fileID: 0}

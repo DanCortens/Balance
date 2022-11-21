@@ -25,8 +25,29 @@
 			"Id": "Param5",
 			"GroupId": "",
 			"Name": "HindLegL"
+		},
+		{
+			"Id": "Param6",
+			"GroupId": "",
+			"Name": "BodyY"
+		},
+		{
+			"Id": "Param7",
+			"GroupId": "",
+			"Name": "BodyX"
+		},
+		{
+			"Id": "Param8",
+			"GroupId": "",
+			"Name": "bodyangle"
 		}
 	],
 	"ParameterGroups": [],
-	"Parts": []
+	"Parts": [],
+	"CombinedParameters": [
+		[
+			"Param6",
+			"Param7"
+		]
+	]
 }
