@@ -514,7 +514,7 @@ public class PlayerController : LivingEntity
         FindObjectOfType<CameraCont>().StartShake(pushDir, pushForce * 0.2f);
     }
 
-        public bool IsCountering()
+    public bool IsCountering()
     {
         return countering;
     }

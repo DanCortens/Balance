@@ -6,8 +6,7 @@ using Pathfinding;
 public abstract class EnemyAI : MonoBehaviour
 {
     //temp hack to show attacking
-    protected SpriteRenderer mat;
-    protected Color baseColor;
+    public GameObject attackEffect;
     [Header("Pathfinding")]
     public float aggroRange = 10f;
     public float speed = 400f;
@@ -31,6 +30,7 @@ public abstract class EnemyAI : MonoBehaviour
     protected bool chaser;
     protected bool turret;
     protected bool hasFacing;
+    protected int facing;
     protected int currentWaypoint;
 
     protected bool dying;
@@ -91,8 +91,7 @@ public abstract class EnemyAI : MonoBehaviour
     }
     protected void CustomStart()
     {
-        mat = gameObject.GetComponent<SpriteRenderer>();
-        baseColor = mat.color;
+        facing = 1;
         dying = false;
         attacking = false;
         flinching = false;
@@ -133,15 +132,27 @@ public abstract class EnemyAI : MonoBehaviour
         damageMult = new float[] { 1f, 1f, 1f };
     }*/
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        CustomFixedUpdate();
-    }
-    protected void CustomFixedUpdate()
+    protected void FixedUpdate()
     {
         if (!flinching && !dying)
         {
+            if (hasFacing)
+            {
+                if (rb2d.velocity.x > 0 || player.transform.position.x > transform.position.x)
+                {
+                    facing = 1;
+                    Vector3 newScale = localScale;
+                    newScale.x = localScale.x;
+                    gameObject.transform.localScale = newScale;
+                }
+                else if (rb2d.velocity.x < -0 || player.transform.position.x < transform.position.x)
+                {
+                    facing = -1;
+                    Vector3 newScale = localScale;
+                    newScale.x = -localScale.x;
+                    gameObject.transform.localScale = newScale;
+                }
+            }
             //isangry checks aggro distance, chaser is true when melee only
             if (IsAngry() && chaser)
             {
@@ -160,7 +171,7 @@ public abstract class EnemyAI : MonoBehaviour
                 {
                     Vector2 dir = ((Vector2)target.position - rb2d.position).normalized;
                     RaycastHit2D hit = Physics2D.Raycast(rb2d.position, dir, range, ~ignoreLayers);
-                    Debug.Log(hit.collider.gameObject.name);
+                    
                     if (hit.collider.gameObject.name == "player")
                     {//no obstacles between enemy and player, shoot
                         if (!attacking)
@@ -192,16 +203,19 @@ public abstract class EnemyAI : MonoBehaviour
         //pick a random attack
         System.Random random = new System.Random();
         int num = random.Next(0, meleeAttacks.Length);
+        //play the animation
+        anim.SetTrigger(meleeAttacks[num].animName);
         //start timer to make the attack
         StartCoroutine(AttackDamageTimer(meleeAttacks[num]));
-        //play the animation
-        anim.Play(meleeAttacks[num].animName);
+        
     }
     protected void RangedCombat()
     {
         attacking = true;
         System.Random random = new System.Random();
         int num = random.Next(0, rangedAttacks.Length);
+        //play the animation
+        anim.SetTrigger("shoot");
         StartCoroutine(RangedAttack(rangedAttacks[num]));
     }
     protected void UpdatePath()
@@ -239,21 +253,7 @@ public abstract class EnemyAI : MonoBehaviour
         if (dist < nextWaypointCheck)
             currentWaypoint++;
 
-        if (hasFacing)
-        {
-            if (rb2d.velocity.x > 0)
-            {
-                Vector3 newScale = localScale;
-                newScale.x = localScale.x;
-                gameObject.transform.localScale = newScale;
-            }
-            else if (rb2d.velocity.x < -0)
-            {
-                Vector3 newScale = localScale;
-                newScale.x = -localScale.x;
-                gameObject.transform.localScale = newScale;
-            }
-        }
+        
     }
 
     protected void OnPathComplete(Path p)
@@ -302,7 +302,7 @@ public abstract class EnemyAI : MonoBehaviour
     {
         dying = true;
         //play death animation
-        //anim.Play("death");
+        anim.SetTrigger("die");
         //destroy game object
         if (!room.cleared)
             room.EnemyKilled();
@@ -312,6 +312,8 @@ public abstract class EnemyAI : MonoBehaviour
 
     protected IEnumerator DeleteMe()
     {
+        yield return new WaitForSeconds(0.2f);
+        deathAnimTime = anim.GetCurrentAnimatorClipInfo(0).Length;
         yield return new WaitForSeconds(deathAnimTime);
         Destroy(this.gameObject);
     }
@@ -319,19 +321,19 @@ public abstract class EnemyAI : MonoBehaviour
     {
         float animLength = anim.GetCurrentAnimatorClipInfo(0).Length;
 
-        mat.color = new Color(1, baseColor.g * 0.4f, baseColor.b * 0.4f, baseColor.a);
         if (!attack.counterable)
             shine.PlayEffect();
         
         yield return new WaitForSeconds(attack.windUp);
-        mat.color = new Color(1, 0, 0, baseColor.a);
         //windUp is the amount of time between the start of the animation and when it should deal damage
-        yield return new WaitForSeconds(0.1f);
-        mat.color = baseColor;
-        
-        
-        Vector2 actualPos = (Vector2)transform.position + attack.attackPos;
-        
+
+        Vector2 offset = attack.attackPos;
+        if (hasFacing)
+            offset.x *= facing;
+        Vector2 actualPos = (Vector2)transform.position + offset;
+
+        GameObject effect = Instantiate(attackEffect, actualPos, Quaternion.identity);
+        effect.GetComponent<AttackEffectScript>().InitEffect(attack.attackType, attack.rad);
         //check for player
         Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, attack.rad, playerLayer);
         foreach (Collider2D hit in hits)
@@ -351,35 +353,21 @@ public abstract class EnemyAI : MonoBehaviour
     }
     private IEnumerator RangedAttack(GameObject attack)
     {
-        mat.color = new Color(baseColor.r * 0.4f, baseColor.g * 0.4f, 1f, baseColor.a);
-        yield return new WaitForSeconds(2f);
-        mat.color = baseColor;
-        Vector2 dir = ((Vector2)target.position - rb2d.position).normalized;
+        float animLength = anim.GetCurrentAnimatorClipInfo(0).Length;
+        yield return new WaitForSeconds(animLength);
+        Vector2 dir = (target.position - transform.position).normalized;
         GameObject p = Instantiate(attack, transform.position, Quaternion.identity);
         p.GetComponent<Projectile>().Shoot(dir);
-        yield return new WaitForSeconds(0.25f);
         attacking = false;
         
-    }
-    private IEnumerator CounterFlash()
-    {
-        mat.color = new Color(0.9f, 0.9f, 0.9f, baseColor.a);
-        yield return new WaitForSeconds(0.1f);
-        mat.color = baseColor;
-        yield return new WaitForSeconds(0.1f);
-        mat.color = new Color(0.9f, 0.9f, 0.9f, baseColor.a);
-        yield return new WaitForSeconds(0.1f);
-        mat.color = baseColor;
-
     }
 
     private IEnumerator Flinching(float wait)
     {
         flinchCheck = 0f;
         flinching = true;
-        mat.color = new Color(0.2f, 0.2f, 0.2f, baseColor.a);
+        anim.SetTrigger("flinch");
         yield return new WaitForSeconds(wait);
-        mat.color = baseColor;
         flinching = false;
     }
 }

@@ -15,10 +15,7 @@ public class BasicNeutEnemy : EnemyAI
        FindObjectOfType<AudioManager>().Play("humandeath");
     } */
 
-    void FixedUpdate()
-    {
-        CustomFixedUpdate();
-    }
+    
     override protected void EnemySpecificStart()
     {
         flying = false;
@@ -31,7 +28,9 @@ public class BasicNeutEnemy : EnemyAI
         hp = 100f;
         flinchThreshold = hp / 2;
 
-        meleeAttacks = new Attack[] {};
+        meleeAttacks = new Attack[] { 
+            new Attack(1f, new Vector2(0.5f, 0f), 1.5f, 0, 10f, true, 0.25f, "attack1"),
+            new Attack(1f, new Vector2(0.5f, 0f), 1.5f, 0, 20f, false, 0.5f, "attack2")};
         damageMult = new float[] { 1f, 1f, 1f };
     }
 
