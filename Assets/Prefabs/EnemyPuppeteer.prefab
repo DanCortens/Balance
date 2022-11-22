@@ -45,8 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   neutEnemyPrefabs:
   - {fileID: 3741025888455305921, guid: ab785d3b043be584a9cb3258ee1d2e0e, type: 3}
+  - {fileID: 988008606625306915, guid: e5af96cb50806c54eb5b2551007cc63e, type: 3}
   darkEnemyPrefabs:
+  - {fileID: 8741799056856845751, guid: 42a34c70646172a4dbee36c38f7f8a6e, type: 3}
   - {fileID: 8741799056856845751, guid: 42a34c70646172a4dbee36c38f7f8a6e, type: 3}
   lightEnemyPrefabs:
   - {fileID: 2138175803851403786, guid: e138c30296fef21429b755a12a51d024, type: 3}
-  worldBalance: 0
+  - {fileID: 2138175803851403786, guid: e138c30296fef21429b755a12a51d024, type: 3}
