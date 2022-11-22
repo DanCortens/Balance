@@ -8,10 +8,7 @@ public class BasicDarkEnemy : EnemyAI
     {
         base.CustomStart();
     }
-    void FixedUpdate()
-    {
-        CustomFixedUpdate();
-    }
+
     override protected void EnemySpecificStart()
     {
         flying = false;

@@ -202,7 +202,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 50, y: -85}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 100, y: 25}
   m_Pivot: {x: -0.00000040233135, y: 0.4999999}
 --- !u!114 &1236134796
 MonoBehaviour:
@@ -382,7 +382,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 50, y: -50}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 100, y: 25}
   m_Pivot: {x: -0.00000040233135, y: 0.4999999}
 --- !u!114 &3757490120463958603
 MonoBehaviour:
@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 3757490120992825615}
   - component: {fileID: 3757490120992825614}
   - component: {fileID: 3757490120992825617}
-  - component: {fileID: 3757490120992825613}
+  - component: {fileID: 1010061966554060908}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -612,7 +612,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3757490120992825613
+--- !u!114 &1010061966554060908
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -621,10 +621,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3757490120992825616}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8395b03dac73b064eaa6ebc9e2011c9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e2325a192e3b024c954ab4c195b06e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpWidthMax: 300
+  hpWidthMax: 100
   hpHeightMax: 25
   balanceWidthMax: 100
   balanceHeightMax: 25

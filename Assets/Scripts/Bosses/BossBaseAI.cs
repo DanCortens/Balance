@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class BossBaseAI : MonoBehaviour
 {
+    public GameObject attackEffectVisualizer;
     public event System.Action onHPChanged;
 
     [Header("Health")]
@@ -21,6 +22,7 @@ public abstract class BossBaseAI : MonoBehaviour
         }
     }
     public bool active;
+    [SerializeField] protected int facing; //1 for right, -1 for left
     [SerializeField] protected float phaseTrigger;
     [SerializeField] protected float phaseProg;
     [SerializeField] protected int phase;
@@ -28,6 +30,7 @@ public abstract class BossBaseAI : MonoBehaviour
     [Header("Combat")]
     [SerializeField] protected BossAttackChain[] attacks;
     [SerializeField] protected float[] damageMult;
+    [SerializeField] protected float touchDamage;
     [SerializeField] protected bool attacking;
     [SerializeField] protected bool stunned;
     [SerializeField] protected bool dying;
@@ -111,22 +114,40 @@ public abstract class BossBaseAI : MonoBehaviour
         yield return new WaitForSeconds(time);
         stunned = false;
     }
-    protected abstract void RangedAttack(BossAttack currMove);
-    protected abstract void MeleeAttack(BossAttack currMove);
-    /*
+    protected void RangedAttack(BossAttack currMove)
     {
-        Vector2 offset = currMove.attackOffset;
+        Vector2 dir = (player.transform.position - transform.position).normalized;
+        GameObject p = Instantiate(currMove.projectile, transform.position, Quaternion.identity);
+        p.GetComponent<Projectile>().Shoot(dir);
+    }
+    protected void MeleeAttack(BossAttack currMove)
+    {
+        Vector2 offset = new Vector2(currMove.attackOffset.x * facing, currMove.attackOffset.y);
         Vector2 attackPos = (Vector2)transform.position + offset;
         Collider2D[] hits = Physics2D.OverlapCircleAll(attackPos, currMove.radius, playerLayer);
+        //TESTING, GET RID OF THIS//
+        GameObject effect = Instantiate(attackEffectVisualizer, attackPos, Quaternion.identity);
+        effect.GetComponent<AttackEffectScript>().InitEffect(currMove.type, currMove.radius);
         foreach (Collider2D hit in hits)
         {
             PlayerController pc = hit.gameObject.GetComponent<PlayerController>();
             if (pc.IsCountering() && attacks[currAttack].counterable)
+            {
                 Counter();
+                pc.CounterAttack();
+            }
+
             else
                 pc.TakeDamage(currMove.damage, currMove.type, attackPos, 2f);
         }
-    }*/
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "player")
+        {
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage(touchDamage, 0, transform.position, 2f);
+        }
+    }
     protected IEnumerator TriggerAttack()
     {
         attacking = true;

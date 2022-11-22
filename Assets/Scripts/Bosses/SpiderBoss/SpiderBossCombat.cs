@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class SpiderBossCombat : BossBaseAI
 {
-    
-    [SerializeField] private int facing; //1 for right, -1 for left
-    
-    public GameObject attackEffectVisualizer;
     public Vector2[] anchors;
     public Vector2 currAnchor;
     public Vector2 xMinMax;
@@ -18,6 +14,7 @@ public class SpiderBossCombat : BossBaseAI
     protected override void InitBossVars()
     {
         hp = 1000f;
+        touchDamage = 10f;
         totalPhases = 2;
         phaseTrigger = 500f;
         damageMult = new float[] { 1f, 1.25f, 0.75f };
@@ -103,33 +100,6 @@ public class SpiderBossCombat : BossBaseAI
         bossRoom.EnemyKilled();
     }
 
-    protected override void MeleeAttack(BossAttack currMove)
-    {
-        Vector2 offset = new Vector2(currMove.attackOffset.x * facing, currMove.attackOffset.y);
-        Vector2 attackPos = (Vector2)transform.position + offset;
-        Collider2D[] hits = Physics2D.OverlapCircleAll(attackPos, currMove.radius, playerLayer);
-        //TESTING, GET RID OF THIS//
-        GameObject effect = Instantiate(attackEffectVisualizer, attackPos, Quaternion.identity);
-        effect.GetComponent<AttackEffectScript>().InitEffect(currMove.type, currMove.radius);
-        foreach (Collider2D hit in hits)
-        {
-            PlayerController pc = hit.gameObject.GetComponent<PlayerController>();
-            if (pc.IsCountering() && attacks[currAttack].counterable)
-            {
-                Counter();
-                pc.CounterAttack();
-            }
-                
-            else
-                pc.TakeDamage(currMove.damage, currMove.type, attackPos, 2f);
-        }
-    }
-    protected override void RangedAttack(BossAttack currMove)
-    {
-        Vector2 dir = (player.transform.position - transform.position).normalized;
-        GameObject p = Instantiate(currMove.projectile, transform.position, Quaternion.identity);
-        p.GetComponent<Projectile>().Shoot(dir);
-    }
     protected void TravelToAnchor()
     {
         transform.position = Vector2.Lerp(anchorStartPos, currAnchor, currTime / duration);

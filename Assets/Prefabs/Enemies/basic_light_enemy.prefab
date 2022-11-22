@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2138175803851403781}
   - component: {fileID: 2138175803851403782}
   - component: {fileID: 2138175803851403784}
-  - component: {fileID: 2138175803851403780}
   - component: {fileID: 2138175803851403779}
   - component: {fileID: 5823169819384439400}
   - component: {fileID: 4801167943400734125}
@@ -110,25 +109,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!95 &2138175803851403780
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2138175803851403786}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &2138175803851403779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6936ef8b94942947a6a1926e831bf12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackEffect: {fileID: 7715566787090560569, guid: 4b3e7cb2abcbd4841b68de17b5dc3cb6, type: 3}
   aggroRange: 10
   speed: 800
   jump: 0.3
