@@ -346,7 +346,7 @@ public abstract class EnemyAI : MonoBehaviour
             else
                 pc.TakeDamage(attack.damage, attack.attackType, actualPos, attack.attackPushForce);
         }
-        yield return new WaitForSeconds(animLength);
+        yield return new WaitForSeconds(animLength - (attack.windUp + 0.1f));
         attacking = false;
     }
     private IEnumerator RangedAttack(GameObject attack)
