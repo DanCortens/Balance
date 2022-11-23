@@ -33,16 +33,6 @@ public class MainMenuSoundScript : MonoBehaviour
 
     void Update()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-        else
-        {
-            instance = this;
-        }
-        DontDestroyOnLoad(this.gameObject);
         
     }
 }
