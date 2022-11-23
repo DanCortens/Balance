@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Door : Interactable
 {
-    public GameObject obstacle;
-    private bool closed;
+    private BoxCollider2D obstacle;
     private bool locked;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
-        closed = true;
+        obstacle = transform.GetChild(0).GetComponent<BoxCollider2D>();
+        anim = GetComponentInChildren<Animator>();
+        anim.SetBool("open", false);
         if (gameObject.name.Contains("locked"))
         {
             if (PlayerPrefs.HasKey(gameObject.name))
@@ -34,10 +36,10 @@ public class Door : Interactable
 
     public override void Interact()
     {
-        if (closed && !locked)
+        if (!anim.GetBool("open") && !locked)
         {
-            closed = false;
-            obstacle.SetActive(false);
+            anim.SetBool("open", true);
+            obstacle.enabled = false;
             Debug.Log("Opened");
             //play open animation
             FindObjectOfType<AudioManager>().Play("door_Open");
@@ -50,8 +52,8 @@ public class Door : Interactable
 
     private void Close()
     {
-        closed = true;
-        obstacle.SetActive(true);
+        anim.SetBool("open", false);
+        obstacle.enabled = true;
         Debug.Log("Closed");
         //play closed animation
         FindObjectOfType<AudioManager>().Play("door_Close");
@@ -63,7 +65,7 @@ public class Door : Interactable
         base.OnTriggerExit2D(collision);
         if (collision.gameObject.name == "player")
         {
-            if (!closed)
+            if (anim.GetBool("open"))
                 Close();
         }
     }
