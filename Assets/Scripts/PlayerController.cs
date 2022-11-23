@@ -23,7 +23,7 @@ public class PlayerController : LivingEntity
     private float facing;
 
     //private variables
-
+    private Vector3 localScale;
     private bool startJump;
     private bool stoppedJump;
     private bool canDoubleJ;
@@ -87,6 +87,7 @@ public class PlayerController : LivingEntity
         anim = GetComponentInChildren<Animator>();
         attStack = new AttStackScript();
         rb2d = GetComponent<Rigidbody2D>();
+        localScale = gameObject.transform.localScale;
     }
     void Start(){
         input = GetComponent<PlayerInput>();
@@ -295,9 +296,6 @@ public class PlayerController : LivingEntity
 
     private void Update()
     {
-        /* austin: In general, this is an easy but unoptimized way of checking for player character death. We should make checks every time the player takes damage or changes HP via events
-         * because constantly polling for things like this every frame has the potential to fuck framerates on lower spec devices. 
-         */
 
         //if (true) //check for paused game state{}
         //else if (true) //check for cinematic game state{}
@@ -319,7 +317,7 @@ public class PlayerController : LivingEntity
             //if the player is not in an attack or damage animation, can make a new attack
             if (!isAttacking && !takingDamage)
             {
-                anim.SetBool("canAttack", true);
+                
             }
         }
         else
@@ -443,8 +441,8 @@ public class PlayerController : LivingEntity
             //facing right
             /*attacks.transform.position = new Vector2(transform.position.x + 0.75f, attacks.transform.position.y);
             aoeAttack.transform.position = new Vector2(transform.position.x, aoeAttack.transform.position.y);*/
-            Vector3 newScale = gameObject.transform.localScale;
-            newScale.x = 0.5f;
+            Vector3 newScale = localScale;
+            newScale.x = localScale.x;
             gameObject.transform.localScale = newScale;
         }
         else if (horzM < 0f)
@@ -452,8 +450,8 @@ public class PlayerController : LivingEntity
             //facing left
             /*attacks.position = new Vector2(transform.position.x - 0.75f, attacks.transform.position.y);
             aoeAttack.position = new Vector2(transform.position.x, aoeAttack.transform.position.y);*/
-            Vector3 newScale = gameObject.transform.localScale;
-            newScale.x = -0.5f;
+            Vector3 newScale = localScale;
+            newScale.x = -localScale.x;
             gameObject.transform.localScale = newScale;
         }
 
@@ -463,6 +461,7 @@ public class PlayerController : LivingEntity
     private void Combat(string result)
     {
         isAttacking = true;
+        anim.SetBool("canAttack", false);
         Debug.Log(result);
         if (anim.GetBool("grounded"))
         {
@@ -472,7 +471,6 @@ public class PlayerController : LivingEntity
             }
             else
             {
-                
                 StartCoroutine(AttackDamageTimer(0, groundAttacks[result]));
                
                 StartCoroutine(NotAttackingTimer(groundAttacks[result].animTime));
@@ -558,6 +556,7 @@ public class PlayerController : LivingEntity
     {
 
         yield return new WaitForSeconds(wait);
+        anim.SetBool("canAttack", true);
         isAttacking = false;
     }
     private IEnumerator Flinching()
@@ -565,6 +564,7 @@ public class PlayerController : LivingEntity
         isAttacking = false;
         yield return new WaitForSeconds(0.25f * (1f - PlayerStats.flinchMod));
         takingDamage = false;
+        anim.SetBool("canAttack", true);
     }
     private IEnumerator Countering()
     {
