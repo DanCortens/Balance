@@ -200,13 +200,13 @@ public abstract class EnemyAI : MonoBehaviour
     protected void MeleeCombat()
     {
         if (attacking) return;
-        anim.SetBool("walk", true);
+        anim.SetBool("walk", false);
         attacking = true;
         //pick a random attack
         System.Random random = new System.Random();
         int num = random.Next(0, meleeAttacks.Length);
         //play the animation
-        anim.Play(meleeAttacks[num].animName);
+        anim.SetTrigger(meleeAttacks[num].animName);
         //start timer to make the attack
         StartCoroutine(AttackDamageTimer(meleeAttacks[num]));
         

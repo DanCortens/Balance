@@ -8,9 +8,14 @@ public class LanternPedestal : Interactable
     public GameObject obstacle;
     public GameObject soulsReleasedEffect;
     public Animator medalAnim;
+    public GameObject localLant;
+    private GameObject playerLant;
+
     public override void Interact()
     {
         PlayerStats.hasLantern = true;
+        localLant.SetActive(false);
+        playerLant.SetActive(true);
         canInteract = false;
         FindObjectOfType<InteractUI>().FadeOut();
         Vector2 offset = new Vector2(2f, 0f);
@@ -28,6 +33,8 @@ public class LanternPedestal : Interactable
     // Start is called before the first frame update
     void Start()
     {
+        playerLant = GameObject.Find("playerLantern");
+        playerLant.SetActive(false);
         cc = GameObject.FindObjectOfType<CinematicController>();
     }
     private IEnumerator Crumble()
