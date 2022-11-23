@@ -199,12 +199,14 @@ public abstract class EnemyAI : MonoBehaviour
 
     protected void MeleeCombat()
     {
+        if (attacking) return;
+        anim.SetBool("walk", true);
         attacking = true;
         //pick a random attack
         System.Random random = new System.Random();
         int num = random.Next(0, meleeAttacks.Length);
         //play the animation
-        anim.SetTrigger(meleeAttacks[num].animName);
+        anim.Play(meleeAttacks[num].animName);
         //start timer to make the attack
         StartCoroutine(AttackDamageTimer(meleeAttacks[num]));
         
@@ -348,7 +350,7 @@ public abstract class EnemyAI : MonoBehaviour
             else
                 pc.TakeDamage(attack.damage, attack.attackType, actualPos, attack.attackPushForce);
         }
-        yield return new WaitForSeconds(animLength - (attack.windUp + 0.1f));
+        yield return new WaitForSeconds(animLength);
         attacking = false;
     }
     private IEnumerator RangedAttack(GameObject attack)
