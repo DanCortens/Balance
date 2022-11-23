@@ -39,7 +39,6 @@ public class HealthUpgrade : Interactable
 
     private IEnumerator Pickup()
     {
-        FindObjectOfType<AudioManager>().Play("healthpickup");
         GameObject newEffect = Instantiate(effect,transform.position,Quaternion.identity);
         yield return new WaitForSeconds(0.2f);
         Destroy(gameObject);
