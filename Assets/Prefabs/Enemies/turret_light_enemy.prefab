@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f19a7840a3f0940adc68df2b6aa51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackEffect: {fileID: 0}
   aggroRange: 10
   speed: 400
   jump: 0.3
@@ -201,6 +202,7 @@ MonoBehaviour:
   range: 8
   rangedAttacks:
   - {fileID: 3669786489465529029, guid: 734c86b8d6230f44fa4c507e54c09d8c, type: 3}
+  room: {fileID: 0}
 --- !u!1001 &8826702616955307296
 PrefabInstance:
   m_ObjectHideFlags: 0

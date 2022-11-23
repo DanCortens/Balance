@@ -184,18 +184,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbe1670c545bd694ab511b85b4404564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackEffect: {fileID: 0}
   aggroRange: 10
   speed: 800
   jump: 0.3
   jumpOffset: 0.1
   jumpNodeReq: 0.8
   nextWaypointCheck: 1
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
   hp: 0
-  projectile: {fileID: 0}
   shine: {fileID: 886620315240103676}
   attacking: 0
   counterable: 0
   flinching: 0
+  range: 0
+  rangedAttacks: []
+  room: {fileID: 0}
 --- !u!1001 &1556159613216601999
 PrefabInstance:
   m_ObjectHideFlags: 0

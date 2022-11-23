@@ -34,7 +34,7 @@ Transform:
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 3829245065605062338}
-  - {fileID: 3871054102878849037}
+  - {fileID: 7833422458440638821}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -57,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -349,6 +349,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7833422460469659139, guid: 545f58392141a0e4fbb34a62d11b1f50, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7943657361100059865, guid: 545f58392141a0e4fbb34a62d11b1f50, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -367,9 +371,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 545f58392141a0e4fbb34a62d11b1f50, type: 3}
---- !u!4 &3871054102878849037 stripped
+--- !u!4 &7833422458440638821 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 3871054101686923115, guid: 545f58392141a0e4fbb34a62d11b1f50, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7833422460469659139, guid: 545f58392141a0e4fbb34a62d11b1f50, type: 3}
   m_PrefabInstance: {fileID: 2033690470}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3238449388864722867

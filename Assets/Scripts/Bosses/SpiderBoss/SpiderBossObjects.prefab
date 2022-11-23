@@ -96,7 +96,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -156,7 +156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625e1561aed276e4a8245bbee412e380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackEffectVisualizer: {fileID: 7715566787090560569, guid: 4b3e7cb2abcbd4841b68de17b5dc3cb6, type: 3}
   active: 0
+  facing: 1
   phaseTrigger: 0
   phaseProg: 0
   phase: 0
@@ -171,14 +173,14 @@ MonoBehaviour:
   - {fileID: 1796182205082783450}
   - {fileID: 2329858836148920623}
   damageMult: []
+  touchDamage: 0
   attacking: 0
   stunned: 0
   dying: 0
   deathAnimBool: 
   currAttack: 0
   splineAnchor: {fileID: 1128094808250797127}
-  facing: 1
-  attackEffectVisualizer: {fileID: 7715566787090560569, guid: 4b3e7cb2abcbd4841b68de17b5dc3cb6, type: 3}
+  bossRoom: {fileID: 0}
   anchors:
   - {x: 171.5, y: 12}
   - {x: 183, y: 12}
