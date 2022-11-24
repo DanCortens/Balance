@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403ae2dd693bb1d4b924f6b8d206b053, type: 3}
   m_Name: CrystalSpider.fadeMotionList
   m_EditorClassIdentifier: 
-  MotionInstanceIds: dec3ffff86c2ffff7ec2ffff
+  MotionInstanceIds: dec3ffff86c2ffff7ec2ffff8671ffff
   CubismFadeMotionObjects:
   - {fileID: 11400000, guid: 70f438d6b29d8634cb1cd9ebca373be9, type: 2}
   - {fileID: 11400000, guid: 681f165582aac2343bef87778effe806, type: 2}
   - {fileID: 11400000, guid: 77ab0bd68300a30488d1fb75de3cda94, type: 2}
+  - {fileID: 11400000, guid: 28105ccf8681d2f4bb58640280354ec7, type: 2}

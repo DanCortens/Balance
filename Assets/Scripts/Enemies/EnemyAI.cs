@@ -321,7 +321,8 @@ public abstract class EnemyAI : MonoBehaviour
     }
     IEnumerator AttackDamageTimer(Attack attack)
     {
-        float animLength = anim.GetCurrentAnimatorClipInfo(0).Length;
+        float animSpeed = anim.speed;
+        float animLength = anim.GetCurrentAnimatorClipInfo(0).Length / speed;
 
         if (!attack.counterable)
             shine.PlayEffect();

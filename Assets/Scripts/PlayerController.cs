@@ -148,11 +148,11 @@ public class PlayerController : LivingEntity
     {
         if (value.isPressed && !isAttacking)
         {
+            anim.SetTrigger("jump");
             //Calls jump audio
             if ((anim.GetBool("grounded") || coyote < COYO_MAX))
             {
                 FindObjectOfType<AudioManager>().Play("Jump");
-                anim.SetTrigger("jump");
                 coyote = COYO_MAX;
                 startJump = true;
                 stoppedJump = false;
@@ -471,15 +471,18 @@ public class PlayerController : LivingEntity
             }
             else
             {
+                //play animation
+                anim.Play(groundAttacks[result].animName);
+                float animTime = anim.GetCurrentAnimatorClipInfo(0).Length / anim.speed;
+                //couroutines
                 StartCoroutine(AttackDamageTimer(0, groundAttacks[result]));
-               
-                StartCoroutine(NotAttackingTimer(groundAttacks[result].animTime));
+                StartCoroutine(NotAttackingTimer(animTime));
+                //StartCoroutine(NotAttackingTimer(groundAttacks[result].animTime));
                 float change = (usingDark) ? -groundAttacks[result].balChange * (darkAff + PlayerStats.damageDoneMod[1]) 
                                            : groundAttacks[result].balChange * (lightAff + PlayerStats.damageDoneMod[2]);
                 puppeteer.worldBalance = Mathf.Clamp(puppeteer.worldBalance + change, -100f, 100f);
                 string animName = (groundAttacks[result].attackType[0] == 0) ? result : 
                                   (usingDark) ? result+ "Dark" : result+ "Light";
-                anim.SetTrigger(animName);
             }
         }
         else
