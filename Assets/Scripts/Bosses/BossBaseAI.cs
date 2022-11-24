@@ -127,7 +127,7 @@ public abstract class BossBaseAI : MonoBehaviour
         Collider2D[] hits = Physics2D.OverlapCircleAll(attackPos, currMove.radius, playerLayer);
         //TESTING, GET RID OF THIS//
         GameObject effect = Instantiate(attackEffectVisualizer, attackPos, Quaternion.identity);
-        effect.GetComponent<AttackEffectScript>().InitEffect(currMove.type, currMove.radius);
+        effect.GetComponent<AttackEffectScript>().InitEffect(currMove.type, currMove.radius, facing);
         foreach (Collider2D hit in hits)
         {
             PlayerController pc = hit.gameObject.GetComponent<PlayerController>();

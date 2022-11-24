@@ -150,10 +150,10 @@ public class PlayerController : LivingEntity
     {
         if (value.isPressed && !isAttacking)
         {
-            anim.SetTrigger("jump");
             //Calls jump audio
             if ((anim.GetBool("grounded") || coyote < COYO_MAX))
             {
+                anim.SetTrigger("jump");
                 FindObjectOfType<AudioManager>().Play("Jump");
                 coyote = COYO_MAX;
                 startJump = true;
@@ -163,6 +163,7 @@ public class PlayerController : LivingEntity
             }
             else if (wallGrab || wallCoyote < COYO_MAX)
             {
+                anim.SetTrigger("jump");
                 FindObjectOfType<AudioManager>().Play("Jump");
                 rb2d.velocity = new Vector2(Mathf.Abs(horzM) * wallDir * SPEED, JUMP_SPD * 1.4f);
                 wallGrab = false;
@@ -474,8 +475,8 @@ public class PlayerController : LivingEntity
             else
             {
                 //play animation
-                anim.Play(groundAttacks[result].animName);
-                float animTime = anim.GetCurrentAnimatorClipInfo(0).Length / anim.speed;
+                anim.SetTrigger(groundAttacks[result].animName);
+                float animTime = 0.3f;
                 //couroutines
                 StartCoroutine(AttackDamageTimer(0, groundAttacks[result]));
                 StartCoroutine(NotAttackingTimer(animTime));
@@ -523,18 +524,6 @@ public class PlayerController : LivingEntity
     }
 
 
-
-    private void OnDrawGizmos()
-    {
-        //debugging gizmos; remove from final build?
-        Gizmos.DrawSphere(groundCheck.position, VERT_COLL_DIST);
-        Gizmos.DrawLine(head.position, head.position + (transform.right * HORIZ_COLL_DIST));
-        Gizmos.DrawWireSphere(sAttack.position, SMALL_ATTACK_RAD);
-        Gizmos.DrawWireSphere(lAttack.position, LARGE_ATTACK_RAD);
-        Gizmos.DrawWireSphere(aoeAttack.position, AOE_ATTACK_RAD);
-        
-    }
-
     private IEnumerator AttackDamageTimer(int currHit, PlayerAttacks.Attack attack)
     {
         //windUp is the amount of time between the start of the animation and when it should deal damage
@@ -544,7 +533,7 @@ public class PlayerController : LivingEntity
         Vector2 actualPos = transform.position;
         actualPos += new Vector2(attack.attackPos.x * facing, attack.attackPos.y);
         GameObject newEffect = Instantiate(attackEffect, actualPos, Quaternion.identity);
-        newEffect.GetComponent<AttackEffectScript>().InitEffect(attack.GetType(currHit,usingDark), attack.rad);
+        newEffect.GetComponent<AttackEffectScript>().InitEffect(attack.GetType(currHit,usingDark), attack.rad, facing);
         Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, attack.rad, enemyLayer);
         foreach (Collider2D hit in hits)
         {

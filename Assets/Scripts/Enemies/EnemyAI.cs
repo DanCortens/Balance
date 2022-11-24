@@ -336,7 +336,7 @@ public abstract class EnemyAI : MonoBehaviour
         Vector2 actualPos = (Vector2)transform.position + offset;
 
         GameObject effect = Instantiate(attackEffect, actualPos, Quaternion.identity);
-        effect.GetComponent<AttackEffectScript>().InitEffect(attack.attackType, attack.rad);
+        effect.GetComponent<AttackEffectScript>().InitEffect(attack.attackType, attack.rad, facing);
         //check for player
         Collider2D[] hits = Physics2D.OverlapCircleAll(actualPos, attack.rad, playerLayer);
         foreach (Collider2D hit in hits)
