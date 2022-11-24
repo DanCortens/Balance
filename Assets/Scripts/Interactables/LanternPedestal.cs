@@ -19,6 +19,8 @@ public class LanternPedestal : Interactable
         canInteract = false;
         FindObjectOfType<InteractUI>().FadeOut();
         Vector2 offset = new Vector2(2f, 0f);
+
+        
         cc.StartCinematic(new Vector2[] { (Vector2)transform.position,
                                         ((Vector2)transform.position + offset),
                                         ((Vector2)transform.position - offset),
@@ -43,6 +45,8 @@ public class LanternPedestal : Interactable
         medalAnim.SetTrigger("crack");
         yield return new WaitForSeconds(0.5f);
         GameObject effect = Instantiate(soulsReleasedEffect, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(1.5f);
+        FindObjectOfType<AudioManager>().Play("banshee");
         Destroy(transform.Find("medallion").gameObject);
         yield return new WaitForSeconds(4f);
         StartDestruction();
