@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 562680299}
   - component: {fileID: 8109296105719990386}
   - component: {fileID: 7801540651413712710}
+  - component: {fileID: 1065308219}
   m_Layer: 7
   m_Name: player
   m_TagString: Untagged
@@ -592,8 +593,27 @@ MonoBehaviour:
   playerCont: {fileID: 3400479936570015892}
   hingeObj: {fileID: 266598375893971932}
   hingeRb: {fileID: 6653942343209673148}
-  hinge: {fileID: 0}
+  hinge: {fileID: 1065308219}
   chainRender: {fileID: 8109296105719990386}
+--- !u!232 &1065308219
+DistanceJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3400479936570015913}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 6653942343209673148}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 0.005
+  m_MaxDistanceOnly: 0
 --- !u!1 &3400479936668610505
 GameObject:
   m_ObjectHideFlags: 0
