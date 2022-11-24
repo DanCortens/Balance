@@ -49,26 +49,44 @@ public class CameraCont : MonoBehaviour
     void Update()
     {
         Vector3 targetPos;
+
+        float camWidth = Camera.main.orthographicSize * Camera.main.aspect;
+        float leftBounds = _centre.x - (_bounds.x / 2) + camWidth;
+        float rightBounds = _centre.x + (_bounds.x / 2) - camWidth;
+        float topBounds = _centre.y - (_bounds.y / 2) + Camera.main.orthographicSize;
+        float bottomBounds = _centre.y + (_bounds.y / 2) - Camera.main.orthographicSize;
+
         if (gse.state == GameStateEngine.State.Play)
         {
+            if (OutOfBounds(rightBounds, leftBounds,topBounds, bottomBounds))
+            {
+                RoomControl room = FindObjectOfType<PlayerController>().GetRoom();
+                centre = room.transform.position;
+                bounds = room.dimensions;
+            }
             target.position = player.position;
-            targetPos = target.TransformPoint(new Vector3(0f, 0f, -10f)); 
-            float camWidth = Camera.main.orthographicSize * Camera.main.aspect;
-            float leftBounds = _centre.x - (_bounds.x / 2) + camWidth;
-            float rightBounds = _centre.x + (_bounds.x / 2) - camWidth;
-            float topBounds = _centre.y - (_bounds.y / 2) + Camera.main.orthographicSize;
-            float bottomBounds = _centre.y + (_bounds.y / 2) - Camera.main.orthographicSize;
-            Vector3 clampTarget = new Vector3
-                (Mathf.Clamp(targetPos.x, leftBounds, rightBounds),
-                 Mathf.Clamp(targetPos.y, topBounds, bottomBounds),
-                 targetPos.z);
-            transform.position = Vector3.SmoothDamp(transform.position + shakeOffset, clampTarget, ref vel, SMTH);
+            targetPos = target.TransformPoint(new Vector3(0f, 0f, -10f));
         }
         else
         {
             targetPos = target.TransformPoint(new Vector3(0f, 0f, -10f));
-            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref vel, SMTH);
         }
+
+        
+        Vector3 clampTarget = new Vector3
+            (Mathf.Clamp(targetPos.x, leftBounds, rightBounds),
+             Mathf.Clamp(targetPos.y, topBounds, bottomBounds),
+             targetPos.z);
+        transform.position = Vector3.SmoothDamp(transform.position + shakeOffset, clampTarget, ref vel, SMTH);
+    }
+    private bool OutOfBounds(float right, float left, float top, float bot)
+    {
+        if (player.position.x > right || player.position.x < left)
+            return true;
+        else if (player.position.y > top || player.position.y < bot)
+            return true;
+        else
+            return false;
     }
 
     public void setTarget(Vector2 tar)

@@ -37,8 +37,8 @@ public class RoomControl : MonoBehaviour
             filled = puppeteer.FillRoom(spawnPoints, types, enemyHolder.transform, this);
         }
         FindObjectOfType<GlobalLightCont>().NewRoom(setting);
-        mainCam.centre = transform.position;
-        mainCam.bounds = dimensions;
+        //mainCam.centre = transform.position;
+        //mainCam.bounds = dimensions;
     }
     public void PlayerLeaves()
     {
