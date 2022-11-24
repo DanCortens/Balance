@@ -99,6 +99,30 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: gears
+    clip: {fileID: 8300000, guid: f5788962d29fda748b8772aa19e244c2, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: banshee
+    clip: {fileID: 8300000, guid: 934218afef1711c4989be68c2d00d990, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: healthpickup
+    clip: {fileID: 8300000, guid: ba30d694b1e8241469268c928db67991, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: healthrestore
+    clip: {fileID: 8300000, guid: 72bbdbc2d75e2b8439747a7929013a5b, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!114 &6846421080045563106
 MonoBehaviour:
   m_ObjectHideFlags: 0

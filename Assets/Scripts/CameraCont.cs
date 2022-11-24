@@ -61,8 +61,11 @@ public class CameraCont : MonoBehaviour
             if (OutOfBounds(rightBounds, leftBounds,topBounds, bottomBounds))
             {
                 RoomControl room = FindObjectOfType<PlayerController>().GetRoom();
-                centre = room.transform.position;
-                bounds = room.dimensions;
+                if (!(room is null))
+                {
+                    centre = room.transform.position;
+                    bounds = room.dimensions;
+                }
             }
             target.position = player.position;
             targetPos = target.TransformPoint(new Vector3(0f, 0f, -10f));

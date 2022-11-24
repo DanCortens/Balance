@@ -28,6 +28,7 @@ public class BarrierLever : Interactable
             foreach (Barrier b in connectedBarriers)
                 b.Toggle();
             anim.SetTrigger("interact");
+            FindObjectOfType<AudioManager>().Play("gears");
             StartCoroutine(ToggleTime());
         }
             

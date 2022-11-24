@@ -26,8 +26,12 @@ public class LanternPedestal : Interactable
                                         ((Vector2)transform.position - offset),
                                         ((Vector2)transform.position + offset),
                                         ((Vector2)transform.position - offset),
+                                        ((Vector2)transform.position + offset),
+                                        ((Vector2)transform.position - offset),
+                                        ((Vector2)transform.position + offset),
+                                        ((Vector2)transform.position - offset),
                                         (Vector2)transform.position },
-                            new float[] { 2f, 0.25f, 0.25f, 0.25f, 0.25f, 0.25f });
+                            new float[] { 1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 0.1f, 4.25f });
         FindObjectOfType<HudController>().ActivateBalanceBar();
         StartCoroutine(Crumble());
     }
@@ -44,18 +48,23 @@ public class LanternPedestal : Interactable
         yield return new WaitForSeconds(1f);
         medalAnim.SetTrigger("crack");
         yield return new WaitForSeconds(0.5f);
+        Destroy(transform.Find("medallion").gameObject);
         GameObject effect = Instantiate(soulsReleasedEffect, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(1.5f);
         FindObjectOfType<AudioManager>().Play("banshee");
-        Destroy(transform.Find("medallion").gameObject);
+        
         yield return new WaitForSeconds(4f);
+        //Calls audio
+        FindObjectOfType<AudioManager>().Play("floorfall");
+        yield return new WaitForSeconds(0.1f);
         StartDestruction();
     }
     private void StartDestruction()
     {
+
+        obstacle.GetComponent<Animator>().SetTrigger("destroy");
         //play destruction animation
-        obstacle.SetActive(false);
-        //Calls audio
-        FindObjectOfType<AudioManager>().Play("floorfall");
+        obstacle.GetComponent<BoxCollider2D>().enabled = false;
+        
     }
 }

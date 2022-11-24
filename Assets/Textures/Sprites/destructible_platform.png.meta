@@ -1,7 +1,79 @@
 fileFormatVersion: 2
 guid: a063e109e04d34c40bb9f36a40131e8e
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 7029343444630277650
+    second: destructible_platform_0
+  - first:
+      213: 3740008263479906952
+    second: destructible_platform_1
+  - first:
+      213: -9152000310814513899
+    second: destructible_platform_2
+  - first:
+      213: 1035800346872950518
+    second: destructible_platform_3
+  - first:
+      213: -6680320497057351712
+    second: destructible_platform_4
+  - first:
+      213: -4615180251457158625
+    second: destructible_platform_5
+  - first:
+      213: -8096123980489366462
+    second: destructible_platform_6
+  - first:
+      213: -3487807349141964857
+    second: destructible_platform_7
+  - first:
+      213: 5860516933835925660
+    second: destructible_platform_8
+  - first:
+      213: -7818086262863184611
+    second: destructible_platform_9
+  - first:
+      213: 3916979481424358368
+    second: destructible_platform_10
+  - first:
+      213: 6914653760611188890
+    second: destructible_platform_11
+  - first:
+      213: -45095327299684505
+    second: destructible_platform_12
+  - first:
+      213: 8336425830781980249
+    second: destructible_platform_13
+  - first:
+      213: -7001525865466858962
+    second: destructible_platform_14
+  - first:
+      213: -1291896800112593522
+    second: destructible_platform_15
+  - first:
+      213: 5508482754550401876
+    second: destructible_platform_16
+  - first:
+      213: 2034998633671130335
+    second: destructible_platform_17
+  - first:
+      213: -1562599243829100485
+    second: destructible_platform_18
+  - first:
+      213: 3752446639028238157
+    second: destructible_platform_19
+  - first:
+      213: -6499680440764539418
+    second: destructible_platform_20
+  - first:
+      213: -3180259731332595980
+    second: destructible_platform_21
+  - first:
+      213: 3468154488134407356
+    second: destructible_platform_22
+  - first:
+      213: 4486749494006069018
+    second: destructible_platform_23
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,7 +113,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,9 +147,561 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: destructible_platform_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 170.66666
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21e886dae9e3d8160800000000000000
+      internalID: 7029343444630277650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_1
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 170.66666
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 882deb143bd27e330800000000000000
+      internalID: 3740008263479906952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_2
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 170.66666
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 515e2a9e4309df080800000000000000
+      internalID: -9152000310814513899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_3
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 170.66666
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fea6957de6ef5e00800000000000000
+      internalID: 1035800346872950518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_4
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 170.66666
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e7b22bd6ebba43a0800000000000000
+      internalID: -6680320497057351712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_5
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 170.66666
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f128f79730693ffb0800000000000000
+      internalID: -4615180251457158625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_6
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 170.66666
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 244e865822ac4af80800000000000000
+      internalID: -8096123980489366462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_7
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 170.66666
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c77565f1b1d89fc0800000000000000
+      internalID: -3487807349141964857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 85.666664
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c98a379d91db45150800000000000000
+      internalID: 5860516933835925660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_9
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 85.666664
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1dbda647f3908390800000000000000
+      internalID: -7818086262863184611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_10
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 85.666664
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ebeac6d518eb5630800000000000000
+      internalID: 3916979481424358368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_11
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 85.666664
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a908c0ab5f8c5ff50800000000000000
+      internalID: 6914653760611188890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_12
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 85.666664
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 767b54be90acf5ff0800000000000000
+      internalID: -45095327299684505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_13
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 85.666664
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95e8624ff1fe0b370800000000000000
+      internalID: 8336425830781980249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_14
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 85.666664
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e22732f225595de90800000000000000
+      internalID: -7001525865466858962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_15
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 85.666664
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8533de74b2421ee0800000000000000
+      internalID: -1291896800112593522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.6666641
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45b875c41ef027c40800000000000000
+      internalID: 5508482754550401876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_17
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 0.6666641
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdc7f56b974cd3c10800000000000000
+      internalID: 2034998633671130335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_18
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 0.6666641
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b30c5494448805ae0800000000000000
+      internalID: -1562599243829100485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_19
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 0.6666641
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d47f2ed365e531430800000000000000
+      internalID: 3752446639028238157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_20
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 0.6666641
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eddcae631f7cc5a0800000000000000
+      internalID: -6499680440764539418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_21
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 0.6666641
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fef074cf927dd3d0800000000000000
+      internalID: -3180259731332595980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_22
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 0.6666641
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb49d63c12c512030800000000000000
+      internalID: 3468154488134407356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: destructible_platform_23
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 0.6666641
+        width: 104
+        height: 85.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a17356a94e2244e30800000000000000
+      internalID: 4486749494006069018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
