@@ -10,14 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 403ae2dd693bb1d4b924f6b8d206b053, type: 3}
-  m_Name: Player.fadeMotionList
+  m_Name: motion.fadeMotionList
   m_EditorClassIdentifier: 
-  MotionInstanceIds: 005ffffff45effffc4e0ffffbce0fffffecafffff6caffffeecaffff
+  MotionInstanceIds: fecafffff6caffffeecaffff
   CubismFadeMotionObjects:
-  - {fileID: 11400000, guid: 0c7ca84316f2f2b439415a43640c26a3, type: 2}
-  - {fileID: 11400000, guid: d6c1dd36558332c45a89cc4b55dd6cd5, type: 2}
-  - {fileID: 11400000, guid: 50e13e91d8a97be4086aad54884dd822, type: 2}
-  - {fileID: 11400000, guid: d230670221f1ceb41a49c963afdbcf50, type: 2}
   - {fileID: 11400000, guid: 3c5d03f930b8c2440bd367b15956269c, type: 2}
   - {fileID: 11400000, guid: fe76f4035611be14989bdfe9a7cd57b8, type: 2}
   - {fileID: 11400000, guid: fec63339c2087eb41b989aba94a4d138, type: 2}

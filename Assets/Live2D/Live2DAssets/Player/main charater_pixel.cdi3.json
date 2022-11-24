@@ -134,6 +134,14 @@
 			"Name": "front"
 		},
 		{
+			"Id": "Part5",
+			"Name": "left arm"
+		},
+		{
+			"Id": "Part6",
+			"Name": "right arm"
+		},
+		{
 			"Id": "Part",
 			"Name": "left arm"
 		},
