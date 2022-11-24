@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RoomControl : MonoBehaviour
 {
+    public RoomSetting setting;
     public List<Transform> spawnPoints;
     public Transform enemyHolder;
     public int[] types;
@@ -35,9 +36,9 @@ public class RoomControl : MonoBehaviour
         {
             filled = puppeteer.FillRoom(spawnPoints, types, enemyHolder.transform, this);
         }
-        
-        mainCam.centre = transform.position;
-        mainCam.bounds = dimensions;
+        FindObjectOfType<GlobalLightCont>().NewRoom(setting);
+        //mainCam.centre = transform.position;
+        //mainCam.bounds = dimensions;
     }
     public void PlayerLeaves()
     {

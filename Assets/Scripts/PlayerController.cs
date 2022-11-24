@@ -53,6 +53,7 @@ public class PlayerController : LivingEntity
     private LayerMask enemyLayer;
     private LayerMask interactLayer;
     private LayerMask hookLayer;
+    private LayerMask roomLayer;
     private InputAction moveInput;
 
     //constants
@@ -106,6 +107,7 @@ public class PlayerController : LivingEntity
         enemyLayer = LayerMask.GetMask("Enemy");
         interactLayer = LayerMask.GetMask("Interact");
         hookLayer = LayerMask.GetMask("Hook");
+        roomLayer = LayerMask.GetMask("Room");
         sideJTime = 0f;
         anim.SetBool("canAttack", true);
         isAttacking = false;
@@ -594,6 +596,14 @@ public class PlayerController : LivingEntity
         StartCoroutine(AttackDamageTimer(0, groundAttacks["counter"]));
         StartCoroutine(NotAttackingTimer(groundAttacks["counter"].animTime));
 
+    }
+    public RoomControl GetRoom()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.1f, roomLayer);
+        if (hits.Length > 0)
+            return hits[0].gameObject.GetComponent<RoomControl>();
+        else
+            return null;
     }
     private void OnDestroy()
     {

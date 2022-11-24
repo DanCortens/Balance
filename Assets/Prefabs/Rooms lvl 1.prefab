@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 17709549}
   - component: {fileID: 17709551}
   - component: {fileID: 17709550}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,8 +31,8 @@ Transform:
   m_Children:
   - {fileID: 1875872625}
   - {fileID: 1946337770}
-  - {fileID: 1626481860}
-  - {fileID: 494481922}
+  - {fileID: 6816808449292704698}
+  - {fileID: 7073949497863062690}
   - {fileID: 1963292769}
   m_Father: {fileID: 1230158739764828668}
   m_RootOrder: 13
@@ -49,10 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 2
   spawnPoints:
   - {fileID: 1946337770}
-  - {fileID: 1626481860}
-  - {fileID: 494481922}
+  - {fileID: 6816808449292704698}
+  - {fileID: 7073949497863062690}
   - {fileID: 1963292769}
   enemyHolder: {fileID: 1875872625}
   types: 00000000000000000000000000000000
@@ -100,7 +101,7 @@ GameObject:
   - component: {fileID: 32491781}
   - component: {fileID: 32491783}
   - component: {fileID: 32491782}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 0
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -179,7 +181,7 @@ GameObject:
   - component: {fileID: 67747161}
   - component: {fileID: 67747163}
   - component: {fileID: 67747162}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (23)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 6
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -256,7 +259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 79620952}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: enemyHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +291,7 @@ GameObject:
   - component: {fileID: 191523773}
   - component: {fileID: 191523775}
   - component: {fileID: 191523774}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,6 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 2
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -365,7 +369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 217651736}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: sp0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +401,7 @@ GameObject:
   - component: {fileID: 276159380}
   - component: {fileID: 276159382}
   - component: {fileID: 276159381}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (22)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,6 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 6
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -476,7 +481,7 @@ GameObject:
   - component: {fileID: 397633110}
   - component: {fileID: 397633112}
   - component: {fileID: 397633111}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,6 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 1
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -555,7 +561,7 @@ GameObject:
   - component: {fileID: 404015578}
   - component: {fileID: 404015580}
   - component: {fileID: 404015579}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,6 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 1
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -632,7 +639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 456517965}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: enemyHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -662,7 +669,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 494481922}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: sp2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -677,11 +684,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 494481921}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.2, y: -7.01, z: 0}
+  m_LocalPosition: {x: 5.8, y: -6.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 17709549}
-  m_RootOrder: 3
+  m_Father: {fileID: 2096728381}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &637748904
 GameObject:
@@ -694,7 +701,7 @@ GameObject:
   - component: {fileID: 637748905}
   - component: {fileID: 637748907}
   - component: {fileID: 637748906}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -727,6 +734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 2
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -773,7 +781,7 @@ GameObject:
   - component: {fileID: 655943675}
   - component: {fileID: 655943677}
   - component: {fileID: 655943676}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -806,6 +814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 3
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -852,7 +861,7 @@ GameObject:
   - component: {fileID: 667373199}
   - component: {fileID: 667373201}
   - component: {fileID: 667373200}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,6 +894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 2
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -920,36 +930,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 24.5, y: 15.5}
   m_EdgeRadius: 0
---- !u!1 &748239961
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 748239962}
-  m_Layer: 0
-  m_Name: sp2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &748239962
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 748239961}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.8, y: -6.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2096728381}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &842216166
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,7 +941,7 @@ GameObject:
   - component: {fileID: 842216167}
   - component: {fileID: 842216169}
   - component: {fileID: 842216168}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -994,6 +974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 6
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -1040,7 +1021,7 @@ GameObject:
   - component: {fileID: 890165570}
   - component: {fileID: 890165572}
   - component: {fileID: 890165571}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1073,6 +1054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 2
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -1119,7 +1101,7 @@ GameObject:
   - component: {fileID: 919779728}
   - component: {fileID: 919779730}
   - component: {fileID: 919779729}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1152,6 +1134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 2
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -1198,7 +1181,7 @@ GameObject:
   - component: {fileID: 983613790}
   - component: {fileID: 983613792}
   - component: {fileID: 983613791}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1231,6 +1214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 6
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -1277,7 +1261,7 @@ GameObject:
   - component: {fileID: 984384483}
   - component: {fileID: 984384485}
   - component: {fileID: 984384484}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1311,6 +1295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 2
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -1358,7 +1343,7 @@ GameObject:
   - component: {fileID: 1205574964}
   - component: {fileID: 1205574966}
   - component: {fileID: 1205574965}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (24)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1391,6 +1376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 6
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -1437,7 +1423,7 @@ GameObject:
   - component: {fileID: 1208058196}
   - component: {fileID: 1208058198}
   - component: {fileID: 1208058197}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BossRoomStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1508,7 +1494,7 @@ GameObject:
   - component: {fileID: 1221333317}
   - component: {fileID: 1221333319}
   - component: {fileID: 1221333318}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1541,6 +1527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 1
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -1587,7 +1574,7 @@ GameObject:
   - component: {fileID: 1328784006}
   - component: {fileID: 1328784008}
   - component: {fileID: 1328784007}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1620,6 +1607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 1
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -1666,7 +1654,7 @@ GameObject:
   - component: {fileID: 1530812868}
   - component: {fileID: 1530812870}
   - component: {fileID: 1530812869}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1699,6 +1687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 6
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -1745,7 +1734,7 @@ GameObject:
   - component: {fileID: 1551302787}
   - component: {fileID: 1551302789}
   - component: {fileID: 1551302788}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1778,6 +1767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 3
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -1822,7 +1812,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1626481860}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: sp1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1837,11 +1827,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1626481859}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.65, y: 4.13, z: 0}
+  m_LocalPosition: {x: 3.88, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 17709549}
-  m_RootOrder: 2
+  m_Father: {fileID: 1735146126}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1735146125
 GameObject:
@@ -1854,7 +1844,7 @@ GameObject:
   - component: {fileID: 1735146126}
   - component: {fileID: 1735146128}
   - component: {fileID: 1735146127}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1873,7 +1863,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 217651736}
-  - {fileID: 1784777725}
+  - {fileID: 1626481860}
   - {fileID: 79620952}
   m_Father: {fileID: 1230158739764828668}
   m_RootOrder: 2
@@ -1890,9 +1880,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 0
   spawnPoints:
   - {fileID: 217651736}
-  - {fileID: 1784777725}
+  - {fileID: 1626481860}
   enemyHolder: {fileID: 79620952}
   types: 0000000000000000
   dimensions: {x: 25, y: 16}
@@ -1938,7 +1929,7 @@ GameObject:
   - component: {fileID: 1760106966}
   - component: {fileID: 1760106968}
   - component: {fileID: 1760106967}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1971,6 +1962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 6
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -2006,36 +1998,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 24.5, y: 15.5}
   m_EdgeRadius: 0
---- !u!1 &1784777724
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1784777725}
-  m_Layer: 0
-  m_Name: sp1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1784777725
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1784777724}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.88, y: -2.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1735146126}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1812394259
 GameObject:
   m_ObjectHideFlags: 0
@@ -2045,7 +2007,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1812394260}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: sp0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2075,7 +2037,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1875872625}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: enemyHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2105,7 +2067,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1946337770}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: sp0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2135,7 +2097,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1963292769}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: sp3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2167,7 +2129,7 @@ GameObject:
   - component: {fileID: 2032341651}
   - component: {fileID: 2032341653}
   - component: {fileID: 2032341652}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2200,6 +2162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 1
   spawnPoints: []
   enemyHolder: {fileID: 0}
   types: 
@@ -2246,7 +2209,7 @@ GameObject:
   - component: {fileID: 2096728381}
   - component: {fileID: 2096728383}
   - component: {fileID: 2096728382}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Room (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2266,7 +2229,7 @@ Transform:
   m_Children:
   - {fileID: 1812394260}
   - {fileID: 2113543025}
-  - {fileID: 748239962}
+  - {fileID: 494481922}
   - {fileID: 456517965}
   m_Father: {fileID: 1230158739764828668}
   m_RootOrder: 10
@@ -2283,10 +2246,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbdc1e2cf226f844a6b810678816afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setting: 2
   spawnPoints:
   - {fileID: 1812394260}
   - {fileID: 2113543025}
-  - {fileID: 748239962}
+  - {fileID: 494481922}
   enemyHolder: {fileID: 456517965}
   types: 000000000000000000000000
   dimensions: {x: 25, y: 16}
@@ -2331,7 +2295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2113543025}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: sp1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2351,6 +2315,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2096728381}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &482036980468089451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7073949497863062690}
+  m_Layer: 12
+  m_Name: sp2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7073949497863062690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482036980468089451}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.2, y: -7.01, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 17709549}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8085072643941260445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6816808449292704698}
+  m_Layer: 12
+  m_Name: sp1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6816808449292704698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8085072643941260445}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.65, y: 4.13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 17709549}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1121865701975287404
 PrefabInstance:
@@ -2429,13 +2453,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c83bc540d5f0f145ac8cbc0ac8e85b4, type: 3}
---- !u!4 &4254447497331071229 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3790763820597231249, guid: 1c83bc540d5f0f145ac8cbc0ac8e85b4, type: 3}
-  m_PrefabInstance: {fileID: 1121865701975287404}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1230158739764828668 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2198825559665426320, guid: 1c83bc540d5f0f145ac8cbc0ac8e85b4, type: 3}
+  m_PrefabInstance: {fileID: 1121865701975287404}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4254447497331071229 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3790763820597231249, guid: 1c83bc540d5f0f145ac8cbc0ac8e85b4, type: 3}
   m_PrefabInstance: {fileID: 1121865701975287404}
   m_PrefabAsset: {fileID: 0}
