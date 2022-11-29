@@ -64,7 +64,7 @@ MonoBehaviour:
   flinching: 0
   range: 6
   rangedAttacks:
-  - {fileID: 3669786489465529029, guid: 734c86b8d6230f44fa4c507e54c09d8c, type: 3}
+  - {fileID: 4983574826888806017, guid: bdc312a103ed4c54db84ec6f937d2af0, type: 3}
   room: {fileID: 0}
 --- !u!114 &-8501312165351380889
 MonoBehaviour:

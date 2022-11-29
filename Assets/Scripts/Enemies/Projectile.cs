@@ -9,7 +9,8 @@ public class Projectile : MonoBehaviour
     public float speed;
     public float pushForce;
     public float deathAnimTime;
-    public string soundName;
+    public string strikeSound;
+    public string shootSound;
 
     private bool destroying;
     private Rigidbody2D rb2d;
@@ -20,6 +21,7 @@ public class Projectile : MonoBehaviour
         destroying = false;
         player = GameObject.Find("player");
         rb2d = gameObject.GetComponent<Rigidbody2D>();
+        FindObjectOfType<AudioManager>().Play(shootSound);
         //Vector2 temp = (player.transform.position - transform.position).normalized;
         //Shoot(temp);
     }
@@ -43,7 +45,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.name == "player")
             player.GetComponent<PlayerController>().TakeDamage(damage, type, transform.position, pushForce);
-        FindObjectOfType<AudioManager>().Play(soundName);
+        FindObjectOfType<AudioManager>().Play(strikeSound);
         StartCoroutine(StartDestruction());
     }
     private IEnumerator StartDestruction()

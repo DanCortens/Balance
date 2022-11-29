@@ -123,6 +123,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: arrowshoot
+    clip: {fileID: 8300000, guid: ac887edfc71b49e4d9c3a927c71188e6, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!114 &6846421080045563106
 MonoBehaviour:
   m_ObjectHideFlags: 0

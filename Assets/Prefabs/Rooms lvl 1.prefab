@@ -1885,7 +1885,7 @@ MonoBehaviour:
   - {fileID: 217651736}
   - {fileID: 1626481860}
   enemyHolder: {fileID: 79620952}
-  types: 0000000000000000
+  types: 0000000001000000
   dimensions: {x: 25, y: 16}
   enemies: 1
   cleared: 1
