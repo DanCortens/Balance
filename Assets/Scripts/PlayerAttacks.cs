@@ -53,7 +53,7 @@ public class PlayerAttacks
 
         //PHYSICAL ATTACKS
         attacks.Add("phys",                                 //name
-            new Attack(1, new float[] { 0.2f },             //swings, wind up
+            new Attack(1, new float[] { 0.1f },             //swings, wind up
             .5f, new Vector2(0.5f, 0f), 1.8f,              //total anim time, pos, radius
             new int[] { 0 }, new float[] { 6f },            //attack type, damage
             0f, "standingAttack"));                                           //balance change
